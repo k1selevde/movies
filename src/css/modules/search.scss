@@ -1,0 +1,15 @@
+.formGroup {
+
+}
+
+.search {
+  &__form {
+    display: flex;
+  }
+  &__btn {
+    background: #0007A4;
+    color: white;
+    font-size: 17px;
+    border: none;
+  }
+}

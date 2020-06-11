@@ -1,0 +1,30 @@
+.petro {
+  color: black;
+  border: 1px solid black;
+  padding: 10px;
+}
+
+.logo-link {
+  outline: none;
+  color: white;
+  font-weight: 700;
+  font-size: 20px;
+  text-transform: uppercase;
+  transition: .24s ease-out;
+  text-decoration: none;
+  padding: 5px 8px;
+}
+
+.logo-link:hover {
+  text-decoration: none;
+  color: #0007A4;
+  background-color: white;
+}
+
+.header__wrap {
+  background: $second-back-color;
+  padding: 20px 35px;
+}
+
+
+
