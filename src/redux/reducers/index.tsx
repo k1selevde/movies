@@ -7,6 +7,8 @@ const rootReducer = combineReducers({
     movie: MovieReducer
 });
 
-export type RootState = ReturnType<typeof rootReducer>;
+type RootReducerType = typeof rootReducer; // (state: AppStateType) => AppStateType
+
+export type AppStateType = ReturnType<typeof rootReducer>;
 
 export default rootReducer;
