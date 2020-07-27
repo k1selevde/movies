@@ -1,0 +1,25 @@
+.genre {
+  &__block {
+    display: flex;
+    align-items: center;
+  }
+  &__checkbox {
+    margin-rigt: 8px;
+  }
+  &__name {
+
+  }
+}
+
+
+.genres {
+  &__title {
+    color: blue;
+    font-weight: 600;
+  }
+
+  &__list {
+    margin-top: 14px;
+    margin-bottom: 12px;
+  }
+}
