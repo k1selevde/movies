@@ -11,7 +11,7 @@ interface State {
 }
 
 
-const NotFound: React.FC<Props> = ({linkToBack,textToBack}) => {
+const NotFound: React.FC<Props> = ({linkToBack = '',textToBack = ''}) => {
     return (
         <>
             <div>

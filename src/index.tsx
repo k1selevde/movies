@@ -1,22 +1,30 @@
 import * as React from "react";
 import * as ReactDOM from "react-dom";
 import { Provider } from 'react-redux';
-import { createStore, applyMiddleware } from 'redux';
+import { createStore, applyMiddleware, compose } from 'redux';
 import thunk from 'redux-thunk';
 import logger from 'redux-logger';
-import rootReducer from './reducers';
+import rootReducer from './redux/reducers';
+import store from './redux/store'
 import App from "./components/App";
-import {BrowserRouter as Router} from "react-router-dom";
-// import "bootstrap/dist/css/bootstrap.min.css"
+import {BrowserRouter} from "react-router-dom";
+
+// window.__REDUX_DEVTOOLS_EXTENSION__ && window._  _REDUX_DEVTOOLS_EXTENSION__()
+const composeEnhancers = (window as any)['__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()'] as typeof compose || compose;
 
 
-const store = createStore(rootReducer, applyMiddleware(thunk, logger));
+store.subscribe(() => {
+    localStorage.setItem('movie-app',JSON.stringify(store.getState()))
+})
+
+/*store.dispatch({type: 'SET_USER', payload: '20'})*/
+
 
 const app = (
     <Provider store={store}>
-        <Router>
+        <BrowserRouter>
             <App/>
-        </Router>
+        </BrowserRouter>
     </Provider>
 )
 

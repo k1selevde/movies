@@ -1,8 +1,9 @@
 import * as React from 'react'
 import {Link} from 'react-router-dom'
-import ControlLoginBtn from "../ControlLoginBtn/ControlLoginBtn";
-import Search from "../Search/Search"
+import Login from './Login/Login'
+import Search from "../../Search/Search"
 import { Spinner } from 'reactstrap';
+import Nav from './Nav'
 interface Props {
 
 }
@@ -23,14 +24,10 @@ class Header extends React.Component<Props,State> {
                             <Spinner color="red" />
                         </div>
                         <div className="col">
-                            <Search />
-                        </div>
-                        <div className="col">
                             <div className="float-right">
-                                <ControlLoginBtn/>
+                                <Nav/>
                             </div>
                         </div>
-
                     </div>
                 </div>
             </div>

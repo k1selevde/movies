@@ -1,3 +1,4 @@
+/*
 .formGroup {
 
 }
@@ -12,4 +13,14 @@
     font-size: 17px;
     border: none;
   }
+}
+*/
+
+.searchField {
+  &__input {
+    border: none;
+    min-width: 350px;
+    border-bottom: 3px dashed darkblue;
+  }
+
 }

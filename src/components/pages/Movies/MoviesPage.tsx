@@ -1,9 +1,27 @@
 import * as React from 'react'
-import MoviesList from "./MoviesList";
+import {AnyAction, Dispatch} from "redux";
+import {connect} from "react-redux";
+import {ThunkDispatch} from "redux-thunk";
+import {getMovies} from "../../../redux/actions/movieActions";
+import {AppStateType} from '../../../redux/reducers';
 import Filters from "../../Filters/Filters";
+import MoviesList from "./MoviesList";
 
-class MoviesPage extends React.Component {
+//@ts-ignore
+import Paginator from "../../common/Paginator/Paginator.tsx"
+
+type MoviesPagePropsType = {
+    movies: any[];
+    getMovies: () => void;
+}
+
+class MoviesPage extends React.Component<MoviesPagePropsType> {
+    componentDidMount(): void {
+        this.props.getMovies()
+    }
+
     render() {
+        const {movies} = this.props;
         return (
             <div>
                 <div className="row">
@@ -11,7 +29,8 @@ class MoviesPage extends React.Component {
                         <Filters/>
                     </div>
                     <div className="col-9">
-                        <MoviesList/>
+                        <MoviesList movies={movies}/>
+                        <Paginator />
                     </div>
                 </div>
             </div>
@@ -19,4 +38,18 @@ class MoviesPage extends React.Component {
     }
 }
 
-export default MoviesPage
+const mapStateToProps = (state: AppStateType) => {
+    return ({
+        movies: state.movie.moviesList
+    })
+}
+
+
+//@ts-ignore
+const mapDispatchToProps = (dispatch: ThunkDispatch<AnyAction>) => {
+    return ({
+        getMovies: () => dispatch(getMovies())
+    })
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(MoviesPage)

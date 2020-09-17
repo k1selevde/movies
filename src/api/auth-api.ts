@@ -1,6 +1,6 @@
 import {instance} from "./api";
 
-const api_key: string = ''
+const api_key: string = '4237669ebd35e8010beee2f55fd45546'
 
 
 type RequestTokenResType = {
@@ -39,8 +39,8 @@ export const authApi = {
         return instance.get<RequestTokenResType>(`/authentication/token/new?api_key=${api_key}`)
     },
 
-    validateTokenWithLogin<ValidateTokenResType>(username: string, password: string, requestToken: string) {
-      return instance.post(`/authentication/token/validate_with_login?api_key=${api_key}`, {
+    validateTokenWithLogin(username: string, password: string, requestToken: string) {
+      return instance.post<ValidateTokenResType>(`/authentication/token/validate_with_login?api_key=${api_key}`, {
           body: {
               username,
               password,
@@ -49,15 +49,15 @@ export const authApi = {
       })
     },
 
-    getSessionId<SessionIdResType>(requestToken: string) {
-        return instance.post(`/authentication/session/new?api_key=${api_key}`, {
+    getSessionId(requestToken: string) {
+        return instance.post<SessionIdResType>(`/authentication/session/new?api_key=${api_key}`, {
             body: {
                 request_token: requestToken
             }
         }, {})
     },
 
-    getAccountDetails<AccountDetailsResType>(session_id: string) {
-        return instance.post(`/account?api_key=${api_key}&session_id=${session_id}`)
+    getAccountDetails(session_id: string) {
+        return instance.post<AccountDetailsResType>(`/account?api_key=${api_key}&session_id=${session_id}`)
     }
 }

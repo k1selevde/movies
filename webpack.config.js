@@ -12,7 +12,8 @@ module.exports = {
   mode: "development",
   output: {
     filename: "main.js",
-    path: path.resolve(__dirname, 'dist')
+    path: path.resolve(__dirname, 'dist'),
+    publicPath: '/'
   },
 
   devtool: "source-map",
@@ -26,6 +27,7 @@ module.exports = {
     compress: true,
     port: 9000,
     watchContentBase: true,
+    historyApiFallback: true,
     progress: true
   },
   plugins: [
@@ -53,7 +55,7 @@ module.exports = {
         use: ["style-loader", "css-loader", "sass-loader"]
       },
       {
-        test: /\.(png|svg|jpg|gif)$/,
+        test: /\.(png|svg|jpg|gif|woff|ttf|eot)$/,
         use: ["file-loader"]
       }
     ]

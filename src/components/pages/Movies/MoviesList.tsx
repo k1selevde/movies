@@ -10,7 +10,7 @@ type Movie = {
 }
 
 interface ListProps  {
-    movies: Array<Movie>
+    movies: Array<{}>
 }
 
 type DefaultProps = Readonly<typeof  defaultProps>
@@ -36,7 +36,7 @@ class MoviesList extends React.Component<ListProps & DefaultProps> {
             <div>
                 <div className="moviesList__wrap">
                     {movies.map(movie => (
-                        <div className="col-6" key={movie.id}>
+                        <div className="col-6">
                              <MovieCard movie={movie}/>
                         </div>
                     ))}

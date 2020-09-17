@@ -1,17 +1,19 @@
 import * as React from 'react'
+import {api_url} from "../../constants/default";
+import {collectionMovie} from "../../types/types";
 
 interface MovieCardProps {
-    movie: {
-        title?: string,
-        id?: string
-    }
+    movie: collectionMovie
 }
+
 
 const MovieCard: React.FC<MovieCardProps> = ({movie}) => {
     return (
-        <div className="movieCard__wrap">
-            {movie.title}
-            SOLID BLACK
+        <div style={{color: 'blue'}} className="movieCard__wrap">
+            flow:{movie}
+            <div>
+                <img src={`${api_url}/${movie.backdrop_path}`} alt=""/>
+            </div>
         </div>
     );
 }

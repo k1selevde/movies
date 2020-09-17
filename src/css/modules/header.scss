@@ -26,5 +26,17 @@
   padding: 20px 35px;
 }
 
-
+.nav {
+  &__wrapper {
+    display: flex;
+  }
+  &__item {
+    margin-left: 40px;
+    & > * {
+          &:not(:last-child) {
+            margin-right: 35px;
+          }
+        }
+  }
+}
 

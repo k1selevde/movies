@@ -1,36 +1,67 @@
 import {Reducer} from 'redux'
-const UPDATE_GENRE = 'MOVIE/UPDATE-GENRE'
+import {
+    GET_GENRES_SUCCESS,
+    UPDATE_GENRE,
+    GET_MOVIES_SUCCESS,
 
+} from "../actions/movieActions";
 
+import {search,genres,collection} from '../actions/actionTypes'
+import {collectionMovie} from "../../types/types";
 
-/*
 type Genre = {
     name: string,
+    id: string,
     isSelected: boolean
 }
-*/
 
-
-type InitialStateType = typeof initialState;
 
 const initialState = {
-    movieList: Array,
-    genres: [
-        {name: 'боевик', isSelected: true, id: '123'},
-        {name: 'приключение', isSelected: false, id: '223'},
-        {name: 'комедия', isSelected: false, id: '323'},
-        {name: 'драма', isSelected: false, id: '423'}
+    search: 'webbb',
+    moviesList: [] as Array<{}>,
+    genres: [] as Array<Genre>,
+    filters: {
+        data_realise: {},
+        sorting: [
+            {option: 'sort_by_voz'},
+            {option: 'sort_by_ybiv'},
+        ]
+    },
+    collections: [
+        ['popular', 'популярные'],
+        ['top_rated', 'с самым большим рейтингом'],
+        ['upcoming', 'набирающие популярность'],
+        ['latest', 'последние']
     ],
-    sorting: [
-        {option: 'sort_by_voz'},
-        {option: 'sort_by_ybiv'},
-    ]
-
+    special_collections: {
+        popular: null as [] | null,
+        top_rated: null as [] | null,
+        latest: null as [] | null,
+        upcoming : null as [] | null,
+    },
+    curCollection: null as collectionMovie[] | null
 }
 
+export type specialCollectionType = typeof initialState.special_collections
+
+type InitialStateType = typeof initialState;
 const reducer: Reducer<InitialStateType> = (state = initialState, action: any): InitialStateType => {
     switch(action.type) {
-        case UPDATE_GENRE:
+        case 'REQUEST':
+            return {
+                ...state,
+            }
+
+        case genres.GET__SUCCESS:
+            return {
+                ...state,
+                genres: action.payload.map((genre: {name: string, id: string, isSelected: boolean }) => {
+                    genre.isSelected =  false
+                    return genre;
+                })
+            }
+
+        case genres.UPDATE:
             return {
                 ...state,
                 genres: [
@@ -43,15 +74,27 @@ const reducer: Reducer<InitialStateType> = (state = initialState, action: any): 
                 })
                 ]
             }
+        case GET_MOVIES_SUCCESS:
+            return {
+                ...state,
+                moviesList: action.payload
+            }
+        case search.UPDATE:
+            return {
+                ...state,
+                search: action.payload
+            }
+        case collection.GET_SUCCESS:
+            return {
+                ...state,
+                special_collections: {
+                    ...state.special_collections,
+                    [action.payload.category]: action.payload.results
+                }
+            }
+        default: return state;
     }
-    return state;
 }
 
-export function updateGenres(name: string) {
-    return {
-        type: UPDATE_GENRE,
-        payload: name
-    }
-}
 
 export default reducer;
