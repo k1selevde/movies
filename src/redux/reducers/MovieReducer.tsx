@@ -1,13 +1,9 @@
 import {Reducer} from 'redux'
 import {
-    GET_GENRES_SUCCESS,
-    UPDATE_GENRE,
     GET_MOVIES_SUCCESS,
-
 } from "../actions/movieActions";
 
 import {search,genres,collection} from '../actions/actionTypes'
-import {collectionMovie} from "../../types/types";
 
 type Genre = {
     name: string,
@@ -17,7 +13,6 @@ type Genre = {
 
 
 const initialState = {
-    search: 'webbb',
     moviesList: [] as Array<{}>,
     genres: [] as Array<Genre>,
     filters: {
@@ -39,7 +34,6 @@ const initialState = {
         latest: null as [] | null,
         upcoming : null as [] | null,
     },
-    curCollection: null as collectionMovie[] | null
 }
 
 export type specialCollectionType = typeof initialState.special_collections
@@ -79,11 +73,6 @@ const reducer: Reducer<InitialStateType> = (state = initialState, action: any): 
                 ...state,
                 moviesList: action.payload
             }
-        case search.UPDATE:
-            return {
-                ...state,
-                search: action.payload
-            }
         case collection.GET_SUCCESS:
             return {
                 ...state,
@@ -94,6 +83,7 @@ const reducer: Reducer<InitialStateType> = (state = initialState, action: any): 
             }
         default: return state;
     }
+    //const _enhaustiveCheck: never = action
 }
 
 

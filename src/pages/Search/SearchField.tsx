@@ -20,6 +20,7 @@ const SearchField  = ({search,updateSearch}: SearchFieldProps) => {
                     value={search}
                     type="text"
                     onChange={changeSearchHandler}
+                    placeholder={"Найти фильмы, сериалы, актеров"}
                 />
             </div>
             <h1>{search}</h1>

@@ -1,9 +1,10 @@
-/*
-.formGroup {
-
-}
 
 .search {
+  &__title {
+    margin-top: 20px;
+    font-size: 21px;
+    font-weight: 500;
+  }
   &__form {
     display: flex;
   }
@@ -14,7 +15,8 @@
     border: none;
   }
 }
-*/
+
+
 
 .searchField {
   &__input {

@@ -2,6 +2,7 @@ import * as React from 'react'
 import MovieCard from "../../MovieCard/MovieCard";
 import {ComponentClass} from "react";
 import {WithLoading} from "../../HOC/WithLoading";
+import {collectionMovie} from "../../../types/types";
 /*import WithLoading from "../../HOC/WithLoading";*/
 
 type Movie = {
@@ -9,13 +10,13 @@ type Movie = {
     id?: string,
 }
 
-interface ListProps  {
-    movies: Array<{}>
+interface MoviesListProps  {
+    movies: collectionMovie[]
 }
 
-type DefaultProps = Readonly<typeof  defaultProps>
+// type DefaultProps = Readonly<typeof  defaultProps>
 
-const defaultProps  = {
+/*const defaultProps  = {
     movies: [
         {id: 't5', title: 'Del Boske style'},
         {id: 't5', title: 'Delly askin'},
@@ -23,11 +24,11 @@ const defaultProps  = {
         {id: '6ytra', title: 'kvadrat dvora'},
         {id: '6ytra', title: 'kvadrat eerer'},
     ]
-}
+}*/
 
 
-class MoviesList extends React.Component<ListProps & DefaultProps> {
-    static defaultProps = defaultProps;
+class MoviesList extends React.Component<MoviesListProps> {
+/*    static defaultProps = defaultProps;*/
 
     render() {
         const {movies} = this.props;

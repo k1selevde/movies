@@ -20,7 +20,11 @@ class SearchPage extends React.Component<Props,State> {
         const {searchValue,updateSearchValue} = this.props;
         return (
             <div>
-                <div>It's search Page</div>
+                <h3
+                    className="search__title"
+                >
+                    Результаты поиска
+                </h3>
                 <SearchField
                     search={searchValue}
                     updateSearch={updateSearchValue}
@@ -32,7 +36,7 @@ class SearchPage extends React.Component<Props,State> {
 }
 
 const mapStateToProps = (state: AppStateType) => ({
-    searchValue: state.movie.search
+    searchValue: state.movie._search
 })
 const mapDispatchToProps = (dispatch: Dispatch) => {
     return({

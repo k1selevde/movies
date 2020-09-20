@@ -76,14 +76,6 @@ export function getMoviesSuccess(data: any) {
 
 //===== NEW CODE
 
-export function updateSearchValue(val: string) {
-    return {
-        type: search.UPDATE,
-        payload: val
-    }
-}
-
-
 export function  getCollection(category: string) {
     return async (dispatch: Dispatch) => {
         await movieApi.getCollection(category)

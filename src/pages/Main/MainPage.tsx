@@ -26,7 +26,7 @@ interface MainPageState {
 class MainPage extends React.Component<MainPageProps,MainPageState> {
     state = {}
     render() {
-        let {popular=[],collections = [],curCollection=[],getCollection, special_collections = {}} = this.props;
+        let {popular=[],collections = [],getCollection, special_collections = {}} = this.props;
         return (
             <div
                 className="main__container"
@@ -59,10 +59,8 @@ class MainPage extends React.Component<MainPageProps,MainPageState> {
                             <SpecialCollection
                                 getCollection={getCollection}
                                 category={key}
-                            >
-                                {special_collections[key] ? special_collections[key].map((i: collectionMovie)=> (<p>{i.title}</p>)) : []}
-                            </SpecialCollection>
-                            <span>text вверху</span>
+                                collection={special_collections[key]}
+                            />
                         </div>
                     ))}
                 </div>
@@ -73,7 +71,6 @@ class MainPage extends React.Component<MainPageProps,MainPageState> {
 
 const mapStateToProps = (state : AppStateType) => ({
     collections: state.movie.collections,
-    curCollection: state.movie.curCollection,
     special_collections: state.movie.special_collections,
     popular: state.movie.special_collections.popular
 })

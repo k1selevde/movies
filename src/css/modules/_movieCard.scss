@@ -1,0 +1,18 @@
+.movieCard {
+  &__title {
+    color: black;
+    font-size: 18px;
+    font-weight: 600;
+  }
+  &__wrap {
+    margin-top: 30px;
+    //padding: 10px 20px;
+    //border: 1px solid black;
+  }
+  &__img {
+    width: 80%;
+    max-width: 400px;
+    border-radius: 15px;
+    border: 3px solid blue;
+  }
+}

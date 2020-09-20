@@ -9,9 +9,10 @@ import MoviesList from "./MoviesList";
 
 //@ts-ignore
 import Paginator from "../../common/Paginator/Paginator.tsx"
+import {collectionMovie} from "../../../types/types";
 
 type MoviesPagePropsType = {
-    movies: any[];
+    movies: collectionMovie[];
     getMovies: () => void;
 }
 
