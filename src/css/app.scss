@@ -50,7 +50,9 @@ button { outline: none; }
     height: 100%;
 }
 
-.content { flex: 1 0 auto; }
+.content {
+    flex: 1 0 auto;
+}
 
 .container {
     margin: 0 auto;

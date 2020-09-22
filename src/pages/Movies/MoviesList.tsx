@@ -1,8 +1,8 @@
 import * as React from 'react'
-import MovieCard from "../../MovieCard/MovieCard";
+import HorizontalMovieCard from "../../components/MovieCard/horizontalMovieCard";
 import {ComponentClass} from "react";
-import {WithLoading} from "../../HOC/WithLoading";
-import {collectionMovie} from "../../../types/types";
+import {WithLoading} from "../../components/HOC/WithLoading";
+import {collectionMovie} from "../../types/types";
 /*import WithLoading from "../../HOC/WithLoading";*/
 
 type Movie = {
@@ -38,7 +38,7 @@ class MoviesList extends React.Component<MoviesListProps> {
                 <div className="moviesList__wrap">
                     {movies.map(movie => (
                         <div className="col-6">
-                             <MovieCard movie={movie}/>
+                             <HorizontalMovieCard movie={movie}/>
                         </div>
                     ))}
                 </div>

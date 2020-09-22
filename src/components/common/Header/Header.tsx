@@ -4,15 +4,32 @@ import Login from './Login/Login'
 import Search from "../../Search/Search"
 import { Spinner } from 'reactstrap';
 import Nav from './Nav'
-interface Props {
+import SearchField from "../../../pages/Search/SearchField";
+import {AppStateType} from "../../../redux/reducers";
+import {connect} from 'react-redux';
+import {searchActions} from "../../../redux/actions/searchActions";
+import {Dispatch} from "redux";
+
+type HeaderProps = {
+    isHiddenSearchField: boolean,
+    search: string,
+    updateSearchValue: (val: string) => {},
+    toggleSearchField: () => {}
+}
+type HeaderState = {}
+
+type SearchProps = {
 
 }
-interface  State {
-}
 
+class Header extends React.Component<HeaderProps,HeaderState> {
 
-class Header extends React.Component<Props,State> {
+    toggleShowSearch(e:any) {
+        e.preventDefault()
+        this.props.toggleSearchField();
+    }
     render() {
+        const {search,updateSearchValue,isHiddenSearchField} = this.props
         return (
             <div className="header__wrap">
                 <div className="container">
@@ -24,8 +41,24 @@ class Header extends React.Component<Props,State> {
                             <Spinner color="red" />
                         </div>
                         <div className="col">
+                            {!isHiddenSearchField && <Nav />}
+                            <div>
+                                {isHiddenSearchField &&
+                                    <SearchField
+                                        search={search}
+                                        updateSearch={updateSearchValue}
+                                    />
+                                }
+
+                            </div>
+                        </div>
+                        <div className="col">
                             <div className="float-right">
-                                <Nav/>
+                                <button
+                                    onClick={(event) =>this.toggleShowSearch(event)}
+                                >
+                                    TOGGLE
+                                </button>
                             </div>
                         </div>
                     </div>
@@ -35,4 +68,18 @@ class Header extends React.Component<Props,State> {
     }
 }
 
-export default Header;
+const mapStateToProps = (state: AppStateType) => ({
+    search: state.search.searchValue,
+    isHiddenSearchField: state.search.searchField.isHidden,
+})
+
+const mapDispatchToProps =(dispatch: Dispatch) => {
+    return ({
+        updateSearchValue: (val:string) => dispatch(searchActions.updateSearchValue(val)),
+        toggleSearchField: () => dispatch(searchActions.toggleSearchField())
+    })
+}
+
+export default connect(mapStateToProps,
+    mapDispatchToProps
+    )(Header);

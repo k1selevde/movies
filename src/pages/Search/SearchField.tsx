@@ -1,4 +1,5 @@
 import * as React from 'react'
+import {useHistory} from "react-router-dom";
 
 type SearchFieldProps = {
     search: string,
@@ -6,24 +7,43 @@ type SearchFieldProps = {
 }
 
 const SearchField  = ({search,updateSearch}: SearchFieldProps) => {
-
+    const history = useHistory()
+    const sVal = React.useRef(null)
     const changeSearchHandler = (e: any) => {
         let value = e.target.value
         updateSearch(value)
     }
+    const toggleShowSearchField = (e: any ) => {
 
+    }
+    const submitForm = (e: any) => {
+        e.preventDefault()
+
+        console.log('search form submit')
+        history.push(`/search/${sVal.current.value}`)
+    }
     return (
         <>
             <div className="d-flex justify-content-center">
-                <input
-                    className="searchField__input"
-                    value={search}
-                    type="text"
-                    onChange={changeSearchHandler}
-                    placeholder={"Найти фильмы, сериалы, актеров"}
-                />
+                <form
+                    className="searchField__form"
+                    onSubmit={submitForm}
+                >
+                    <input
+                        ref={sVal}
+                        className="searchField__input"
+                        value={search}
+                        type="text"
+                        onChange={changeSearchHandler}
+                        placeholder={"Найти фильмы, сериалы, актеров и тд!"}
+                    />
+{/*                    <div
+                        // className="search__icon"
+                    >
+                        CLICK
+                    </div>*/}
+                </form>
             </div>
-            <h1>{search}</h1>
         </>
 
     );

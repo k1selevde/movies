@@ -6,23 +6,26 @@ import { AppProps }  from '../types/types'
 import { connect } from 'react-redux'
 import Header from './common/Header/Header'
 import NotFound from "./common/NotFound";
-import MoviePage from "./pages/Movie/MoviePage"
-import MoviesPage from "./pages/Movies/MoviesPage"
+import MoviePage from "../pages/Movie/MoviePage"
+import MoviesPage from "../pages/Movies/MoviesPage"
 import {authApi} from "../api/auth-api";
 import {setAccountDetails, AccountDetailsType} from "../redux/actions/authActions";
 import './../css/app.scss'
-import MainPage from "./pages/Main/MainPage";
-import SearchPage from "./pages/Search/Search";
-
-
-
+import MainPage from "../pages/Main/MainPage";
+import SearchPage from "../pages/Search/Search";
+import SearchHint from "./common/SearchHint";
+import Popup from 'reactjs-popup';
+import SpecialPage from '../pages/Special/SpecialPage'
 interface Props {
-    load?: boolean,
-    setAccountDetails(data: {}): void
+    setAccountDetails: (id: any) => {},
+    isHiddenSearchField: boolean
 }
 
 interface State {
-
+    userData: {
+        password: string,
+        username: string
+    }
 }
 
 class App extends React.Component<Props,State> {
@@ -88,14 +91,28 @@ class App extends React.Component<Props,State> {
     }
 
     render() {
+        const {isHiddenSearchField} = this.props
         return (
             <div>
                 <Header />
                 <div className="content container">
+                    <Popup
+                        position="bottom center"
+                        trigger={<button className="button"> Open Modal </button>}
+                    >
+                        <div style={{background: 'blue'}}>Popup content here !!</div>
+                    </Popup>
+
                     <Switch>
                         <Route exact path="/" component={MainPage}/>
                         <Route path="/movies" component={MoviesPage}/>
-                        <Route path="/search" component={SearchPage}/>
+                        <Route path="/search/:value" render={({match}) =>
+                        {
+                            let {value} = match.params;
+                            return <SearchPage value={value} />
+                        }}
+                        />
+                        <Route path="/special/:query" component={SpecialPage}/>
                         <Route path="/movie/:id" render={({match}) =>
                         {
                             let {id} = match.params
@@ -111,10 +128,11 @@ class App extends React.Component<Props,State> {
     }
 }
 
-// const mapStateToProps = (state: AppStateType) => {
-//     return {
-//     }
-// }
+const mapStateToProps = (state: AppStateType) => ({
+    isHiddenSearchField: state.search.searchField.isHidden
+})
+
+
 
 const mapDispatchToProps = (dispatch: Dispatch) => {
     return ({
@@ -123,4 +141,4 @@ const mapDispatchToProps = (dispatch: Dispatch) => {
 }
 
 //export default WithLoading(connect(mapStateToProps, null)(App))
-export default connect(null,mapDispatchToProps )(App);
+export default connect(mapStateToProps,mapDispatchToProps )(App);

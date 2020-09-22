@@ -20,15 +20,17 @@ class Genres extends React.Component<GenresProps,GenresState> {
 
     constructor(props: any) {
         super(props)
-/*        this.state = {
-
-        }*/
         this.changeGenreHandler = this.changeGenreHandler.bind(this)
     }
 
      changeGenreHandler(name: string, e: any) {
         e.preventDefault();
+        alert('hell')
         this.props.updateGenres(name);
+    }
+
+    componentDidUpdate() {
+        alert('UPDATE')
     }
 
     render() {
@@ -41,8 +43,9 @@ class Genres extends React.Component<GenresProps,GenresState> {
                         <div key={genre.id} className="genre__block">
                             <input
                                 type="checkbox"
-                                value={genre.id}
-                                defaultChecked={genre.isSelected}
+                                // value={genre.id}
+                                checked={genre.isSelected}
+                                // defaultChecked={genre.isSelected}
                                 onChange={(e) => this.changeGenreHandler(genre.name,e)}
                                 className="genre__checkbox"
                                 id={genre.name}

@@ -1,19 +1,26 @@
 import * as React from 'react'
 import {NavLink} from 'react-router-dom'
 
-const Nav  = () => {
+type NavPropsType = {
+}
+
+
+const Nav: React.FC<NavPropsType>  = () => {
+    let [navLinks,setNavLinks] = React.useState([
+        {title:'Фильмы',link: '/movies'},
+        {title:'ТВ-шоу', link: '/tv'}
+        ])
+
     return (
         <div className="nav__wrapper">
-            <div className="nav__item">
-                <NavLink to="/movies">
-                    <div>Фильмы</div>
-                </NavLink>
-            </div>
-            <div className="nav__item">
-                <NavLink to="/search">
-                    <div>Поиск</div>
-                </NavLink>
-            </div>
+            {navLinks.map(nav => (
+                <div className="nav__item">
+                    <NavLink to={nav.link}>
+                        <div>{nav.title}</div>
+                    </NavLink>
+                </div>
+            ))}
+
         </div>
     );
 }

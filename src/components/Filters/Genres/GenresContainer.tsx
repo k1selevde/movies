@@ -24,7 +24,6 @@ class GenresContainer extends React.Component<GCPropsType> {
         console.log(genres);
         return (
             <>
-                <button onClick={getGenres}>GIVE ME IT</button>
                 <Genres
                     genres={genres}
                     updateGenres={updateGenres}

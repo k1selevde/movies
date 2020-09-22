@@ -1,11 +1,11 @@
 import * as React from 'react'
-import SpecialCollection from '../../SpecialCollection/SpecialCollection'
-import Posters from "../../common/Posters";
-import {AppStateType} from "../../../redux/reducers";
+import SpecialCollection from '../../components/SpecialCollection/SpecialCollection'
+import Posters from "../../components/common/Posters";
+import {AppStateType} from "../../redux/reducers";
 import {connect} from 'react-redux';
-import {getCollection} from '../../../redux/actions/movieActions';
-import {collectionMovie} from "../../../types/types";
-import {specialCollectionType} from "../../../redux/reducers/MovieReducer";
+import {getCollection} from '../../redux/actions/movieActions';
+import {collectionMovie} from "../../types/types";
+import {specialCollectionType} from "../../redux/reducers/MovieReducer";
 import {Link} from 'react-router-dom';
 
 interface MainPageProps {

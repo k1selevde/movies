@@ -1,20 +1,21 @@
 import * as React from 'react'
 import {connect} from 'react-redux'
 import SearchField from "./SearchField";
-import {AppStateType} from "../../../redux/reducers";
+import {AppStateType} from "../../redux/reducers";
 import {Dispatch} from 'redux';
-import {updateSearchValue} from "../../../redux/actions/movieActions";
+import {searchActions} from "../../redux/actions/searchActions";
 
 
 // Похожие props
-interface Props {
+type SearchProps = {
+    value: string,
     searchValue: string,
     updateSearchValue: (search: string) => {}
 }
-interface State {
+type SearchState = {
 }
 
-class SearchPage extends React.Component<Props,State> {
+class SearchPage extends React.Component<SearchProps,SearchState> {
     state = {}
     render() {
         const {searchValue,updateSearchValue} = this.props;
@@ -25,10 +26,10 @@ class SearchPage extends React.Component<Props,State> {
                 >
                     Результаты поиска
                 </h3>
-                <SearchField
+               {/* <SearchField
                     search={searchValue}
                     updateSearch={updateSearchValue}
-                />
+                />*/}
             </div>
 
         )
@@ -36,12 +37,8 @@ class SearchPage extends React.Component<Props,State> {
 }
 
 const mapStateToProps = (state: AppStateType) => ({
-    searchValue: state.movie._search
+    searchValue: state.search.searchValue
 })
-const mapDispatchToProps = (dispatch: Dispatch) => {
-    return({
-        updateSearchValue: (search: string) => dispatch(updateSearchValue(search))
-    })
-}
 
-export default connect(mapStateToProps,mapDispatchToProps)(SearchPage)
+
+export default connect(mapStateToProps,{updateSearchValue: searchActions.updateSearchValue})(SearchPage)

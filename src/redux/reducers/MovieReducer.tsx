@@ -17,10 +17,26 @@ const initialState = {
     genres: [] as Array<Genre>,
     filters: {
         data_realise: {},
-        sorting: [
-            {option: 'sort_by_voz'},
-            {option: 'sort_by_ybiv'},
-        ]
+        sorting: {
+            options: [
+                {
+                    label: "Популярные по убыванию",
+                    value: "popularity.desc"
+                },
+                {
+                    label: "Популярные по возростанию",
+                    value: "popularity.asc"
+                },
+                {
+                    label: "Рейтинг по убыванию",
+                    value: "vote_average.desc"
+                },
+                {
+                    label: "Рейтинг по возростанию",
+                    value: "vote_average.asc"
+                }
+            ]
+        },
     },
     collections: [
         ['popular', 'популярные'],

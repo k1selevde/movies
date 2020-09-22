@@ -48,6 +48,7 @@
     "react-redux": "^7.0.3",
     "react-router-dom": "^5.2.0",
     "react-slick": "^0.27.11",
+    "reactjs-popup": "^2.0.3",
     "reactstrap": "^8.4.1",
     "redux": "^4.0.1",
     "redux-logger": "^3.0.6",

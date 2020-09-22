@@ -1,5 +1,12 @@
 
 .search {
+  &__icon {
+    //background: url("../../assets/icons/search.svg");
+    opacity: .7;
+    background-size: 18px;
+    width: 18px;
+    height: 18px;
+  }
   &__title {
     margin-top: 20px;
     font-size: 21px;
@@ -26,3 +33,19 @@
   }
 
 }
+
+.searchHint__popup {
+  background: green;
+  width: 100%;
+  color: white
+}
+
+/*
+.popup-overlay {
+  background: green;
+  height: 100px;
+  width: 150px;
+  //position: absolute;
+  overflow: hidden;
+  color: black;
+}*/

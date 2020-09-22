@@ -1,5 +1,6 @@
 export const search = {
-    UPDATE: 'MOVIE/UPDATE_SEARCH'
+    UPDATE: 'SEARCH/UPDATE_SEARCH',
+    TOGGLE__SEARCH_FIELD: 'SEARCH/TOGGLE__SEARCH_FIELD'
 }
 
 export const genres = {
