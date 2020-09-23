@@ -12,9 +12,9 @@ export const movieApi = {
             .then(res => res.json())
     },
 
-    getCollection(category: string) {
-        console.log('query URL: ',`${api_url}/movie/${category}?api_key=${api_key}&language=ru-RU&page=1` )
-        return fetch(`${api_url}/movie/${category}?api_key=${api_key}&language=ru-RU&page=1`)
+    getCollection(category: string, page: number) {
+        console.log('query URL: ',`${api_url}/movie/${category}?api_key=${api_key}&language=ru-RU&page=${page}` )
+        return fetch(`${api_url}/movie/${category}?api_key=${api_key}&language=ru-RU&page=${page}`)
             .then(res => res.json())
     }
 }

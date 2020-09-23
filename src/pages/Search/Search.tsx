@@ -26,10 +26,6 @@ class SearchPage extends React.Component<SearchProps,SearchState> {
                 >
                     Результаты поиска
                 </h3>
-               {/* <SearchField
-                    search={searchValue}
-                    updateSearch={updateSearchValue}
-                />*/}
             </div>
 
         )

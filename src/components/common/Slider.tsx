@@ -1,6 +1,6 @@
 import * as React from 'react'
 import Slider from "react-slick";
-import HorizontalMovieCard from '../MovieCard/horizontalMovieCard'
+import HorizontalMovieCard from '../MovieCard/HorizontalMovieCard'
 import {collectionMovie} from "../../types/types";
 
 let basicMovie = {
@@ -97,7 +97,6 @@ class SpecialCollection extends React.Component<SpecialCollectionProps,SpecialCo
         };
         return (
             <>
-                <h4>Cards</h4>
                 <div style={{margin: '0 auto'}}>
                     <Slider {...settings}>
                         {moviesArr.map((mov)=>(

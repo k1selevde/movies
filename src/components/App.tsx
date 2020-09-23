@@ -16,19 +16,24 @@ import SearchPage from "../pages/Search/Search";
 import SearchHint from "./common/SearchHint";
 import Popup from 'reactjs-popup';
 import SpecialPage from '../pages/Special/SpecialPage'
-interface Props {
+import PeoplePage from "../pages/People/PeoplePage";
+import Routes from './Routes'
+
+
+
+interface IAppProps {
     setAccountDetails: (id: any) => {},
     isHiddenSearchField: boolean
 }
 
-interface State {
+interface IAppState {
     userData: {
         password: string,
         username: string
     }
 }
 
-class App extends React.Component<Props,State> {
+class App extends React.Component<IAppProps,IAppState> {
 
     state = {
         userData: {
@@ -102,25 +107,7 @@ class App extends React.Component<Props,State> {
                     >
                         <div style={{background: 'blue'}}>Popup content here !!</div>
                     </Popup>
-
-                    <Switch>
-                        <Route exact path="/" component={MainPage}/>
-                        <Route path="/movies" component={MoviesPage}/>
-                        <Route path="/search/:value" render={({match}) =>
-                        {
-                            let {value} = match.params;
-                            return <SearchPage value={value} />
-                        }}
-                        />
-                        <Route path="/special/:query" component={SpecialPage}/>
-                        <Route path="/movie/:id" render={({match}) =>
-                        {
-                            let {id} = match.params
-                            return <MoviePage id={id}/>
-                        }}
-                        />
-                        <Route path="*" component={NotFound} />
-                    </Switch>
+                    <Routes/>
                 </div>
 
             </div>

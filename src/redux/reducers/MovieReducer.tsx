@@ -39,10 +39,10 @@ const initialState = {
         },
     },
     collections: [
-        ['popular', 'популярные'],
-        ['top_rated', 'с самым большим рейтингом'],
-        ['upcoming', 'набирающие популярность'],
-        ['latest', 'последние']
+        ['popular', 'Популярные'],
+        ['top_rated', 'С самым большим рейтингом'],
+        ['latest', 'Последние'],
+        ['upcoming', 'Набирающие популярность']
     ],
     special_collections: {
         popular: null as [] | null,
@@ -94,7 +94,16 @@ const reducer: Reducer<InitialStateType> = (state = initialState, action: any): 
                 ...state,
                 special_collections: {
                     ...state.special_collections,
-                    [action.payload.category]: action.payload.results
+                    //@ts-ignore
+                    [action.payload.category]: [...state.special_collections[action.payload.category],...action.payload.results]
+                }
+            }
+        case collection.CLEAR:
+            return {
+                ...state,
+                special_collections: {
+                    ...state.special_collections,
+                    [action.payload]: []
                 }
             }
         default: return state;

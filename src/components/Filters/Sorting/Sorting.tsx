@@ -1,11 +1,17 @@
 import * as React from 'react'
+import {OptionType} from "../../../types/types";
 
-const Sorting: React.FC  = () => {
+interface ISortingProps {
+    options: OptionType[]
+}
+
+const Sorting: React.FC<ISortingProps>  = ({options=[]}) => {
     return (
         <div>
             <select name="sel" id="sel">
-                <option value="12">По возрастанию рейтинга</option>
-                <option value="13">По убыванию рейтинга</option>
+                {options.map(option => (
+                    <option value={option.value}>{option.label}</option>
+                ))}
             </select>
         </div>
     );

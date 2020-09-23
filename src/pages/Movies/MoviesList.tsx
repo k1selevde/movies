@@ -1,5 +1,5 @@
 import * as React from 'react'
-import HorizontalMovieCard from "../../components/MovieCard/horizontalMovieCard";
+import HorizontalMovieCard from "../../components/MovieCard/HorizontalMovieCard";
 import {ComponentClass} from "react";
 import {WithLoading} from "../../components/HOC/WithLoading";
 import {collectionMovie} from "../../types/types";

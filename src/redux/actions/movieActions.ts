@@ -76,9 +76,9 @@ export function getMoviesSuccess(data: any) {
 
 //===== NEW CODE
 
-export function  getCollection(category: string) {
+export function  getCollection(category: string, page: number) {
     return async (dispatch: Dispatch) => {
-        await movieApi.getCollection(category)
+        await movieApi.getCollection(category,page)
             .then((res: any) =>{
                 console.log('We got a popular movies: ', res)
                 dispatch(getCollectionSuccess({results: res.results,category}))
@@ -103,6 +103,13 @@ export function getCollectionSuccess(payload: any) {
 export function getCollectionFailure(payload: any) {
     return {
         type: collection.GET_FAILURE,
+        payload
+    }
+}
+
+export function clearCollection(payload: string) {
+    return {
+        type: collection.CLEAR,
         payload
     }
 }

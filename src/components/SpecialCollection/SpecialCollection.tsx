@@ -1,5 +1,5 @@
 import * as React from 'react'
-import HorizontalMovieCard from '../MovieCard/horizontalMovieCard'
+import HorizontalMovieCard from '../MovieCard/HorizontalMovieCard'
 import Slider from "../common/Slider";
 import {collectionMovie} from "../../types/types";
 import {connect}from 'react-redux'
@@ -61,7 +61,7 @@ class CustomSlide extends React.Component<any,any> {
 }
 
 interface SpecialCollectionProps {
-    getCollection: (category: string) => Promise<void>,
+    getCollection: (category: string,page: number) => Promise<void>,
     category: string,
     collection: collectionMovie[]
 }
@@ -71,7 +71,7 @@ class SpecialCollection extends React.Component<SpecialCollectionProps> {
     componentDidMount(): void {
         console.log('Component here:)')
         let {getCollection,category} = this.props;
-        getCollection(category)
+        getCollection(category,1)
     }
 
     componentDidUpdate() {

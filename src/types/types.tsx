@@ -79,3 +79,8 @@ export type searchResultCompany = {
     name: string,
     origin_country: string
 }
+
+export type OptionType = {
+    label: string,
+    value: string
+}

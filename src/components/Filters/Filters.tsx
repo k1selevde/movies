@@ -1,24 +1,29 @@
 import * as React from 'react'
 import GenresContainer from "./Genres/GenresContainer";
 import Sorting from './Sorting/Sorting'
+import {AppStateType} from "../../redux/reducers";
+import {connect} from 'react-redux'
+import {OptionType} from "../../types/types";
 
-type FilterType = {
-    name?: string
+
+
+interface IFilterProps {
+    // filters?: Array<FilterType>
+    options: OptionType[]
 }
 
-interface Props {
-    filters?: Array<FilterType>
-}
 
-interface State {
-}
+class Filters extends React.Component<IFilterProps> {
+   componentDidMount(): void {
+       // fetching here
+   }
 
-class Filters extends React.Component<Props,State> {
-    state = {
+    sortingChange() {
 
     }
 
     render() {
+        const {options} = this.props;
         return (
             <div
                 className="filters__container"
@@ -28,7 +33,9 @@ class Filters extends React.Component<Props,State> {
                 >
                     Фильтры
                 </h4>
-                <Sorting />
+                <Sorting
+                    options={options}
+                />
                 <GenresContainer />
                 <button className="reset-btn">СБРОСИТЬ</button>
             </div>
@@ -36,4 +43,7 @@ class Filters extends React.Component<Props,State> {
     }
 }
 
-export default Filters;
+const mapStateToProps = (state: AppStateType) => ({
+    options: state.movie.filters.sorting.options
+})
+export default connect(mapStateToProps)(Filters);

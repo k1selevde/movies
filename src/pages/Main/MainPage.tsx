@@ -6,7 +6,7 @@ import {connect} from 'react-redux';
 import {getCollection} from '../../redux/actions/movieActions';
 import {collectionMovie} from "../../types/types";
 import {specialCollectionType} from "../../redux/reducers/MovieReducer";
-import {Link} from 'react-router-dom';
+import {Link, NavLink} from 'react-router-dom';
 
 interface MainPageProps {
     collections: Array<string[]>,
@@ -52,9 +52,12 @@ class MainPage extends React.Component<MainPageProps,MainPageState> {
                             <span>{special_collections[key]}</span>
                         </div>
                     ))}*/}
-                    {Object.keys(special_collections).map((key)=>(
+                    {Object.keys(special_collections).map((key:string, i: number)=>(
                         <div key={key}>
-                            <h4>{key}</h4>
+                            <NavLink to={`/special/${key}`}>
+                                {collections[i][1]}
+
+                            </NavLink>
 
                             <SpecialCollection
                                 getCollection={getCollection}
