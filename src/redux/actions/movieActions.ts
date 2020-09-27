@@ -2,7 +2,17 @@ import {Dispatch, Action} from "redux"
 import {movieApi} from "../../api/movie-api";
 import {ThunkAction} from "redux-thunk";
 import {AppStateType} from "../reducers";
-import {search,genres,collection} from './actionTypes'
+import {
+    search,
+    genres,
+    collection,
+    movieDetails,
+    movieKeywords,
+    similarMovies,
+    movieReviews,
+    movieCredits
+} from './actionTypes'
+import {movieKeywordsType} from "../../types/types";
 
 
 export const GET_GENRES_SUCCESS = 'MOVIE/GET_GENRES_SUCCESS'
@@ -25,17 +35,6 @@ type GenresType = {
 export type GetGenresThunk = ThunkAction<void , AppStateType , unknown ,any>
 //type GetGenresThunk = ThunkAction<any,any,any,any>
 
-export function getGenres(): GetGenresThunk {
-    return async (dispatch: Dispatch) => {
-            dispatch({type: 'REQUEST'})
-            await movieApi.getGenres()
-                .then((res: any) => {
-                    console.log('its res : ', res)
-                    dispatch(getGenresSuccess(res.genres))
-                    }
-                )
-    }
-}
 
 export function getGenresSuccess(payload: GenresType) {
     return {
@@ -54,16 +53,7 @@ export function updateGenres(payload: string) {
 }
 
 
-export function getMovies() {
-    return async (dispatch: Dispatch) => {
-        dispatch({type: 'REQUEST'})
-        await movieApi.getMovies()
-            .then((res: any) => {
-                console.log('get movies res: ',res)
-                dispatch(getMoviesSuccess(res.results))
-            })
-    }
-}
+
 
 
 export function getMoviesSuccess(data: any) {
@@ -76,15 +66,7 @@ export function getMoviesSuccess(data: any) {
 
 //===== NEW CODE
 
-export function  getCollection(category: string, page: number) {
-    return async (dispatch: Dispatch) => {
-        await movieApi.getCollection(category,page)
-            .then((res: any) =>{
-                console.log('We got a popular movies: ', res)
-                dispatch(getCollectionSuccess({results: res.results,category}))
-            })
-    }
-}
+
 
 
 export function getCollectionRequest() {
@@ -113,3 +95,146 @@ export function clearCollection(payload: string) {
         payload
     }
 }
+
+
+//THUNKS
+
+export function getGenres(): GetGenresThunk {
+    return async (dispatch: Dispatch) => {
+        dispatch({type: 'REQUEST'})
+        await movieApi.getGenres()
+            .then((res: any) => {
+                    console.log('its res : ', res)
+                    dispatch(getGenresSuccess(res.genres))
+                }
+            )
+    }
+}
+
+export function  getCollection(category: string, page: number) {
+    return async (dispatch: Dispatch) => {
+        await movieApi.getCollection(category,page)
+            .then((res: any) =>{
+                console.log('We got a popular movies: ', res.results)
+                dispatch(getCollectionSuccess({results: res.results,category}))
+            })
+    }
+}
+
+
+export function getMovies() {
+    return async (dispatch: Dispatch) => {
+        dispatch({type: 'REQUEST'})
+        await movieApi.getMovies()
+            .then((res: any) => {
+                console.log('get movies res: ',res)
+                dispatch(getMoviesSuccess(res.results))
+            })
+    }
+}
+
+export function getMovieDetails(id: string) {
+    return async(dispatch: Dispatch) =>{
+        //dispatch()
+        await movieApi.getMovieDetails(id)
+            .then((res:any) => {
+                console.log('We got a movie details: ',res)
+                dispatch(getMovieDetailsSuccess(res))
+            })
+    }
+}
+
+export function getMovieDetailsRequest() {
+    return({
+        type: movieDetails.REQUEST
+    })
+}
+
+export function getMovieDetailsSuccess(payload: any) {
+    return({
+        type: movieDetails.GET__SUCCESS,
+        payload
+    })
+}
+
+export function getMovieDetailsFailure(payload: {}) {
+    return({
+        type: movieDetails.GET__SUCCESS,
+        payload
+    })
+}
+
+
+export function getMovieKeywordsSuccess(payload: any) {
+    return ({
+        type: movieKeywords.GET_SUCCESS,
+        payload
+    })
+}
+
+export function getMovieKeywords(id: string) {
+    return async(dispatch: Dispatch) =>{
+        //dispatch()
+        await movieApi.getKeywords(id)
+            .then((res:any) => {
+                console.log('We got a keywords  : ',res)
+                dispatch(getMovieKeywordsSuccess(res.keywords))
+            })
+    }
+}
+
+export function getSimilarMovies(id: string,page: string) {
+    return async(dispatch: Dispatch) =>{
+        //dispatch()
+        await movieApi.getSimilarMovies(id,page)
+            .then((res:any) => {
+                console.log('We got a similar movies  : ',res)
+                dispatch(getSimilarMoviesSuccess(res.results))
+            })
+    }
+}
+
+export function getSimilarMoviesSuccess(payload: any) {
+    return ({
+        type: similarMovies.GET_SUCCESS,
+        payload
+    })
+}
+
+export function getMovieReviews(id: string,page:string) {
+    return async(dispatch: Dispatch) =>{
+        //dispatch()
+        await movieApi.getReviews(id,page)
+            .then((res:any) => {
+                console.log('We got a reviews of movie  : ',res)
+                dispatch(getMovieReviewsSuccess(res.results))
+            })
+    }
+}
+
+export function getMovieReviewsSuccess(payload: any) {
+    return ({
+        type: movieReviews.GET__SUCCESS,
+        payload
+    })
+}
+
+export function getMovieCredits(id: string) {
+    return async(dispatch: Dispatch) =>{
+        //dispatch(
+        console.log('moviecredits requst...')
+        await movieApi.getCredits(id)
+            .then((res:any) => {
+                console.log('We got a CREDITS FOR MOVIE : ',res)
+                dispatch(getMovieCreditsSuccess(res.cast))
+            })
+    }
+}
+
+export function getMovieCreditsSuccess(payload: any) {
+    return ({
+        type: movieCredits.GET_SUCCESS,
+        payload
+    })
+}
+

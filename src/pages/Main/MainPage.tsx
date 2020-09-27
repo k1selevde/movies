@@ -8,11 +8,17 @@ import {collectionMovie} from "../../types/types";
 import {specialCollectionType} from "../../redux/reducers/MovieReducer";
 import {Link, NavLink} from 'react-router-dom';
 
+
+function isEmpty(obj: object,key: string) : Boolean {
+    //@ts-ignore
+    return Boolean(obj[key]);
+}
+
 interface MainPageProps {
     collections: Array<string[]>,
     getCollection: (category: string) => Promise<void>,
     // special_collections: specialCollectionType,
-    special_collections: any,
+    special_collections: specialCollectionType,
     // special_collections: object,
     curCollection: collectionMovie[],
     //test
@@ -34,26 +40,8 @@ class MainPage extends React.Component<MainPageProps,MainPageState> {
                 <Posters />
                 <Link to="/movie/34">MOVIE</Link>
                 <div>
-                    {/*{collections.map((col) => (
-                        <div>
-                            <h3>{col[1]}</h3>
-                            <SpecialCollection
-                                getCollection={getCollection}
-                                curCollection={curCollection}
-                                category={col[0]}
-                                collection={special_collections}
-                            />
-                        </div>
-                    ))}*/}
-                    {/*{Object.keys(special_collections).map((key)=>(
-                        <div key={key}>
-                            <h4>{key}</h4>
-                            {@ts-ignore}
-                            <span>{special_collections[key]}</span>
-                        </div>
-                    ))}*/}
                     {Object.keys(special_collections).map((key:string, i: number)=>(
-                        <div key={key}>
+                       <div key={key}>
                             <NavLink to={`/special/${key}`}>
                                 {collections[i][1]}
 
@@ -62,6 +50,7 @@ class MainPage extends React.Component<MainPageProps,MainPageState> {
                             <SpecialCollection
                                 getCollection={getCollection}
                                 category={key}
+                                //@ts-ignore
                                 collection={special_collections[key]}
                             />
                         </div>

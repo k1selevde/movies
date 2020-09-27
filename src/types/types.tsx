@@ -84,3 +84,104 @@ export type OptionType = {
     label: string,
     value: string
 }
+
+export type movieDetailsType = {
+    adult: false,
+    backdrop_path: string,
+    belongs_to_collection: {},
+    budget: number,
+    genres: [],
+    homepage: string,
+    id: number,
+    imdb_id: string,
+    original_language: string,
+    original_title: string,
+    overview: string,
+    popularity: number,
+    poster_path: string,
+    production_companies: [],
+    production_countries: [],
+    release_date: string,
+    revenue: number,
+    runtime: number,
+    spoken_languages: [],
+    status: string,
+    tagline: string,
+    title: string,
+    video: boolean,
+    vote_average: number,
+    vote_count: number
+}
+
+export type movieCreditType = {
+    cast_id: number,
+    character: string,
+    credit_id: string,
+    gender: number,
+    id: number,
+    name: string,
+    order: number,
+    profile_path: string
+}
+
+export type movieCreditsType = {
+    cast: movieCreditType[]
+}
+
+export type movieKeywordType = {
+    id: number,
+    name: string
+}
+
+export type movieKeywordsType = {
+    keywords: movieKeywordType[]
+}
+
+export type similarMovieType = {
+    id: number,
+    video: boolean,
+    vote_count: number,
+    vote_average: number,
+    title: string,
+    release_date: string,
+    original_language: string,
+    original_title: string,
+    genre_ids: number[],
+    backdrop_path: string,
+    adult: boolean,
+    overview:   string,
+    poster_path: string,
+    popularity: number
+}
+
+export type similarMoviesResultsType = {
+    results: similarMovieType[]
+}
+
+export type movieReviewType = {
+    author: string,
+    content: string,
+    id: string,
+    url: string
+}
+
+export type movieReviewsResultType = {
+    results: movieReviewType[]
+}
+
+export type personDetailsType = {
+    birthday: string,
+    known_for_department: string,
+    deathday: null | string,
+    id: number,
+    name: string,
+    also_known_as: any[],
+    gender: number,
+    biography: string,
+    popularity: number,
+    place_of_birth: string,
+    profile_path: string,
+    adult: false,
+    imdb_id: string,
+    homepage: null | string
+}

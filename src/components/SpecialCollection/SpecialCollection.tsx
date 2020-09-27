@@ -66,6 +66,12 @@ interface SpecialCollectionProps {
     collection: collectionMovie[]
 }
 
+
+function isEmpty(obj: object,key: string) : Boolean {
+    //@ts-ignore
+    return Boolean(obj[key]);
+}
+
 class SpecialCollection extends React.Component<SpecialCollectionProps> {
 
     componentDidMount(): void {
@@ -83,10 +89,9 @@ class SpecialCollection extends React.Component<SpecialCollectionProps> {
         let {category,collection=[]} = this.props
         return (
             <>
-                {/*{collection.map((i)=> (
-                    <div>{i.title} : {i.popularity}</div>
-                ))}*/}
-                <Slider moviesArr={collection} />
+                {
+                    !(collection === null) &&  <Slider moviesArr={collection}/>
+                }
             </>
      )
     }

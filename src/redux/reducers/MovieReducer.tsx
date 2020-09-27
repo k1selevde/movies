@@ -3,7 +3,22 @@ import {
     GET_MOVIES_SUCCESS,
 } from "../actions/movieActions";
 
-import {search,genres,collection} from '../actions/actionTypes'
+import {
+    search,
+    genres,
+    collection,
+    movieDetails,
+    movieKeywords,
+    movieCredits,
+    similarMovies, movieReviews
+} from '../actions/actionTypes'
+import {
+    movieCreditsType,
+    movieDetailsType,
+    movieKeywordsType,
+    movieReviewsResultType,
+    similarMoviesResultsType
+} from "../../types/types";
 
 type Genre = {
     name: string,
@@ -11,8 +26,16 @@ type Genre = {
     isSelected: boolean
 }
 
+export type CurrentMovieType = typeof initialState.currentMovie;
 
 const initialState = {
+    currentMovie: {
+        details: null as movieDetailsType | null,
+        keywords: null as movieKeywordsType | null,
+        credits: null as movieCreditsType | null,
+        similarMovies: null as similarMoviesResultsType | null,
+        reviews: null as movieReviewsResultType | null
+    },
     moviesList: [] as Array<{}>,
     genres: [] as Array<Genre>,
     filters: {
@@ -55,6 +78,8 @@ const initialState = {
 export type specialCollectionType = typeof initialState.special_collections
 
 type InitialStateType = typeof initialState;
+
+
 const reducer: Reducer<InitialStateType> = (state = initialState, action: any): InitialStateType => {
     switch(action.type) {
         case 'REQUEST':
@@ -90,12 +115,13 @@ const reducer: Reducer<InitialStateType> = (state = initialState, action: any): 
                 moviesList: action.payload
             }
         case collection.GET_SUCCESS:
+            const cat = action.payload.category
             return {
                 ...state,
                 special_collections: {
                     ...state.special_collections,
                     //@ts-ignore
-                    [action.payload.category]: [...state.special_collections[action.payload.category],...action.payload.results]
+                    [cat]: [...action.payload.results]
                 }
             }
         case collection.CLEAR:
@@ -104,6 +130,46 @@ const reducer: Reducer<InitialStateType> = (state = initialState, action: any): 
                 special_collections: {
                     ...state.special_collections,
                     [action.payload]: []
+                }
+            }
+        case movieDetails.GET__SUCCESS:
+            return {
+                ...state,
+                currentMovie: {
+                    ...state.currentMovie,
+                    details: action.payload
+                }
+            }
+        case movieKeywords.GET_SUCCESS:
+            return {
+                ...state,
+                currentMovie: {
+                    ...state.currentMovie,
+                    keywords: action.payload
+                }
+            }
+        case movieCredits.GET_SUCCESS:
+            return {
+                ...state,
+                currentMovie: {
+                    ...state.currentMovie,
+                    credits: action.payload
+                }
+            }
+        case similarMovies.GET_SUCCESS:
+            return {
+                ...state,
+                currentMovie: {
+                    ...state.currentMovie,
+                    similarMovies: action.payload
+                }
+            }
+        case movieReviews.GET__SUCCESS:
+            return {
+                ...state,
+                currentMovie: {
+                    ...state.currentMovie,
+                    reviews: action.payload
                 }
             }
         default: return state;

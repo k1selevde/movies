@@ -1,0 +1,28 @@
+import * as React from 'react';
+import {people} from "../actions/actionTypes";
+import {personDetailsType} from "../../types/types";
+
+let initialState = {
+    details: null as personDetailsType | null,
+    error: null as string | null
+}
+
+type InitialStateType = typeof initialState;
+
+const reducer = (state = initialState, action: any): InitialStateType => {
+    switch(action.type) {
+        case people.GET_DETAILS_SUCCESS:
+            return {
+                ...state,
+                details: action.payload
+            }
+        case people.GET_DETAILS_FAILURE:
+            return {
+                ...state,
+                error: 'bad'
+            }
+        default: return state;
+    }
+}
+
+export default reducer;

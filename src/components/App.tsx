@@ -12,11 +12,11 @@ import {authApi} from "../api/auth-api";
 import {setAccountDetails, AccountDetailsType} from "../redux/actions/authActions";
 import './../css/app.scss'
 import MainPage from "../pages/Main/MainPage";
-import SearchPage from "../pages/Search/Search";
+import SearchPage from "../pages/Search/SearchPage";
 import SearchHint from "./common/SearchHint";
 import Popup from 'reactjs-popup';
 import SpecialPage from '../pages/Special/SpecialPage'
-import PeoplePage from "../pages/People/PeoplePage";
+import PeoplePage from "../pages/Person/PersonPage";
 import Routes from './Routes'
 
 

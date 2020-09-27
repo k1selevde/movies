@@ -1,8 +1,8 @@
 import {Route, Switch} from "react-router";
 import MainPage from "../pages/Main/MainPage";
 import MoviesPage from "../pages/Movies/MoviesPage";
-import PeoplePage from "../pages/People/PeoplePage";
-import SearchPage from "../pages/Search/Search";
+import PeoplePage from "../pages/Person/PersonPage";
+import SearchPage from "../pages/Search/SearchPage";
 import SpecialPage from "../pages/Special/SpecialPage";
 import MoviePage from "../pages/Movie/MoviePage";
 import NotFound from "./common/NotFound";
