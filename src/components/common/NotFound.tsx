@@ -1,17 +1,16 @@
 import * as React from 'react'
 import {NavLink} from 'react-router-dom'
 
-interface Props {
+interface INotFoundProps {
     linkToBack?: string,
-    textToBack?: string
-}
-
-interface State {
-
+    textToBack?: string,
+    img?: string
 }
 
 
-const NotFound: React.FC<Props> = ({linkToBack = '',textToBack = ''}) => {
+
+
+const NotFound: React.FC<INotFoundProps> = ({linkToBack = '',textToBack = ''}) => {
     return (
         <>
             <div>

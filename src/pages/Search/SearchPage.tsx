@@ -10,9 +10,10 @@ import {
     findPerson, findPersonUpdate,
     searchActions
 } from "../../redux/actions/searchActions";
-import MovieReviews from "../Movie/MovieReviews";
+import MovieReviews from "../Movie/MoviePageTabs/MovieReviews";
 import MoviesResults from "./MoviesResults";
 import PersonResults from "./PersonResults";
+import NotFound from "../../components/common/NotFound";
 
 
 // Похожие props
@@ -64,6 +65,7 @@ class SearchPage extends React.Component<SearchProps,SearchState> {
                 <div
                     className="search__resultsBlock"
                 >
+                   {/* {(movies.length == 0) && (people.length == 0) && <NotFound /> }*/}
                     <MoviesResults
                         value={value}
                         findMovies={findMovies.bind(null,value)}
@@ -80,7 +82,6 @@ class SearchPage extends React.Component<SearchProps,SearchState> {
                     />
                 </div>
             </div>
-
         )
     }
 }

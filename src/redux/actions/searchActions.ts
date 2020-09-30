@@ -38,7 +38,7 @@ export function findMoviesFailure(payload: any) {
 
 export function findPerson(query: string, page: string) {
     return async(dispatch: Dispatch) => {
-
+        dispatch(clearSearchPeople())
         await searchApi.findPerson(query,page)
             .then((res:any) => {
                 //alert(res.results)

@@ -1,5 +1,5 @@
 import * as React from 'react'
-import {movieCreditType} from "../../types/types";
+import {movieCreditType} from "../../../types/types";
 
 interface IMovieCreditsProps {
     credits: any,

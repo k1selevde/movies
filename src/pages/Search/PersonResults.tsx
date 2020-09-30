@@ -34,23 +34,26 @@ const PersonResults: React.FC<IPersonResultsProps> = ({people,value,findPerson,f
 
     return (
             <>
-                <h4>Here is person results</h4>
-                <div className="container">
-                    <div className="row">
-                        {people && people.map((person: searchResultPerson) => (
-                            <div className="col-4">
-                                <NavLink  key={person.id} to={`/people/${person.id}`}>
-                                    <div>{person.name}</div>
-                                </NavLink>
+                {people && people[0] &&
+                <div><h4>Here is person results</h4>
+                        <div className="container">
+                            <div className="row">
+                                {people.map((person: searchResultPerson) => (
+                                    <div className="col-4">
+                                        <NavLink key={person.id} to={`/people/${person.id}`}>
+                                            <div>{person.name}</div>
+                                        </NavLink>
+                                    </div>
+                                ))}
                             </div>
-                        ))}
+                        </div>
+                        <button
+                            onClick={showMoreHandler}
+                        >
+                            Показать еще
+                        </button>
                     </div>
-                </div>
-                <button
-                   onClick={showMoreHandler}
-                >
-                    Показать еще
-                </button>
+                }
             </>
         )
 }

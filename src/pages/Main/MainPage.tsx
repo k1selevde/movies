@@ -44,7 +44,6 @@ class MainPage extends React.Component<MainPageProps,MainPageState> {
                        <div key={key}>
                             <NavLink to={`/special/${key}`}>
                                 {collections[i][1]}
-
                             </NavLink>
 
                             <SpecialCollection

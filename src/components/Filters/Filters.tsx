@@ -8,7 +8,7 @@ import {OptionType} from "../../types/types";
 
 
 interface IFilterProps {
-    // filters?: Array<FilterType>
+    setCurrentSortOption: (option: string) => {}
     options: OptionType[]
 }
 
@@ -33,7 +33,9 @@ class Filters extends React.Component<IFilterProps> {
                 >
                     Фильтры
                 </h4>
+
                 <Sorting
+                    setCurrentSortOption={this.props.setCurrentSortOption}
                     options={options}
                 />
                 <GenresContainer />

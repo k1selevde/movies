@@ -10,7 +10,7 @@ import {
     movieKeywords,
     similarMovies,
     movieReviews,
-    movieCredits
+    movieCredits, movies
 } from './actionTypes'
 import {movieKeywordsType} from "../../types/types";
 
@@ -111,7 +111,7 @@ export function getGenres(): GetGenresThunk {
     }
 }
 
-export function  getCollection(category: string, page: number) {
+export function  getCollection(category: string, page: string) {
     return async (dispatch: Dispatch) => {
         await movieApi.getCollection(category,page)
             .then((res: any) =>{
@@ -122,13 +122,13 @@ export function  getCollection(category: string, page: number) {
 }
 
 
-export function getMovies() {
+export function getMovies(page: string, sort: string) {
     return async (dispatch: Dispatch) => {
         dispatch({type: 'REQUEST'})
-        await movieApi.getMovies()
+        await movieApi.getMovies(page, sort)
             .then((res: any) => {
-                console.log('get movies res: ',res)
-                dispatch(getMoviesSuccess(res.results))
+                console.log('get movies RES: ',res)
+                dispatch(getMoviesSuccess(res))
             })
     }
 }
@@ -238,3 +238,16 @@ export function getMovieCreditsSuccess(payload: any) {
     })
 }
 
+export function setCurrentPage(payload: any) {
+    return ({
+        type: movies.SET_CURRENT_PAGE,
+        payload
+    })
+}
+
+export function setCurrentSortOption(payload: any) {
+    return ({
+        type: movies.SET_CURRENT_SORT_OPTION,
+        payload
+    })
+}

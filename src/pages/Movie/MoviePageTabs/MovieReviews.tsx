@@ -1,5 +1,5 @@
 import * as React from 'react'
-import {movieReviewType} from "../../types/types";
+import {movieReviewType} from "../../../types/types";
 
 interface IMovieReviews {
     reviews: any,

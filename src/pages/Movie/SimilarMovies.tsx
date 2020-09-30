@@ -1,5 +1,7 @@
 import * as React from 'react'
 import {similarMoviesResultsType, similarMovieType} from "../../types/types";
+import Slider from '../../components/common/Slider'
+
 
 interface ISimilarMoviesProps {
     movies: similarMovieType[],
@@ -15,10 +17,7 @@ class SimilarMovies extends React.PureComponent<ISimilarMoviesProps> {
         const {movies} = this.props;
         return (
             <div>
-                Here is similar movies
-                <div>{movies && movies.map((movie:similarMovieType) =>(
-                   <div key={movie.id}>{movie.title}</div>
-                ))}</div>
+                {movies && <Slider moviesArr={movies}/>}
             </div>
         )
     }

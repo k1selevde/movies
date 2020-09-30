@@ -10,7 +10,7 @@ import {
     movieDetails,
     movieKeywords,
     movieCredits,
-    similarMovies, movieReviews
+    similarMovies, movieReviews, movies
 } from '../actions/actionTypes'
 import {
     movieCreditsType,
@@ -38,6 +38,11 @@ const initialState = {
     },
     moviesList: [] as Array<{}>,
     genres: [] as Array<Genre>,
+    currentFilters: {
+        currentPage:  1,
+        totalPages: 1,
+        sort_option: "popularity.desc"
+    },
     filters: {
         data_realise: {},
         sorting: {
@@ -76,7 +81,7 @@ const initialState = {
 }
 
 export type specialCollectionType = typeof initialState.special_collections
-
+export type currentFiltersType = typeof initialState.currentFilters
 type InitialStateType = typeof initialState;
 
 
@@ -112,16 +117,22 @@ const reducer: Reducer<InitialStateType> = (state = initialState, action: any): 
         case GET_MOVIES_SUCCESS:
             return {
                 ...state,
-                moviesList: action.payload
+                currentFilters: {
+                    ...state.currentFilters,
+                    totalPages: action.payload.total_results
+                },
+                moviesList: action.payload.results
             }
         case collection.GET_SUCCESS:
             const cat = action.payload.category
+            //@ts-ignore
+            const oldArr = state.special_collections[cat] ? state.special_collections[cat] : []
             return {
                 ...state,
                 special_collections: {
                     ...state.special_collections,
                     //@ts-ignore
-                    [cat]: [...action.payload.results]
+                    [cat]: [...oldArr, ...action.payload.results]
                 }
             }
         case collection.CLEAR:
@@ -170,6 +181,22 @@ const reducer: Reducer<InitialStateType> = (state = initialState, action: any): 
                 currentMovie: {
                     ...state.currentMovie,
                     reviews: action.payload
+                }
+            }
+        case movies.SET_CURRENT_PAGE:
+            return {
+                ...state,
+                currentFilters: {
+                    ...state.currentFilters,
+                    currentPage: action.payload
+                }
+            }
+        case movies.SET_CURRENT_SORT_OPTION:
+            return {
+                ...state,
+                currentFilters: {
+                    ...state.currentFilters,
+                    sort_option: action.payload
                 }
             }
         default: return state;

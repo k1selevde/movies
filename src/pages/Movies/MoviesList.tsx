@@ -14,21 +14,8 @@ interface MoviesListProps  {
     movies: collectionMovie[]
 }
 
-// type DefaultProps = Readonly<typeof  defaultProps>
-
-/*const defaultProps  = {
-    movies: [
-        {id: 't5', title: 'Del Boske style'},
-        {id: 't5', title: 'Delly askin'},
-        {id: '6ytra', title: 'kvadrat dvora'},
-        {id: '6ytra', title: 'kvadrat dvora'},
-        {id: '6ytra', title: 'kvadrat eerer'},
-    ]
-}*/
-
 
 class MoviesList extends React.Component<MoviesListProps> {
-/*    static defaultProps = defaultProps;*/
 
     render() {
         const {movies} = this.props;
@@ -46,8 +33,5 @@ class MoviesList extends React.Component<MoviesListProps> {
         );
     }
 }
-
-/*
-export default WithLoading(MoviesList)*/
 
 export default MoviesList;

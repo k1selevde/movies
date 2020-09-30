@@ -34,21 +34,22 @@ const MoviesResults: React.FC<IMoviesResultsProps> = ({value,movies,findMovies,f
 
     return (
         <>
-            <h4>Here is movies results</h4>
-            <div className="container">
-                <div className="row">
-                    {movies && movies.map((movie:any)=> (
-                        <div className="col-3">
-                            <HorizontalMovieCard movie={movie}/>
-                        </div>
-                    ))}
+            {movies && movies[0] && <div><h4>Here is movies results</h4>
+                <div className="container">
+                    <div className="row">
+                        {movies.map((movie: any) => (
+                            <div className="col-3">
+                                <HorizontalMovieCard movie={movie}/>
+                            </div>
+                        ))}
+                    </div>
                 </div>
-            </div>
-            <button
-                onClick={showMoreHandler}
-            >
-                Показать еще
-            </button>
+                <button
+                    onClick={showMoreHandler}
+                >
+                    Показать еще
+                </button>
+            </div>}
         </>
 
     )

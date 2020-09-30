@@ -7,12 +7,12 @@ export const movieApi = {
             .then(res => res.json())
     },
 
-    getMovies() {
-        return fetch(`${api_url}/discover/movie?api_key=${api_key}&language=ru-RU`)
+    getMovies(page: string, sort: string) {
+        return fetch(`${api_url}/discover/movie?api_key=${api_key}&language=ru-RU&sort_by=${sort}&page=${page}`)
             .then(res => res.json())
     },
 
-    getCollection(category: string, page: number) {
+    getCollection(category: string, page: string) {
         console.log('query URL: ',`${api_url}/movie/${category}?api_key=${api_key}&language=ru-RU&page=${page}` )
         return fetch(`${api_url}/movie/${category}?api_key=${api_key}&language=ru-RU&page=${page}`)
             .then(res => res.json())

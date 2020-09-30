@@ -58,7 +58,7 @@ interface SpecialCollectionProps {
 }
 interface SpecialCollectionState {}
 
-class SpecialCollection extends React.Component<SpecialCollectionProps,SpecialCollectionState> {
+class MySlider extends React.Component<SpecialCollectionProps,SpecialCollectionState> {
     render() {
         let {moviesArr = []} = this.props;
         var settings = {
@@ -110,4 +110,4 @@ class SpecialCollection extends React.Component<SpecialCollectionProps,SpecialCo
     }
 }
 
-export default SpecialCollection
+export default MySlider;

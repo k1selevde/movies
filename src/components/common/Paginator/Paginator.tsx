@@ -1,12 +1,22 @@
 import * as React from 'react'
 import cn from 'classnames'
 
-const Paginator = ({
+
+interface IPaginatorProps {
+    totalItemsCount: number
+    pageSize: number
+    currentPage: number
+    portionSize: number
+    setPage: (page: string) => {}
+}
+
+const Paginator: React.FC<IPaginatorProps> = ({
                      totalItemsCount = 40,
                      pageSize = 5,
-                     currentPage = 1,
+                     currentPage,
                      // onPageChanged ,
                      portionSize = 3,
+                     setPage
                  }) => {
     let pagesCount = Math.ceil(totalItemsCount / pageSize);
     let pages = [];
@@ -17,9 +27,9 @@ const Paginator = ({
     let [portionNumber,setPortionNumber] = React.useState(1)
     let leftPortionPageNumber = (portionNumber - 1) * portionSize + 1;
     let rightPortionPageNumber = portionNumber * portionSize
+
     return (
         <div>
-            {pages.map(i=> (<div>{i}</div>))}
             <div
                 className="paginator"
             >
@@ -37,6 +47,9 @@ const Paginator = ({
                     .map(p => {
                         return (
                             <span
+                                onClick={() => {
+                                    setPage(String(p))
+                                }}
                                 className={
                                     cn(
                                         {
@@ -61,7 +74,7 @@ const Paginator = ({
                 }
             </div>
         </div>
-    );
+    )
 }
 
 export default Paginator;

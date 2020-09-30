@@ -20,7 +20,7 @@ function getTitleForSpecialPage(arr: any[][], query: string) {
 type RoutesPropsType = {
     collections: any[][],
     special_collections: any,
-    getCollection: (category: string, page: number) => Promise<void>
+    getCollection: (category: string, page: string) => Promise<void>
 }
 
 const Routes  = ({collections,special_collections,getCollection} : RoutesPropsType) => {
@@ -40,6 +40,7 @@ const Routes  = ({collections,special_collections,getCollection} : RoutesPropsTy
                 <Route path="/movie/:id" render={({match}) =>
                 {
                     let {id} = match.params
+                    //@ts-ignore
                     return <MoviePage id={id}/>
                 }}
                 />

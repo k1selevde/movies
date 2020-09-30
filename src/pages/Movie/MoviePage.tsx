@@ -6,8 +6,9 @@ import {movieDetailsType} from "../../types/types";
 import MovieKeywords from "./MovieKeywords";
 import SimilarMovies from "./SimilarMovies";
 import {CurrentMovieType} from '../../redux/reducers/MovieReducer'
-import MovieReviews from "./MovieReviews";
-import MovieCredits from "./MovieCredits";
+import MovieReviews from "./MoviePageTabs/MovieReviews";
+import MovieCredits from "./MoviePageTabs/MovieCredits";
+import MoviePageTabs from "./MoviePageTabs";
 
 
 interface MoviePageProps {
@@ -30,18 +31,18 @@ class MoviePage extends React.Component<MoviePageProps,MoviePageState> {
     }
 
     render() {
-        const {currentMovie: {details,keywords,similarMovies,credits,reviews},
-            id,getMovieKeywords,getSimilarMovies,getMovieReviews,getMovieCredits} = this.props;
+        const {currentMovie,
+            id,getMovieKeywords,getSimilarMovies} = this.props;
         return (
             <>
                 <div>
-                    Movie PAGE!11, {id}
+                    Movie PAGE, {id}
                 </div>
                 <div>
-                    <h4>keywords</h4>
+                    <h4>Keywords</h4>
                     <MovieKeywords
                         //@ts-ignore
-                        keywords={keywords}
+                        keywords={currentMovie.keywords}
                         getKeywords={getMovieKeywords.bind(null,id)}
                     />
                 </div>
@@ -49,22 +50,14 @@ class MoviePage extends React.Component<MoviePageProps,MoviePageState> {
                     <h4>Similar movies:</h4>
                     <SimilarMovies
                         //@ts-ignore
-                        movies={similarMovies}
+                        movies={currentMovie.similarMovies}
                         getMovies={getSimilarMovies.bind(null,id,'1')}
                     />
                 </div>
                 <div>
-                    <h4>Reviews</h4>
-                    <MovieReviews
-                        reviews={reviews}
-                        getReviews={getMovieReviews.bind(null,id,"1")}
-                    />
-                </div>
-                <div>
-                    <h4>Credits</h4>
-                    <MovieCredits
-                        credits={credits}
-                        getCredits={getMovieCredits.bind(null,id)}
+                    <MoviePageTabs
+                        id={id}
+                        currentMovie={currentMovie}
                     />
                 </div>
             </>
@@ -78,9 +71,7 @@ const mapStateToProps = (state: AppStateType)=> ({
 
 export default connect(mapStateToProps,
     {
-        getMovieDetails,
         getMovieKeywords,
-        getMovieReviews,
-        getMovieCredits,
+        getMovieDetails,
         getSimilarMovies
     })(MoviePage)

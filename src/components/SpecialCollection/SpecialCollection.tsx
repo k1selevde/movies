@@ -7,12 +7,6 @@ import {AppStateType} from "../../redux/reducers";
 import {specialCollectionType} from "../../redux/reducers/MovieReducer";
 
 
-let basicMovie = {
-    title: 'Second War',
-    id: '324',
-    backdrop_path: ''
-}
-
 function SampleNextArrow(props: any) {
     const { className, style, onClick } = props;
     return (
