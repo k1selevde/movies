@@ -7,8 +7,9 @@ interface IMovieReviews {
 }
 
 class MovieReviews extends React.Component<IMovieReviews> {
+
+
     componentDidMount(): void {
-        alert('reviews')
         this.props.getReviews()
     }
 

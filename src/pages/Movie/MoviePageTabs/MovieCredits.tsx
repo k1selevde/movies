@@ -1,8 +1,9 @@
 import * as React from 'react'
-import {movieCreditType} from "../../../types/types";
+import {movieCreditsType, movieCreditType} from "../../../types/types";
+import {NavLink} from "react-router-dom";
 
 interface IMovieCreditsProps {
-    credits: any,
+    credits: movieCreditType[],
     getCredits:() => Promise<void>
 }
 
@@ -18,9 +19,12 @@ class MovieCredits extends React.Component<IMovieCreditsProps> {
         return (
             <div>
                 {credits && credits.map((credit: movieCreditType)=> (
-                    <div key={credit.id}>
+                    <NavLink
+                        to={`/people/${credit.id}`}
+                        key={credit.id}
+                    >
                         {credit.name}
-                    </div>
+                    </NavLink>
                 ))}
             </div>
         )

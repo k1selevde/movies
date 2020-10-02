@@ -2,13 +2,12 @@ import * as React from 'react'
 import {movieDetailsType} from "../../../types/types";
 
 interface IMovieDetailsProps {
-    details: movieDetailsType
+    details: null | movieDetailsType
 }
 
 const MovieDetails: React.FC<IMovieDetailsProps>  = ({details}) => {
 
-    React.useEffect(()=>{alert(details)},[details])
-    const dataDetails = [
+    const dataDetails = details ? [
         {
             name: "Статус",
             value: details.status
@@ -27,7 +26,7 @@ const MovieDetails: React.FC<IMovieDetailsProps>  = ({details}) => {
         },
         {
             name: "Страна",
-            value: details.production_countries.map((item : any )=> item.name)
+            value: details.production_countries ? details.production_countries.map((item : any )=> item.name) : null
         },
         {
             name: "Бюджет",
@@ -39,21 +38,21 @@ const MovieDetails: React.FC<IMovieDetailsProps>  = ({details}) => {
         },
         {
             name: "Компания",
-            value: details.production_companies.map((item: any) => item.name)
+            value: details.production_companies ? details.production_companies.map((item: any) => item.name) : null
         },
         {
             name: "Жанры",
-            value: details.genres.map((item: any) => item.name)
+            value: details.genres ? details.genres.map((item: any) => item.name) : null
         }
-    ]
+    ] : null;
 
     return (
         <>
             <div>Details here</div>
             <table>
                 <tbody>
-                {dataDetails.map((item,index) => (
-                    <tr>
+                {details && dataDetails.map((item,index) => (
+                    <tr key={index}>
                         <th scope="row">{item.name}</th>
                         <td>{`${item.value}`}</td>
                     </tr>

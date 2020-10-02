@@ -1,0 +1,22 @@
+// moviePageTabs
+
+.movieTabLink {
+  outline: none;
+  border-radius: 15px;
+  border: 2px solid black;
+  background: antiquewhite;
+  color: black;
+  text-decoration: none;
+  &__active {
+    text-decoration: none;
+    color: white;
+    background: cornflowerblue;
+    cursor: default;
+    &:hover {
+      color: black;
+    }
+  }
+  &:hover {
+    color: black;
+  }
+}

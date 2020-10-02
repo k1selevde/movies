@@ -4,11 +4,11 @@ import {collectionMovie} from "../../types/types";
 import {Link} from 'react-router-dom'
 
 
-interface MovieCardProps {
+interface IMovieCardProps {
     movie: collectionMovie
 }
 
-const HorizontalMovieCard: React.FC<MovieCardProps> = ({movie}) => {
+const HorizontalMovieCard: React.FC<IMovieCardProps> = ({movie}) => {
     return (
         <Link to={`/movie/${movie.id}`} key={movie.id}>
             <div style={{color: 'blue', overflow: 'hidden'}} className="movieCard__wrap">

@@ -1,7 +1,7 @@
 import * as React from 'react'
 import {connect} from 'react-redux'
-import SearchField from "./SearchField";
-import {AppStateType} from "../../redux/reducers";
+import SearchField from "../SearchField";
+import {AppStateType} from "../../../redux/reducers";
 import {Dispatch} from 'redux';
 import {
     clearSearchMovies,findMoviesUpdate,
@@ -9,11 +9,11 @@ import {
     findMovies,
     findPerson, findPersonUpdate,
     searchActions
-} from "../../redux/actions/searchActions";
-import MovieReviews from "../Movie/MoviePageTabs/MovieReviews";
+} from "../../../redux/actions/searchActions";
+import MovieReviews from "../../Movie/MoviePageTabs/MovieReviews";
 import MoviesResults from "./MoviesResults";
 import PersonResults from "./PersonResults";
-import NotFound from "../../components/common/NotFound";
+import NotFound from "../../../components/common/NotFound";
 
 
 // Похожие props
@@ -34,8 +34,7 @@ type SearchProps = {
 }
 
 
-type SearchState = {
-}
+type SearchState = {}
 
 class SearchPage extends React.Component<SearchProps,SearchState> {
     componentDidMount(): void {
@@ -65,7 +64,15 @@ class SearchPage extends React.Component<SearchProps,SearchState> {
                 <div
                     className="search__resultsBlock"
                 >
-                   {/* {(movies.length == 0) && (people.length == 0) && <NotFound /> }*/}
+                    <div>
+                        {!(movies || people) &&
+                            <NotFound
+                                textToBack='Простите, по вашему запросу ничего не найдено, попробуйте снова'
+                                linkToBack='/search'
+                                text=''
+                            />
+                        }
+                    </div>
                     <MoviesResults
                         value={value}
                         findMovies={findMovies.bind(null,value)}

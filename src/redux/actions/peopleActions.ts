@@ -31,6 +31,9 @@ export function getDetailsFailure(payload: any) {
     })
 }
 
-
-
+export function cleanPeopleDetail() {
+    return ({
+        type: people.CLEAR
+    })
+}
 

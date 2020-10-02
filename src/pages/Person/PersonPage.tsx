@@ -1,37 +1,122 @@
 import * as React from 'react'
-import {withRouter} from 'react-router-dom'
+import {withRouter, RouteComponentProps} from 'react-router-dom'
 import {connect} from "react-redux";
 import {AppStateType} from "../../redux/reducers";
-import {peopleActions} from "../../redux/actions/peopleActions";
-import {getDetails} from '../../redux/actions/peopleActions'
+import {cleanPeopleDetail,getDetails} from "../../redux/actions/peopleActions";
 import {personDetailsType} from "../../types/types";
 import {objectIsNotEmpty} from "../../helpers/helpers";
 
 interface IPeoplePageProps {
-    match:any,
-    history: any,
-    location: any,
     details: null | personDetailsType,
-    getDetails: (id: string) => Promise<void>
+    getDetails: (id: string) => Promise<void>,
+    cleanPeopleDetail: () => {}
 }
 
-class PersonPage extends React.Component<IPeoplePageProps> {
-    componentWillMount(): void {
-        const id = this.props.match.params.id;
-        //get details
-        this.props.getDetails(String(id))
-    }
+const PersonPage : React.FC<IPeoplePageProps & RouteComponentProps> = ({
+                                                                           match,
+                                                                           details,
+                                                                           getDetails,
+                                                                           cleanPeopleDetail
 
-    render() {
-        const {match,details} = this.props;
-        return(
-            <>
-                <div>People here</div>
-                <div>match params: {match.params.id}</div>
-                <div>{objectIsNotEmpty(details,'name') && details.name}</div>
-            </>
-        )
+}) => {
+
+    type personDetailType = {
+        name: string,
+        value: any
     }
+    const personDetails = [
+            {
+                name: 'День рождения',
+                value: details && details.birthday
+            },
+            {
+                name: 'known_for_department',
+                value: details && details.known_for_department
+            },
+            {
+                name: 'deathday',
+                value: details && details.deathday
+            },
+            {
+                name: 'id',
+                value: details && details.id
+            },
+            {
+                name: 'name',
+                value: details && details.name
+            },
+            {
+                name: 'also_known_as',
+                value: details && details.also_known_as
+            },
+            {
+                name: 'gender',
+                value: details && (details.gender == 1 ? 'Женщина' : 'Мужчина')
+            },
+            {
+                name: 'biography',
+                value: details && details.biography
+            },
+            {
+                name: ' popularity',
+                value: details && details.popularity
+            },
+            {
+                name: ' place_of_birth',
+                value: details && details.place_of_birth || 'Не указано'
+            },
+            {
+                name: ' profile_path',
+                value: details && details.profile_path
+            },
+            {
+                name: ' adult',
+                value: details && details.adult || false
+            },
+            {
+                name: ' imdb_id',
+                value: details && details.imdb_id
+            },
+            {
+                name: ' homepage',
+                value: details && details.homepage || 'нету :D'
+            }
+        ]
+
+    React.useEffect(() => {
+        //@ts-ignore
+        const id = match.params.id;
+        getDetails(id)
+
+        return function cleanPeople() {
+            cleanPeopleDetail()
+        };
+    }, [])
+
+
+    return (
+        <>
+            <div>People here</div>
+            {/*@ts-ignore*/}
+            <div>match params: {match.params.id}</div>
+            <div>{details && objectIsNotEmpty(details,'name') && details.name}</div>
+            <table>
+                <tbody>
+                    {personDetails && personDetails.map((detail: personDetailType) => (
+                        <>
+                            {detail.value &&
+                                <tr>
+                                    <th>{detail.name}</th>
+                                    <td>{detail.value}</td>
+                                </tr>
+                            }
+                        </>
+                    ))}
+                </tbody>
+            </table>
+        </>
+    )
+
 }
 
 const mapStateToProps = (state: AppStateType) => ({
@@ -39,7 +124,8 @@ const mapStateToProps = (state: AppStateType) => ({
 })
 
 export default connect(mapStateToProps, {
-    getDetails: getDetails
+    cleanPeopleDetail,
+    getDetails
 })(withRouter(PersonPage));
 
 

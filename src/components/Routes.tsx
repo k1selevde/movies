@@ -2,7 +2,7 @@ import {Route, Switch} from "react-router";
 import MainPage from "../pages/Main/MainPage";
 import MoviesPage from "../pages/Movies/MoviesPage";
 import PeoplePage from "../pages/Person/PersonPage";
-import SearchPage from "../pages/Search/SearchPage";
+import SearchPage from "../pages/Search/QuerySearch/SearchPage";
 import SpecialPage from "../pages/Special/SpecialPage";
 import MoviePage from "../pages/Movie/MoviePage";
 import NotFound from "./common/NotFound";
@@ -10,6 +10,7 @@ import * as React from "react";
 import {AppStateType} from "../redux/reducers";
 import {connect} from 'react-redux'
 import {getCollection} from "../redux/actions/movieActions";
+import EmptySearchPage from "../pages/Search/EmptySearch/EmptySearchPage";
 
 
 function getTitleForSpecialPage(arr: any[][], query: string) {
@@ -36,6 +37,8 @@ const Routes  = ({collections,special_collections,getCollection} : RoutesPropsTy
                     return <SearchPage value={value} />
                 }}
                 />
+                <Route exact path="/search"  component={EmptySearchPage} />
+
 
                 <Route path="/movie/:id" render={({match}) =>
                 {

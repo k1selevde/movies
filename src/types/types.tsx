@@ -61,6 +61,23 @@ export type searchResultTv = {
     poster_path: string
 }
 
+/*export type DetailsResultPerson = {
+    birthday: string,
+    known_for_department: string,
+    deathday: null,
+    id: number,
+    name: string,
+    also_known_as: string[],
+    gender: number,
+    biography: string,
+    popularity: number,
+    place_of_birth: string,
+    profile_path: string,
+    adult: false,
+    imdb_id: string,
+    homepage: string
+}*/
+
 export type searchResultPerson = {
     known_for_department: string,
     id: number,

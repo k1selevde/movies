@@ -2,7 +2,7 @@ import * as React from 'react'
 import {withRouter} from "react-router";
 import {NavLink} from "react-router-dom";
 import NavTabs from './NavTabs'
-import {Switch,Route} from 'react-router-dom'
+import {Switch,Route, RouteComponentProps} from 'react-router-dom'
 import MovieCredits from "./MovieCredits";
 import MovieReviews from "./MovieReviews";
 import MovieDetails from "./MovieDetails";
@@ -18,13 +18,17 @@ type tabType = {
 
 interface IMoviePageTabsProps {
     id: string
-    history: any
-    match: any
-    location: any
     currentMovie: CurrentMovieType
+    getMovieReviews: (id: string, page: string) => Promise<void>
+    getMovieCredits: (id: string) => Promise<void>
 }
 
-const MoviePageTabs: React.FC<IMoviePageTabsProps>  = ({id,match,currentMovie: {details,credits,reviews}}) => {
+const MoviePageTabs: React.FC<IMoviePageTabsProps & RouteComponentProps>  = ({
+                                                                                 getMovieCredits,
+                                                                                 getMovieReviews,
+                                                                                 id,
+                                                                                 currentMovie: {details,credits,reviews}
+                                                                            }) => {
 
     return (
         <section>
@@ -33,14 +37,16 @@ const MoviePageTabs: React.FC<IMoviePageTabsProps>  = ({id,match,currentMovie: {
                 <Switch>
                     <Route path="/movie/:id/reviews" render={() =>
                     {
-                        return <MovieReviews reviews={reviews}
-                                             getReviews={getMovieReviews.bind(null,id,"1")}/>
+                        return <MovieReviews
+                                    reviews={reviews}
+                                    getReviews={getMovieReviews.bind(null,id,"1")}/>
                     }} />
                     <Route path="/movie/:id/credits" render={() => {
                        return  <MovieCredits
-                            credits={credits}
-                            getCredits={getMovieCredits.bind(null,id)}
-                            />
+                                    getCredits={getMovieCredits.bind(null,id)}
+                                    {...{/*@ts-ignore*/}}
+                                    credits={credits}
+                       />
                     }} />
                     <Route path="/movie/:id" exact component={() => <MovieDetails details={details} />} />
                 </Switch>
@@ -50,4 +56,4 @@ const MoviePageTabs: React.FC<IMoviePageTabsProps>  = ({id,match,currentMovie: {
 }
 
 
-export default connect(null,{getMovieDetails,getMovieReviews, getMovieCredits,})(withRouter(MoviePageTabs));
+export default connect(null,{getMovieReviews, getMovieCredits})(withRouter(MoviePageTabs));

@@ -23,15 +23,17 @@ class Genres extends React.Component<GenresProps,GenresState> {
         this.changeGenreHandler = this.changeGenreHandler.bind(this)
     }
 
-     changeGenreHandler(name: string, e: any) {
+     changeGenreHandler(name: string, e: React.ChangeEvent<HTMLInputElement>) {
         e.preventDefault();
         alert('hell')
         this.props.updateGenres(name);
     }
 
+/*
     componentDidUpdate() {
         alert('UPDATE')
     }
+*/
 
     render() {
         const {genres} = this.props;

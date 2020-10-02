@@ -8,7 +8,7 @@ import Filters from "../../components/Filters/Filters";
 import MoviesList from "./MoviesList";
 
 
-import Paginator from "../../components/common/Paginator/Paginator"
+import Paginator from "../../components/common/UI/Paginator/Paginator"
 import {collectionMovie} from "../../types/types";
 import {currentFiltersType} from "../../redux/reducers/MovieReducer";
 

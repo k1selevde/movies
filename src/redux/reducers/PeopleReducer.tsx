@@ -21,6 +21,11 @@ const reducer = (state = initialState, action: any): InitialStateType => {
                 ...state,
                 error: 'bad'
             }
+        case people.CLEAR:
+            return {
+                ...state,
+                details: null
+            }
         default: return state;
     }
 }

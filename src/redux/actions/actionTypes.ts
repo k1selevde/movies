@@ -66,6 +66,7 @@ export const searchPeople = {
 export const people = {
     GET_DETAILS_SUCCESS: 'PEOPLE/GET_DETAILS_SUCCESS',
     GET_DETAILS_FAILURE: 'PEOPLE/GET_DETAILS_FAILURE',
+    CLEAR: 'PEOPLE/CLEAR_PEOPLE_DETAIL'
 }
 
 export const movies = {

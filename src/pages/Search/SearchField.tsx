@@ -9,7 +9,8 @@ type SearchFieldProps = {
 const SearchField  = ({search,updateSearch}: SearchFieldProps) => {
     const history = useHistory()
     const sVal = React.useRef(null)
-    const changeSearchHandler = (e: any) => {
+
+    const changeSearchHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
         let value = e.target.value
         updateSearch(value)
     }

@@ -1,5 +1,5 @@
 import * as React from 'react'
-import HorizontalMovieCard from "../../components/MovieCard/HorizontalMovieCard";
+import HorizontalMovieCard from "../../../components/MovieCard/HorizontalMovieCard";
 
 
 interface IMoviesResultsProps {

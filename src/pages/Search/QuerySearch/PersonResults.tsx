@@ -1,5 +1,5 @@
 import * as React from 'react'
-import {searchResultPerson} from "../../types/types";
+import {searchResultPerson} from "../../../types/types";
 import {NavLink} from 'react-router-dom'
 
 interface IPersonResultsProps {
@@ -23,7 +23,6 @@ const PersonResults: React.FC<IPersonResultsProps> = ({people,value,findPerson,f
 
 
     React.useEffect(()=> {
-        alert('rerender')
         findPerson('1')
     }, [value])
 
