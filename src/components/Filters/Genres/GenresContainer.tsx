@@ -24,10 +24,7 @@ class GenresContainer extends React.Component<GCPropsType> {
         console.log(genres);
         return (
             <>
-                <Genres
-                    genres={genres}
-                    updateGenres={updateGenres}
-                />
+                <div>-</div>
             </>
         )
     }
@@ -35,13 +32,14 @@ class GenresContainer extends React.Component<GCPropsType> {
 
 const mapStateToProps = (state: AppStateType) => {
     return ({
-        genres: state.movie.genres
+
     })
 }
 
 type actionsType = GetGenresThunk | UpdateGenresType;
 
-//@ts-ignore
+
+/*
 const mapDispatchToProps = (dispatch: ThunkDispatch<actionsType>) => {
     return ({
          updateGenres: (data: string) => dispatch(updateGenres(data)),
@@ -49,5 +47,6 @@ const mapDispatchToProps = (dispatch: ThunkDispatch<actionsType>) => {
     })
 }
 
+*/
 
-export default connect(mapStateToProps,mapDispatchToProps)(GenresContainer)
+export default connect(mapStateToProps, )(GenresContainer)

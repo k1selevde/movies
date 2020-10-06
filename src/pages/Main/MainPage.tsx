@@ -7,7 +7,7 @@ import {getCollection} from '../../redux/actions/movieActions';
 import {collectionMovie} from "../../types/types";
 import {specialCollectionType} from "../../redux/reducers/MovieReducer";
 import {Link, NavLink} from 'react-router-dom';
-
+import Progress from '../../components/common/Progress'
 
 function isEmpty(obj: object,key: string) : Boolean {
     //@ts-ignore
@@ -21,7 +21,6 @@ interface MainPageProps {
     special_collections: specialCollectionType,
     // special_collections: object,
     curCollection: collectionMovie[],
-    //test
     popular: collectionMovie[]
 }
 
@@ -39,7 +38,9 @@ class MainPage extends React.Component<MainPageProps,MainPageState> {
             >
                 <Posters />
                 <Link to="/movie/34">MOVIE</Link>
+                <Progress />
                 <div>
+
                     {Object.keys(special_collections).map((key:string, i: number)=>(
                        <div key={key}>
                             <NavLink to={`/special/${key}`}>

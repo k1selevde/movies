@@ -14,37 +14,54 @@ interface IMoviesResultsState {
     page: number
 }
 
-const MoviesResults: React.FC<IMoviesResultsProps> = ({value,movies,findMovies,findMoviesUpdate}) => {
-        const [page,setPage] = React.useState(1)
+const MoviesResults: React.FC<IMoviesResultsProps> = ({
+                                                          clear,
+                                                          value,
+                                                          movies,
+                                                          findMovies,
+                                                          findMoviesUpdate
+}) => {
+
+    const [page,setPage] = React.useState(2)
 
     const showMoreHandler = () => {
-       setPage(page+1)
-       findMoviesUpdate(String(page))
+        findMoviesUpdate(String(page))
+        setPage(page+1)
     }
 
     React.useEffect(() =>
     {
         findMovies('1')
+        return () => {
+            //clear movie search results
+            clear()
+        }
     },[])
 
     React.useEffect(() =>
     {
         findMovies('1')
+        // обновить счетчик
+        setPage(2)
     },[value])
 
     return (
         <>
-            {movies && movies[0] && <div><h4>Here is movies results</h4>
+            {movies && movies.results && movies.results[0] && <div><h4>Here is movies results</h4>
                 <div className="container">
                     <div className="row">
-                        {movies.map((movie: any) => (
-                            <div className="col-3">
+                        {movies.results.map((movie: any) => (
+                            <div
+                                key={movie.id}
+                                className="col-3"
+                            >
                                 <HorizontalMovieCard movie={movie}/>
                             </div>
                         ))}
                     </div>
                 </div>
                 <button
+                    disabled={movies.total_pages+1 <= page}
                     onClick={showMoreHandler}
                 >
                     Показать еще

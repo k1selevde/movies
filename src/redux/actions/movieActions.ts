@@ -10,9 +10,10 @@ import {
     movieKeywords,
     similarMovies,
     movieReviews,
-    movieCredits, movies
+    movieCredits, movies, posters
 } from './actionTypes'
-import {movieKeywordsType} from "../../types/types";
+import {Genre, movieKeywordsType} from "../../types/types";
+import {AxiosResponse} from "axios";
 
 
 export const GET_GENRES_SUCCESS = 'MOVIE/GET_GENRES_SUCCESS'
@@ -36,12 +37,19 @@ export type GetGenresThunk = ThunkAction<void , AppStateType , unknown ,any>
 //type GetGenresThunk = ThunkAction<any,any,any,any>
 
 
-export function getGenresSuccess(payload: GenresType) {
-    return {
+export function getGenresSuccess(payload: Array<Genre>) {
+    return ({
         type: genres.GET__SUCCESS,
         payload
-    }
+    })
 }
+
+export function clearGenres() {
+    return ({
+        type: genres.CLEAR
+    })
+}
+
 
 export type UpdateGenresType = typeof updateGenres;
 
@@ -103,15 +111,15 @@ export function getGenres(): GetGenresThunk {
     return async (dispatch: Dispatch) => {
         dispatch({type: 'REQUEST'})
         await movieApi.getGenres()
-            .then((res: any) => {
-                    console.log('its res : ', res)
-                    dispatch(getGenresSuccess(res.genres))
+            .then((data) => {
+                    console.log('its res : ', data)
+                    dispatch(getGenresSuccess(data.genres))
                 }
             )
     }
 }
 
-export function  getCollection(category: string, page: string) {
+export function  getCollection(category: string, page: string) : ThunkAction<any, any, any, any>{
     return async (dispatch: Dispatch) => {
         await movieApi.getCollection(category,page)
             .then((res: any) =>{
@@ -122,13 +130,29 @@ export function  getCollection(category: string, page: string) {
 }
 
 
-export function getMovies(page: string, sort: string) {
+export function getPosters() {
     return async (dispatch: Dispatch) => {
-        dispatch({type: 'REQUEST'})
-        await movieApi.getMovies(page, sort)
-            .then((res: any) => {
-                console.log('get movies RES: ',res)
-                dispatch(getMoviesSuccess(res))
+        await movieApi.getPosters()
+            .then((res) => {
+                console.log(res)
+                dispatch(getPostersSuccess(res.results))
+            })
+    }
+}
+
+export function getPostersSuccess(payload: any) {
+    return ({
+        type: posters.GET_SUCCESS,
+        payload
+    })
+}
+
+export function getMovies(page: string, filters: {}) {
+    return async (dispatch: Dispatch) => {
+        //dispatch({type: 'REQUEST'})
+        await movieApi.getMovies(page, filters)
+            .then((data ) => {
+                dispatch(getMoviesSuccess(data))
             })
     }
 }
@@ -138,7 +162,6 @@ export function getMovieDetails(id: string) {
         //dispatch()
         await movieApi.getMovieDetails(id)
             .then((res:any) => {
-                console.log('We got a movie details: ',res)
                 dispatch(getMovieDetailsSuccess(res))
             })
     }
@@ -176,20 +199,17 @@ export function getMovieKeywords(id: string) {
     return async(dispatch: Dispatch) =>{
         //dispatch()
         await movieApi.getKeywords(id)
-            .then((res:any) => {
-                console.log('We got a keywords  : ',res)
-                dispatch(getMovieKeywordsSuccess(res.keywords))
+            .then((data) => {
+                dispatch(getMovieKeywordsSuccess(data.keywords))
             })
     }
 }
 
 export function getSimilarMovies(id: string,page: string) {
     return async(dispatch: Dispatch) =>{
-        //dispatch()
         await movieApi.getSimilarMovies(id,page)
-            .then((res:any) => {
-                console.log('We got a similar movies  : ',res)
-                dispatch(getSimilarMoviesSuccess(res.results))
+            .then((data) => {
+                dispatch(getSimilarMoviesSuccess(data.results))
             })
     }
 }
@@ -205,9 +225,8 @@ export function getMovieReviews(id: string,page:string) {
     return async(dispatch: Dispatch) =>{
         //dispatch()
         await movieApi.getReviews(id,page)
-            .then((res:any) => {
-                console.log('We got a reviews of movie  : ',res)
-                dispatch(getMovieReviewsSuccess(res.results))
+            .then((data) => {
+                dispatch(getMovieReviewsSuccess(data.results))
             })
     }
 }
@@ -221,17 +240,14 @@ export function getMovieReviewsSuccess(payload: any) {
 
 export function getMovieCredits(id: string) {
     return async(dispatch: Dispatch) =>{
-        //dispatch(
-        console.log('moviecredits requst...')
         await movieApi.getCredits(id)
-            .then((res:any) => {
-                console.log('We got a CREDITS FOR MOVIE : ',res)
-                dispatch(getMovieCreditsSuccess(res.cast))
+            .then((data) => {
+                dispatch(getMovieCreditsSuccess(data.cast))
             })
     }
 }
 
-export function getMovieCreditsSuccess(payload: any) {
+export function getMovieCreditsSuccess(payload: any ) {
     return ({
         type: movieCredits.GET_SUCCESS,
         payload
@@ -249,5 +265,11 @@ export function setCurrentSortOption(payload: any) {
     return ({
         type: movies.SET_CURRENT_SORT_OPTION,
         payload
+    })
+}
+
+export function clearCurrentMovie() {
+    return ({
+        type: 'MOVIE/CLEAR_CURRENT_MOVIE'
     })
 }

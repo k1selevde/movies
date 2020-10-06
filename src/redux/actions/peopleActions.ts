@@ -1,6 +1,7 @@
 import {Dispatch} from "redux";
 import {peopleApi} from "../../api/people-api";
 import {people} from "./actionTypes";
+import {MovieDetailsType, PersonDetailsType} from "../../types/types";
 
 
 export const peopleActions = {
@@ -9,15 +10,14 @@ export const peopleActions = {
 
 export function getDetails(id: string) {
     return async (dispatch: Dispatch) => {
-
         await peopleApi.getDetails(id)
-            .then((res:any) => {
-                dispatch(getDetailsSuccess(res))
+            .then((data) => {
+                dispatch(getDetailsSuccess(data))
             })
     }
 }
 
-export function getDetailsSuccess(payload: any) {
+export function getDetailsSuccess(payload: PersonDetailsType) {
     return ({
         type: people.GET_DETAILS_SUCCESS,
         payload

@@ -1,12 +1,32 @@
 import * as React from 'react'
+import {AppStateType} from "../../redux/reducers";
+import {connect} from "react-redux";
+import {getPosters} from "../../redux/actions/movieActions";
+import UniversalSlider from "./UniversalSlider";
 
-class Posters extends React.Component {
-    state = {}
-    render() {
-        return (
-            <div>Here is a posters</div>
-        )
-    }
+interface IPostersProps {
+    posters: null | []
+    getPosters: () => Promise<void>
 }
 
-export default Posters
+const Posters: React.FC<IPostersProps> = ({posters, getPosters}) => {
+    React.useEffect(() => {
+        getPosters()
+    }, [])
+
+    return (
+        <>
+            <h4>Сейчас в кино</h4>
+            <div>
+                {posters && <UniversalSlider moviesArr={posters} />}
+            </div>
+        </>
+    )
+}
+
+const mapStateToProps = (state: AppStateType) => ({
+    posters: state.movie.posters
+})
+
+
+export default connect(mapStateToProps, {getPosters})(Posters)

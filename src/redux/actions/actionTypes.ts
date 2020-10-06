@@ -1,13 +1,15 @@
 export const search = {
     UPDATE: 'SEARCH/UPDATE_SEARCH',
-    TOGGLE__SEARCH_FIELD: 'SEARCH/TOGGLE__SEARCH_FIELD'
+    TOGGLE__SEARCH_FIELD: 'SEARCH/TOGGLE__SEARCH_FIELD',
+    CLEAR: 'SEARCH/CLEAR_SEARCH_VALUE'
 }
 
 export const genres = {
     GET__SUCCESS: 'MOVIE/GET_GENRES_SUCCESS',
     UPDATE: 'MOVIE/UPDATE-GENRE',
     // don't use:
-    GET__FAILURE: 'MOVIE/GET_GENRES_FAILURE'
+    GET__FAILURE: 'MOVIE/GET_GENRES_FAILURE',
+    CLEAR: 'MOVIE/CLEAR_GENRES'
 }
 
 export const movieReviews = {
@@ -20,6 +22,10 @@ export const movieDetails = {
     REQUEST: 'MOVIE/DETAIS_REQUEST',
     GET__SUCCESS: 'MOVIE/GET_DETAIL_SUCCESS',
     GET__FAILURE: 'MOVIE/GET_DETAIL_FAILURE'
+}
+
+export const posters = {
+    GET_SUCCESS: 'MOVIE/GET_POSTERS_SUCCESS'
 }
 
 export const collection = {
@@ -72,4 +78,14 @@ export const people = {
 export const movies = {
     SET_CURRENT_PAGE: 'MOVIES/SET_CURRENT_PAGE',
     SET_CURRENT_SORT_OPTION: 'MOVIES_SET_CURRENT_SORT_OPTION'
+}
+
+export const oftenMovies = {
+    GET__SUCCESS: 'OFTEN_MOVIES/GET__SUCCESS',
+    UPDATE: 'OFTEN_MOVIES/UPDATE'
+}
+
+export const oftenPeople = {
+    GET__SUCCESS: 'OFTEN_PEOPLE/GET__SUCCESS',
+    UPDATE: 'OFTEN_PEOPLE/UPDATE'
 }

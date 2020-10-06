@@ -4,23 +4,23 @@ import Slider from '../../components/common/Slider'
 
 
 interface ISimilarMoviesProps {
+    id: string,
     movies: similarMovieType[],
     getMovies: ()=> Promise<void>
 }
 
-class SimilarMovies extends React.PureComponent<ISimilarMoviesProps> {
-    componentDidMount(): void {
-        this.props.getMovies()
-    }
+const SimilarMovies :  React.FC<ISimilarMoviesProps> = ({id,movies,getMovies}) => {
 
-    render() {
-        const {movies} = this.props;
-        return (
-            <div>
-                {movies && <Slider moviesArr={movies}/>}
-            </div>
-        )
-    }
+    React.useEffect(() => {
+        alert('rerender')
+        getMovies()
+    }, [id])
+
+    return (
+        <div>
+            {movies && <Slider moviesArr={movies}/>}
+        </div>
+    )
 }
 
 

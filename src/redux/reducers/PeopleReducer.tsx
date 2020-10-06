@@ -1,9 +1,9 @@
 import * as React from 'react';
 import {people} from "../actions/actionTypes";
-import {personDetailsType} from "../../types/types";
+import {PersonDetailsType} from "../../types/types";
 
 let initialState = {
-    details: null as personDetailsType | null,
+    details: null as PersonDetailsType | null,
     error: null as string | null
 }
 

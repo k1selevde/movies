@@ -12,9 +12,11 @@ const goodText = 'Возможно, вы воспользовались неде
 const goodTitle = 'Такой страницы нет'
 
 const NotFound: React.FC<INotFoundProps> = ({
-                                                linkToBack = '',
-                                                textToBack = '',
-                                                text= 'Простите, страница не найдена . . .',
+                                                linkToBack = '/',
+                                                textToBack = 'Вернуться на главную',
+                                                text= `Простите, страница не найдена . . .
+                                                    
+                                                `,
                                                 img= ''
                                             }) => {
     return (

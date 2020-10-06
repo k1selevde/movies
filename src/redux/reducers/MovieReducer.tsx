@@ -10,11 +10,11 @@ import {
     movieDetails,
     movieKeywords,
     movieCredits,
-    similarMovies, movieReviews, movies
+    similarMovies, movieReviews, movies, posters
 } from '../actions/actionTypes'
 import {
     movieCreditsType,
-    movieDetailsType,
+    MovieDetailsType,
     movieKeywordsType,
     movieReviewsResultType,
     similarMoviesResultsType
@@ -30,7 +30,7 @@ export type CurrentMovieType = typeof initialState.currentMovie;
 
 const initialState = {
     currentMovie: {
-        details: null as movieDetailsType | null,
+        details: null as MovieDetailsType | null,
         keywords: null as movieKeywordsType | null,
         credits: null as movieCreditsType | null,
         similarMovies: null as similarMoviesResultsType | null,
@@ -72,12 +72,14 @@ const initialState = {
         ['latest', 'Последние'],
         ['upcoming', 'Набирающие популярность']
     ],
+    posters: null as [] |  null,
     special_collections: {
         popular: null as [] | null,
         top_rated: null as [] | null,
         latest: null as [] | null,
         upcoming : null as [] | null,
     },
+    // specialPage_collections: []
 }
 
 export type specialCollectionType = typeof initialState.special_collections
@@ -90,6 +92,11 @@ const reducer: Reducer<InitialStateType> = (state = initialState, action: any): 
         case 'REQUEST':
             return {
                 ...state,
+            }
+        case posters.GET_SUCCESS:
+            return {
+                ...state,
+                posters: action.payload
             }
 
         case genres.GET__SUCCESS:
@@ -114,6 +121,19 @@ const reducer: Reducer<InitialStateType> = (state = initialState, action: any): 
                 })
                 ]
             }
+
+        case genres.CLEAR:
+            return {
+                ...state,
+                genres: [
+                    ...state.genres.map(genre =>
+                    {
+                        genre.isSelected = false;
+                        return genre;
+                    })
+                ]
+            }
+
         case GET_MOVIES_SUCCESS:
             return {
                 ...state,
@@ -199,6 +219,12 @@ const reducer: Reducer<InitialStateType> = (state = initialState, action: any): 
                     sort_option: action.payload
                 }
             }
+        case 'MOVIE/CLEAR_CURRENT_MOVIE':
+            return {
+                ...state,
+                currentMovie: initialState.currentMovie
+            }
+
         default: return state;
     }
     //const _enhaustiveCheck: never = action

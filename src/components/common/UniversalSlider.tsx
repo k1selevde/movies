@@ -1,10 +1,7 @@
 import * as React from 'react'
 import Slider from "react-slick";
-import HorizontalMovieCard from '../MovieCard/HorizontalMovieCard'
+import VerticalMovieCard from '../MovieCard/VerticalMovieCard'
 import {collectionMovie} from "../../types/types";
-import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
-import KeyboardArrowRightIcon from '@material-ui/icons/KeyboardArrowRight';
-
 
 let basicMovie = {
     title: 'Second War',
@@ -14,16 +11,11 @@ let basicMovie = {
 function SampleNextArrow(props: any) {
     const { className, style, onClick } = props;
     return (
-
-        <div style={{cursor: 'pointer', width: '60px', height: '40px'}}>
-            <KeyboardArrowRightIcon  fontSize="large" onClick={onClick} />
-        </div>
-
-        /*<div
+        <div
             className={className}
             style={{ ...style, display: "block",width:'100px', height: '100px', background: "red" }}
             onClick={onClick}
-        />*/
+        />
     );
 }
 function  AppendDots(dots: any) {
@@ -42,10 +34,11 @@ function  AppendDots(dots: any) {
 function SamplePrevArrow(props: any) {
     const { className, style, onClick } = props;
     return (
-        <div style={{cursor: 'pointer', width: '60px', height: '40px'}}>
-            <ArrowBackIosIcon  onClick={onClick} />
-        </div>
-
+        <div
+            className={className}
+            style={{ ...style,width:'100px', height: '100px', display: "block", background: "red" }}
+            onClick={onClick}
+        />
     );
 }
 
@@ -60,12 +53,13 @@ class CustomSlide extends React.Component<any,any> {
     }
 }
 
-interface SpecialCollectionProps {
+interface IUniversalSliderProps {
     moviesArr: collectionMovie[]
 }
-interface SpecialCollectionState {}
 
-class MySlider extends React.PureComponent<SpecialCollectionProps,SpecialCollectionState> {
+interface IUniversalSliderState {}
+
+class UniversalSlider extends React.PureComponent<IUniversalSliderProps,IUniversalSliderState> {
     render() {
         let {moviesArr = []} = this.props;
         var settings = {
@@ -106,8 +100,8 @@ class MySlider extends React.PureComponent<SpecialCollectionProps,SpecialCollect
             <>
                 <div style={{margin: '0 auto'}}>
                     <Slider {...settings}>
-                        {moviesArr.map((mov) => (
-                            <HorizontalMovieCard movie={mov}/>
+                        {moviesArr.map((mov)=>(
+                            <VerticalMovieCard movie={mov}/>
                         ))}
                     </Slider>
                 </div>
@@ -117,4 +111,4 @@ class MySlider extends React.PureComponent<SpecialCollectionProps,SpecialCollect
     }
 }
 
-export default MySlider;
+export default UniversalSlider;

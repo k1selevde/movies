@@ -1,5 +1,5 @@
 import * as React from 'react'
-
+import cn from 'classnames'
 
 export type Genre = {
     name: string,
@@ -7,71 +7,52 @@ export type Genre = {
     id: string
 }
 
-type GenresProps = {
+interface IGenresProps {
     genres: Array<Genre>,
-    updateGenres: (data: string) => void
+    updateGenres: (data: string) => void,
+    getGenres: () => void
+    clear: () => {}
 }
 
-type GenresState = {
 
-}
+const Genres: React.FC<IGenresProps> = ({genres,updateGenres,getGenres,clear}) => {
 
-class Genres extends React.Component<GenresProps,GenresState> {
+    React.useEffect(() => {
+        if (!(genres && genres[0])) {
+            getGenres()
+        }
+        return () => {
+            clear()
+        }
+    }, [])
 
-    constructor(props: any) {
-        super(props)
-        this.changeGenreHandler = this.changeGenreHandler.bind(this)
+
+    const changeGenreHandler = (name: string) => {
+        updateGenres(name);
     }
 
-     changeGenreHandler(name: string, e: React.ChangeEvent<HTMLInputElement>) {
-        e.preventDefault();
-        alert('hell')
-        this.props.updateGenres(name);
-    }
 
-/*
-    componentDidUpdate() {
-        alert('UPDATE')
-    }
-*/
-
-    render() {
-        const {genres} = this.props;
-        return (
-            <div className="genres__wrapper">
-                <h3 className="genres__title">Жанры</h3>
-                <div className="genres__list">
-                    {genres && genres.map(genre => (
-                        <div key={genre.id} className="genre__block">
-                            <input
-                                type="checkbox"
-                                // value={genre.id}
-                                checked={genre.isSelected}
-                                // defaultChecked={genre.isSelected}
-                                onChange={(e) => this.changeGenreHandler(genre.name,e)}
-                                className="genre__checkbox"
-                                id={genre.name}
-                            />
-                            <label htmlFor={genre.name} className="genre__name">{genre.name}</label>
+    return (
+        <div className="genres__wrapper">
+            <h3 className="genres__title">Жанры</h3>
+            <div className="genres__list">
+                {genres && genres.map(genre => (
+                    <div key={genre.id} className="genre__block">
+                        <div
+                            onClick={() => changeGenreHandler(genre.name)}
+                            className={cn("genre__name",
+                            {["genre__name--active"]: genre.isSelected}
+                        )}
+                        >
+                            {genre.name}
                         </div>
-                    ))}
-                </div>
+                    </div>
+                ))}
             </div>
+        </div>
 
-        )
-    }
+    )
+
 }
-
-/*const defaultProps = {
-    genres: [
-        {name: 'боевик', isSelected: true, id: '123'},
-        {name: 'приключение', isSelected: false, id: '223'},
-        {name: 'комедия', isSelected: false, id: '323'},
-        {name: 'драма', isSelected: false, id: '423'}
-    ]
-}
-
-
-Genres.defaultProps = defaultProps;*/
 
 export default Genres

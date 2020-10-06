@@ -10,19 +10,28 @@ interface ISpecialPageProps {
     title: string
     movies: collectionMovie[],
     getCollection: (page: string) => Promise<void>
+    clear: () => {}
 }
 
 type State = {
     page: number
 }
 
-const SpecialPage : React.FC<ISpecialPageProps> = ({movies,title,getCollection}) =>  {
+const SpecialPage : React.FC<ISpecialPageProps> = ({clear,movies,title,getCollection}) =>  {
 
-   const [page,setPage] = React.useState(1)
+   const [page,setPage] = React.useState(2)
 
-   const uploadHandler = () =>  {
-        setPage((page:number) => page+1)
+    React.useEffect(() => {
+        //clear collection after unmounting
+        return () => {
+            clear()
+        }
+    }, [])
+
+
+   const uploadHandler = async () =>  {
         getCollection(String(page))
+       await setPage((page:number) => page+1)
     }
 
     return (

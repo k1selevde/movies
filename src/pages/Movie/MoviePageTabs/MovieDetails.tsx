@@ -1,8 +1,8 @@
 import * as React from 'react'
-import {movieDetailsType} from "../../../types/types";
+import {MovieDetailsType} from "../../../types/types";
 
 interface IMovieDetailsProps {
-    details: null | movieDetailsType
+    details: null | MovieDetailsType
 }
 
 const MovieDetails: React.FC<IMovieDetailsProps>  = ({details}) => {

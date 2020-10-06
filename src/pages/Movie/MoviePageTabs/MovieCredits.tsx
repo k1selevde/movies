@@ -3,32 +3,30 @@ import {movieCreditsType, movieCreditType} from "../../../types/types";
 import {NavLink} from "react-router-dom";
 
 interface IMovieCreditsProps {
-    credits: movieCreditType[],
+    credits: movieCreditType[]
+    id: string
     getCredits:() => Promise<void>
 }
 
-class MovieCredits extends React.Component<IMovieCreditsProps> {
+const MovieCredits : React.FC<IMovieCreditsProps> = ({id,credits,getCredits}) => {
 
-    componentDidMount(): void {
-        console.log('CREDIT COMPONENT MOUNT')
-        this.props.getCredits()
-    }
+    React.useEffect(() => {
+        console.log(`new ID: ${id}`)
+        getCredits()
+    }, [id])
 
-    render() {
-        const {credits} = this.props;
-        return (
-            <div>
-                {credits && credits.map((credit: movieCreditType)=> (
-                    <NavLink
-                        to={`/people/${credit.id}`}
-                        key={credit.id}
-                    >
-                        {credit.name}
-                    </NavLink>
-                ))}
-            </div>
-        )
-    }
+    return (
+        <div>
+            {credits && credits.map((credit: movieCreditType)=> (
+                <NavLink
+                    to={`/people/${credit.id}`}
+                    key={credit.id}
+                >
+                    {credit.name}
+                </NavLink>
+            ))}
+        </div>
+    )
 }
 
 

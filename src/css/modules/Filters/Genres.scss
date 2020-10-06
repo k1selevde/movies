@@ -7,7 +7,14 @@
     margin-rigt: 8px;
   }
   &__name {
-
+    cursor: pointer;
+    padding: 4px 19px;
+    border-radius: 25%;
+    &--active {
+      color: white;
+      cursor: no-drop;
+      background: mediumvioletred;
+    }
   }
 }
 

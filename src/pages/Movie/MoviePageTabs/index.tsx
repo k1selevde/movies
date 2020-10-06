@@ -38,11 +38,13 @@ const MoviePageTabs: React.FC<IMoviePageTabsProps & RouteComponentProps>  = ({
                     <Route path="/movie/:id/reviews" render={() =>
                     {
                         return <MovieReviews
+                                    id={id}
                                     reviews={reviews}
                                     getReviews={getMovieReviews.bind(null,id,"1")}/>
                     }} />
                     <Route path="/movie/:id/credits" render={() => {
                        return  <MovieCredits
+                                    id={id}
                                     getCredits={getMovieCredits.bind(null,id)}
                                     {...{/*@ts-ignore*/}}
                                     credits={credits}

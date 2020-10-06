@@ -1,46 +1,105 @@
 import {instance} from "./api";
 import {api_key, api_url} from "../constants/default";
 
+import * as queryString from "query-string";
+import {AxiosResponse} from "axios";
+import {
+    CollectionMoviesResponse, CreditsMovieResponse,
+    DiscoverMoviesResponse,
+    GenresResponse, KeywordsMovieResponse, MovieDetailsType,
+    ReviewsMovieResponse,
+    SimilarMoviesResponse
+} from "../types/types";
+
+
 export const movieApi = {
+
     getGenres() {
-        return fetch(`${api_url}/genre/movie/list?api_key=${api_key}&language=ru-Ru`)
-            .then(res => res.json())
+        let queryStringParams = {
+            language: 'ru-RU'
+        }
+        return instance.get<GenresResponse>(`/genre/movie/list?${queryString.stringify(queryStringParams)}`)
+            .then(res => res.data);
     },
 
-    getMovies(page: string, sort: string) {
-        return fetch(`${api_url}/discover/movie?api_key=${api_key}&language=ru-RU&sort_by=${sort}&page=${page}`)
-            .then(res => res.json())
+
+
+    getMovies(page: string, filters: {}) {
+        let queryStringParams = {
+            language: 'ru-RU',
+            ...filters
+        };
+
+        return instance.get<DiscoverMoviesResponse>(`/discover/movie?${queryString.stringify(queryStringParams)}`)
+            .then(res => res.data);
     },
+
 
     getCollection(category: string, page: string) {
-        console.log('query URL: ',`${api_url}/movie/${category}?api_key=${api_key}&language=ru-RU&page=${page}` )
-        return fetch(`${api_url}/movie/${category}?api_key=${api_key}&language=ru-RU&page=${page}`)
-            .then(res => res.json())
+        let queryStringParams = {
+            language: 'ru-RU',
+            page
+        };
+
+        return instance.get<CollectionMoviesResponse>(`/movie/${category}?${queryString.stringify(queryStringParams)}`)
+            .then(res => res.data);
     },
+
+
     getSimilarMovies(id: string, page: string) {
-        /*https://api.themoviedb.org/3/movie/12/similar?api_key=4237669ebd35e8010beee2f55fd45546&language=en-US&page=1*/
-        return fetch(`${api_url}/movie/${id}/similar?api_key=${api_key}&language=ru-RU&page=${page}`)
-            .then(res =>res.json())
+        let queryStringParams = {
+            language: 'ru-RU',
+            page
+        };
+
+        return instance.get<SimilarMoviesResponse>(`/movie/${id}/similar?${queryString.stringify(queryStringParams)}`)
+            .then(res => res.data);
     },
+
     getReviews(id: string, page: string) {
-        /*https://api.themoviedb.org/3/movie/12/reviews?api_key=4237669ebd35e8010beee2f55fd45546&language=en-US&page=1*/
-        return fetch(`${api_url}/movie/${id}/reviews?api_key=${api_key}&language=en-USen-US&page=${page}`)
-            .then(res =>res.json())
+        let queryStringParams = {
+            language: 'ru-RU',
+            page
+        };
+
+        return instance.get<ReviewsMovieResponse>(`/movie/${id}/reviews?${queryString.stringify(queryStringParams)}`)
+            .then(res => res.data);
     },
 
     getCredits(id: string) {
+
+        return instance.get<CreditsMovieResponse>(`/movie/${id}/credits?`)
+            .then(res => res.data);
+
         /*https://api.themoviedb.org/3/movie/12/credits?api_key=4237669ebd35e8010beee2f55fd45546*/
-        return fetch(`${api_url}/movie/${id}/credits?api_key=${api_key}`)
-            .then(res =>res.json())
+/*        return fetch(`${api_url}/movie/${id}/credits?api_key=${api_key}`)
+            .then(res =>res.json())*/
     },
     getKeywords(id: string) {
+
+        return instance.get<KeywordsMovieResponse>(`/movie/${id}/keywords?`)
+            .then(res => res.data);
+
         /*https://api.themoviedb.org/3/movie/12/keywords?api_key=4237669ebd35e8010beee2f55fd45546*/
-        return fetch(`${api_url}/movie/${id}/keywords?api_key=${api_key}`)
-            .then(res =>res.json())
+/*        return fetch(`${api_url}/movie/${id}/keywords?api_key=${api_key}`)
+            .then(res =>res.json())*/
     },
+
+
     getMovieDetails(id: string) {
-        /*https://api.themoviedb.org/3/movie/12?api_key=4237669ebd35e8010beee2f55fd45546&language=en-US*/
-        return fetch(`${api_url}/movie/${id}?api_key=${api_key}&language=ru-RU`)
-            .then(res =>res.json())
+
+        let queryStringParams = {
+            language: 'ru-RU',
+        };
+
+        return instance.get<MovieDetailsType>(`/movie/${id}?${queryString.stringify(queryStringParams)}`)
+            .then(res => res.data);
+      },
+
+     getPosters() {
+
+        /*https://api.themoviedb.org/3/movie/now_playing?api_key=4237669ebd35e8010beee2f55fd45546&language=en-US&page=1*/
+         return fetch(`https://api.themoviedb.org/3/movie/now_playing?api_key=4237669ebd35e8010beee2f55fd45546&language=ru-RU&page=1`)
+             .then(res =>res.json())
      }
 }

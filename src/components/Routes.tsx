@@ -2,14 +2,14 @@ import {Route, Switch} from "react-router";
 import MainPage from "../pages/Main/MainPage";
 import MoviesPage from "../pages/Movies/MoviesPage";
 import PeoplePage from "../pages/Person/PersonPage";
-import SearchPage from "../pages/Search/QuerySearch/SearchPage";
+import SearchPage from "../pages/Search/QuerySearch/QuerySearchPage";
 import SpecialPage from "../pages/Special/SpecialPage";
 import MoviePage from "../pages/Movie/MoviePage";
 import NotFound from "./common/NotFound";
 import * as React from "react";
 import {AppStateType} from "../redux/reducers";
 import {connect} from 'react-redux'
-import {getCollection} from "../redux/actions/movieActions";
+import {clearCollection, getCollection} from "../redux/actions/movieActions";
 import EmptySearchPage from "../pages/Search/EmptySearch/EmptySearchPage";
 
 
@@ -21,10 +21,11 @@ function getTitleForSpecialPage(arr: any[][], query: string) {
 type RoutesPropsType = {
     collections: any[][],
     special_collections: any,
-    getCollection: (category: string, page: string) => Promise<void>
+    getCollection: (category: string, page: string) => Promise<void>,
+    clearCollection: (value: string) => {}
 }
 
-const Routes  = ({collections,special_collections,getCollection} : RoutesPropsType) => {
+const Routes  = ({collections,special_collections,getCollection, clearCollection} : RoutesPropsType) => {
     return (
         <div>
             <Switch>
@@ -43,6 +44,7 @@ const Routes  = ({collections,special_collections,getCollection} : RoutesPropsTy
                 <Route path="/movie/:id" render={({match}) =>
                 {
                     let {id} = match.params
+                    //let id = React.useMemo(() => match.params.id, [match.params])
                     //@ts-ignore
                     return <MoviePage id={id}/>
                 }}
@@ -52,7 +54,7 @@ const Routes  = ({collections,special_collections,getCollection} : RoutesPropsTy
                     let {value} = match.params
                     let title = getTitleForSpecialPage(collections,value)
 
-                    if (!!title) return <SpecialPage getCollection={getCollection.bind(null,value)} title={title} movies={special_collections[value]}/>
+                    if (!!title) return <SpecialPage getCollection={getCollection.bind(null,value)} title={title} movies={special_collections[value]} clear={clearCollection.bind(null,value)}/>
                     return <NotFound />
                 }}
                 />
@@ -67,4 +69,4 @@ const mapStateToProps = (state: AppStateType) => ({
     special_collections: state.movie.special_collections,
 })
 
-export default connect(mapStateToProps,{getCollection})(Routes);
+export default connect(mapStateToProps,{clearCollection,getCollection})(Routes);

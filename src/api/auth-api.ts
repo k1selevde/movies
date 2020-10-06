@@ -37,16 +37,18 @@ type AccountDetailsResType = {
 export const authApi = {
     getRequestToken() {
         return instance.get<RequestTokenResType>(`/authentication/token/new?api_key=${api_key}`)
+            .then(res => res.data)
     },
 
     validateTokenWithLogin(username: string, password: string, requestToken: string) {
       return instance.post<ValidateTokenResType>(`/authentication/token/validate_with_login?api_key=${api_key}`, {
-          body: {
-              username,
-              password,
-              request_token: requestToken
-          }
-      })
+              body: JSON.stringify({
+                  username,
+                  password,
+                  request_token: requestToken
+              })
+          })
+            .then(res => res.data)
     },
 
     getSessionId(requestToken: string) {
@@ -55,9 +57,11 @@ export const authApi = {
                 request_token: requestToken
             }
         }, {})
+            .then(res => res.data)
     },
 
     getAccountDetails(session_id: string) {
         return instance.post<AccountDetailsResType>(`/account?api_key=${api_key}&session_id=${session_id}`)
+            .then(res => res.data)
     }
 }

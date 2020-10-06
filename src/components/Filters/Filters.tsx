@@ -4,12 +4,18 @@ import Sorting from './Sorting/Sorting'
 import {AppStateType} from "../../redux/reducers";
 import {connect} from 'react-redux'
 import {OptionType} from "../../types/types";
+import Genres, {Genre} from "./Genres/Genres";
+import {clearGenres, getGenres, updateGenres} from "../../redux/actions/movieActions";
 
 
 
 interface IFilterProps {
+    genres: Array<Genre>
     setCurrentSortOption: (option: string) => {}
     options: OptionType[]
+    updateGenres: (name: string) => {}
+    getGenres: () => Promise<void>
+    clearGenres: () => {}
 }
 
 
@@ -23,7 +29,7 @@ class Filters extends React.Component<IFilterProps> {
     }
 
     render() {
-        const {options} = this.props;
+        const {options,genres,updateGenres,getGenres,clearGenres} = this.props;
         return (
             <div
                 className="filters__container"
@@ -38,14 +44,26 @@ class Filters extends React.Component<IFilterProps> {
                     setCurrentSortOption={this.props.setCurrentSortOption}
                     options={options}
                 />
-                <GenresContainer />
-                <button className="reset-btn">СБРОСИТЬ</button>
+                <Genres
+                    genres={genres}
+                    updateGenres={updateGenres}
+                    getGenres={getGenres}
+                    clear={clearGenres}
+                />
+                <button
+                    onClick={() => { clearGenres()}}
+                    className="reset-btn"
+                >
+                    СБРОСИТЬ
+                </button>
             </div>
         )
     }
 }
 
 const mapStateToProps = (state: AppStateType) => ({
+    genres: state.movie.genres,
     options: state.movie.filters.sorting.options
 })
-export default connect(mapStateToProps)(Filters);
+
+export default connect(mapStateToProps,{updateGenres,getGenres,clearGenres})(Filters);

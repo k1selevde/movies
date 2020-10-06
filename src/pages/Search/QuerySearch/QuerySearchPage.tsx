@@ -23,8 +23,8 @@ type SearchProps = {
     value: string,
     searchValue: string,
     results: {
-        movies: [] | null,
-        people: [] | null
+        movies:  any,
+        people:  any
     },
     findPerson: (query: string,page: string) => {},
     findMovies: (query: string, page: string) => {},
@@ -36,7 +36,7 @@ type SearchProps = {
 
 type SearchState = {}
 
-class SearchPage extends React.Component<SearchProps,SearchState> {
+class QuerySearchPage extends React.Component<SearchProps,SearchState> {
     componentDidMount(): void {
         //update search field;
         let {value} = this.props;
@@ -65,7 +65,7 @@ class SearchPage extends React.Component<SearchProps,SearchState> {
                     className="search__resultsBlock"
                 >
                     <div>
-                        {!(movies || people) &&
+                        {!(Boolean(movies && movies.results[0]) || Boolean(people && people.results[0])) &&
                             <NotFound
                                 textToBack='Простите, по вашему запросу ничего не найдено, попробуйте снова'
                                 linkToBack='/search'
@@ -108,4 +108,5 @@ export default connect(mapStateToProps,
         findMovies: findMovies,
         findPersonUpdate: findPersonUpdate,
         findMoviesUpdate: findMoviesUpdate,
-    })(SearchPage)
+//@ts-ignore
+    })(QuerySearchPage)

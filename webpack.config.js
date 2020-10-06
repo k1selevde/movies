@@ -1,5 +1,7 @@
 const path = require("path");
 const HTMLWebpackPlugin = require('html-webpack-plugin')
+const {BundleAnalyzerPlugin} = require('webpack-bundle-analyzer')
+const Dotenv = require('dotenv-webpack');
 
 const isDev =  process.env.NODE_ENV === 'development'
 console.log('IS DEV? :', isDev)
@@ -36,7 +38,9 @@ module.exports = {
       minify: {
         collapseWhitespace: isProd
       }
-    })
+    }),
+    // new BundleAnalyzerPlugin(),
+    new Dotenv()
   ],
   module: {
     rules: [
@@ -55,7 +59,7 @@ module.exports = {
         use: ["style-loader", "css-loader", "sass-loader"]
       },
       {
-        test: /\.(png|svg|jpg|gif|woff|ttf|eot)$/,
+        test: /\.(png|svg|jpg|gif|woff|ttf|eot)$/i,
         use: ["file-loader"]
       }
     ]

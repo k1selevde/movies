@@ -5,12 +5,6 @@ import {WithLoading} from "../../components/HOC/WithLoading";
 import {collectionMovie} from "../../types/types";
 /*import WithLoading from "../../HOC/WithLoading";*/
 
-/*
-type Movie = {
-    title?: string,
-    id?: string,
-}
-*/
 
 interface IMoviesListProps  {
     movies: collectionMovie[]

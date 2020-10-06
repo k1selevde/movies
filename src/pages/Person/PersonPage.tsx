@@ -3,11 +3,11 @@ import {withRouter, RouteComponentProps} from 'react-router-dom'
 import {connect} from "react-redux";
 import {AppStateType} from "../../redux/reducers";
 import {cleanPeopleDetail,getDetails} from "../../redux/actions/peopleActions";
-import {personDetailsType} from "../../types/types";
+import {PersonDetailsType} from "../../types/types";
 import {objectIsNotEmpty} from "../../helpers/helpers";
 
 interface IPeoplePageProps {
-    details: null | personDetailsType,
+    details: null | PersonDetailsType,
     getDetails: (id: string) => Promise<void>,
     cleanPeopleDetail: () => {}
 }

@@ -1,4 +1,4 @@
-import {search, searchMovies, searchPeople} from "./actionTypes";
+import {oftenMovies, oftenPeople, search, searchMovies, searchPeople} from "./actionTypes";
 import {Dispatch} from "redux";
 import {movieApi} from "../../api/movie-api";
 import {getMovieCreditsSuccess} from "./movieActions";
@@ -15,9 +15,8 @@ export function findMovies(query: string, page: string) {
         //dispatch()
         console.log('search movies...')
         await searchApi.findMovies(query,page)
-            .then((res:any) => {
-                console.log('we got a movies by query : ',res)
-                dispatch(findMoviesSuccess(res.results))
+            .then((data) => {
+                dispatch(findMoviesSuccess(data))
             })
     }
 }
@@ -38,11 +37,11 @@ export function findMoviesFailure(payload: any) {
 
 export function findPerson(query: string, page: string) {
     return async(dispatch: Dispatch) => {
-        dispatch(clearSearchPeople())
+
+        //dispatch(clearSearchPeople())
         await searchApi.findPerson(query,page)
-            .then((res:any) => {
-                //alert(res.results)
-                dispatch(findPeopleSuccess(res.results))
+            .then((data) => {
+                dispatch(findPeopleSuccess(data))
             })
     }
 }
@@ -58,8 +57,8 @@ export function findPersonUpdate(query: string,page:string) {
     return async(dispatch: Dispatch) => {
         console.log('find person update')
         await searchApi.findPerson(query,page)
-            .then((res:any)=> {
-                dispatch(findPersonUpdateSuccess(res.results))
+            .then((data)=> {
+                dispatch(findPersonUpdateSuccess(data.results))
             })
     }
 }
@@ -76,8 +75,8 @@ export function findMoviesUpdate(query: string,page:string) {
     return async(dispatch: Dispatch) => {
         alert('find person update')
         await searchApi.findMovies(query,page)
-            .then((res:any)=> {
-                dispatch(findMoviesUpdateSuccess(res.results))
+            .then((data)=> {
+                dispatch(findMoviesUpdateSuccess(data.results))
             })
     }
 }
@@ -104,4 +103,77 @@ export function clearSearchPeople() {
     return ({
         type: searchPeople.CLEAR
     })
+}
+
+
+/*search often looking */
+export function findOftenPeopleSuccess(payload: any) {
+    return ({
+        type: oftenPeople.GET__SUCCESS,
+        payload
+    })
+}
+
+export function updateOftenPeopleSuccess(payload: any) {
+    return ({
+        type: oftenPeople.UPDATE,
+        payload
+    })
+}
+
+
+export function findOftenPeople(page:string) {
+    return async(dispatch: Dispatch) => {
+        alert('find OFTEN person update')
+        await searchApi.findOftenPeople(page)
+            .then((data)=> {
+                dispatch(findOftenPeopleSuccess(data))
+            })
+    }
+}
+
+export function updateOftenPeople(page:string) {
+    return async(dispatch: Dispatch) => {
+        alert('update OFTEN person update')
+        await searchApi.findOftenPeople(page)
+            .then((data)=> {
+                dispatch(updateOftenPeopleSuccess(data))
+            })
+    }
+}
+
+// search often looking movies here
+
+export function findOftenMoviesSuccess(payload: any) {
+    return ({
+        type: oftenMovies.GET__SUCCESS,
+        payload
+    })
+}
+
+export function updateOftenMoviesSuccess(payload: any) {
+    return ({
+        type: oftenMovies.UPDATE,
+        payload
+    })
+}
+
+
+export function findOftenMovies(page:string) {
+    return async(dispatch: Dispatch) => {
+        await searchApi.findOftenMovies(page)
+            .then((data)=> {
+                dispatch(findOftenMoviesSuccess(data))
+            })
+    }
+}
+
+export function updateOftenMovies(page:string) {
+    return async(dispatch: Dispatch) => {
+        alert('update OFTEN person update')
+        await searchApi.findOftenMovies(page)
+            .then((data)=> {
+                dispatch(updateOftenMoviesSuccess(data.results))
+            })
+    }
 }

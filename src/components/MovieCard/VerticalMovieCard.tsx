@@ -6,7 +6,7 @@ type VerticalMovieCardProps = {
     movie: collectionMovie
 }
 
-const verticalMovieCard: React.FC<VerticalMovieCardProps> = ({movie}) => {
+const VerticalMovieCard: React.FC<VerticalMovieCardProps> = ({movie}) => {
     return (
         <Link to={`movie/${movie.id}`}>
             <div>{movie.title}</div>
@@ -14,4 +14,5 @@ const verticalMovieCard: React.FC<VerticalMovieCardProps> = ({movie}) => {
     )
 }
 
-export default verticalMovieCard
+export default VerticalMovieCard
+

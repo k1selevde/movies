@@ -2,28 +2,30 @@ import * as React from 'react'
 import {movieReviewType} from "../../../types/types";
 
 interface IMovieReviews {
-    reviews: any,
+    id: string
+    reviews: any
     getReviews: () => Promise<void>
 }
 
-class MovieReviews extends React.Component<IMovieReviews> {
+const MovieReviews: React.FC<IMovieReviews> = ({id,reviews,getReviews}) => {
 
+    React.useEffect(() => {
+        getReviews()
+    }, [id])
 
-    componentDidMount(): void {
+/*    componentDidMount(): void {
         this.props.getReviews()
-    }
+    }*/
 
-    render() {
-        const {reviews=[]} = this.props;
-        return (
-            <>
-                <div>
-                    {reviews && reviews.map((review: movieReviewType) => (
-                        <div key={review.id}>{review.author} : {review.content}</div>
-                    ))}
-                </div>
-            </>
-        )
-    }
+    return (
+        <>
+            <div>
+                {reviews && reviews.map((review: movieReviewType) => (
+                    <div key={review.id}>{review.author} : {review.content}</div>
+                ))}
+            </div>
+        </>
+    )
 }
+
 export default MovieReviews;

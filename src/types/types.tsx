@@ -1,4 +1,4 @@
-export interface AppProps { 
+export interface AppProps {
     compiler: string;
     routing?: string;
 }
@@ -6,6 +6,93 @@ export interface AppProps {
 //export const SUCCESSFUL_API_CONNECT:string = 'SUCCESSFUL_API_CONNEC'
 
 // new code
+
+// RESPONSES START= ====
+
+export type SearchOftenMoviesResponse = {
+    page: number
+    total_results: number
+    total_pages: number
+    results: any[]
+}
+
+export type SearchOftenPeopleResponse = {
+    page: number
+    total_results: number
+    total_pages: number
+    results: any[]
+}
+
+
+export type SearchPeopleResponse = {
+    page: number
+    total_results: number
+    total_pages: number
+    results: any[]
+}
+
+
+export type SearchMoviesResponse = {
+    page: number
+    total_results: number
+    total_pages: number
+    results: any[]
+}
+
+export type KeywordsMovieResponse = {
+    id: number
+    keywords: any[]
+}
+
+export type CreditsMovieResponse = {
+    id: number
+    cast: any[]
+    crew: any[]
+}
+
+export type ReviewsMovieResponse = {
+    id: number
+    page: number
+    results: any[]
+    total_pages: number
+    total_results: number
+}
+
+export type SimilarMoviesResponse = {
+    page: number
+    results: any[]
+    total_pages: number
+    total_results: number
+}
+
+export type CollectionMoviesResponse = {
+    results: any[]
+    page: number
+    total_results: number
+    dates?: {}
+    total_pages: number
+}
+
+export type DiscoverMoviesResponse = {
+    page: number
+    total_results: number
+    total_pages: number
+    // change to movies
+    results: any[]
+}
+
+export type Genre = {
+    id: number
+    name: string
+}
+
+export type GenresResponse = {
+    genres: Array<Genre>
+}
+
+
+
+// RESPONSE END ===
 
 export type collectionMovie = {
     popularity: number,
@@ -102,7 +189,7 @@ export type OptionType = {
     value: string
 }
 
-export type movieDetailsType = {
+export type MovieDetailsType = {
     adult: false,
     backdrop_path: string,
     belongs_to_collection: {},
@@ -186,7 +273,7 @@ export type movieReviewsResultType = {
     results: movieReviewType[]
 }
 
-export type personDetailsType = {
+export type PersonDetailsType = {
     birthday: string,
     known_for_department: string,
     deathday: null | string,
