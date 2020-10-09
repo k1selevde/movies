@@ -1,7 +1,8 @@
 node_modules
+dist/
 .env
 /dist/*.js
-/dist
+
 .idea
 
 stats.json
