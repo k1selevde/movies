@@ -7,7 +7,9 @@ import {
     findOftenMovies,
     findOftenPeople,
     updateOftenMovies,
-    updateOftenPeople
+    updateOftenPeople,
+    clearOftenSearchPeople,
+    clearOftenSearchMovies
 } from "../../../redux/actions/searchActions";
 
 
@@ -19,21 +21,25 @@ interface IEmptySearchPageProps {
     updateOftenPeople: (page: string) => Promise<void>
     findOftenMovies: (page: string) => Promise<void>
     updateOftenMovies: (page: string) => Promise<void>
+    clearOftenSearchMovies: () => {}
+    clearOftenSearchPeople: () => {}
 }
 
 
-const EmptySearchPage: React.FC<IEmptySearchPageProps> = ({oftenMovies,findOftenMovies,updateOftenMovies,oftenPeople,findOftenPeople,updateOftenPeople}) => {
+const EmptySearchPage: React.FC<IEmptySearchPageProps> = ({clearOftenSearchMovies,clearOftenSearchPeople,oftenMovies,findOftenMovies,updateOftenMovies,oftenPeople,findOftenPeople,updateOftenPeople}) => {
     return (
         <div>
             <OftenFindMovies
                 oftenMovies={oftenMovies}
                 updateOftenMovies={updateOftenMovies}
                 findOftenMovies={findOftenMovies.bind(null,'1')}
+                clear={clearOftenSearchMovies}
             />
            <OftenFindPeople
                 oftenPeople={oftenPeople}
                 findOftenPeople={findOftenPeople.bind(null,'1')}
                 updateOftenPeople={updateOftenPeople}
+                clear={clearOftenSearchPeople}
             />
         </div>
     )
@@ -49,5 +55,7 @@ export default connect(mapStateToProps, {
     findOftenPeople,
     updateOftenPeople,
     findOftenMovies,
-    updateOftenMovies
+    updateOftenMovies,
+    clearOftenSearchMovies,
+    clearOftenSearchPeople
 })(EmptySearchPage);

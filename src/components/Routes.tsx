@@ -9,8 +9,10 @@ import NotFound from "./common/NotFound";
 import * as React from "react";
 import {AppStateType} from "../redux/reducers";
 import {connect} from 'react-redux'
-import {clearCollection, getCollection} from "../redux/actions/movieActions";
+import {getCollection} from "../redux/actions/movieActions";
 import EmptySearchPage from "../pages/Search/EmptySearch/EmptySearchPage";
+import {clearSpecialCollection, getSpecialCollection} from '../redux/actions/specialActions'
+import {collectionMovie} from "../types/types";
 
 
 function getTitleForSpecialPage(arr: any[][], query: string) {
@@ -19,13 +21,13 @@ function getTitleForSpecialPage(arr: any[][], query: string) {
 }
 
 type RoutesPropsType = {
+    movies: collectionMovie[]
     collections: any[][],
-    special_collections: any,
-    getCollection: (category: string, page: string) => Promise<void>,
-    clearCollection: (value: string) => {}
+    getSpecialCollection: (category: string, page: string) => Promise<void>,
+    clearSpecialCollection: (value: string) => {}
 }
 
-const Routes  = ({collections,special_collections,getCollection, clearCollection} : RoutesPropsType) => {
+const Routes  = ({movies,collections,getSpecialCollection, clearSpecialCollection} : RoutesPropsType) => {
     return (
         <div>
             <Switch>
@@ -54,7 +56,7 @@ const Routes  = ({collections,special_collections,getCollection, clearCollection
                     let {value} = match.params
                     let title = getTitleForSpecialPage(collections,value)
 
-                    if (!!title) return <SpecialPage getCollection={getCollection.bind(null,value)} title={title} movies={special_collections[value]} clear={clearCollection.bind(null,value)}/>
+                    if (!!title) return <SpecialPage getCollection={getSpecialCollection.bind(null,value)} title={title} movies={movies} clear={clearSpecialCollection.bind(null,value)}/>
                     return <NotFound />
                 }}
                 />
@@ -66,7 +68,7 @@ const Routes  = ({collections,special_collections,getCollection, clearCollection
 
 const mapStateToProps = (state: AppStateType) => ({
     collections: state.movie.collections,
-    special_collections: state.movie.special_collections,
+    movies: state.special.currentCollection
 })
 
-export default connect(mapStateToProps,{clearCollection,getCollection})(Routes);
+export default connect(mapStateToProps,{getSpecialCollection,clearSpecialCollection})(Routes);

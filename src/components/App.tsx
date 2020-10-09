@@ -14,7 +14,6 @@ import './../css/app.scss'
 import MainPage from "../pages/Main/MainPage";
 import SearchPage from "../pages/Search/QuerySearch/QuerySearchPage";
 import SearchHint from "./common/SearchHint";
-import Popup from 'reactjs-popup';
 import SpecialPage from '../pages/Special/SpecialPage'
 import PeoplePage from "../pages/Person/PersonPage";
 import Routes from './Routes'
@@ -52,13 +51,7 @@ class App extends React.Component<IAppProps,IAppState> {
             <div>
                 <Header />
                 <div className="content container">
-                    <Popup
-                        position="bottom center"
-                        trigger={<button className="button"> Open Modal </button>}
-                    >
-                        <div style={{background: 'blue'}}>Popup content here !!</div>
-                    </Popup>
-                    <Routes/>
+                    <Routes />
                 </div>
 
             </div>

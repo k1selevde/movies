@@ -10,10 +10,11 @@ import {
     movieKeywords,
     similarMovies,
     movieReviews,
-    movieCredits, movies, posters
+    movieCredits, movies, posters, specialCollection
 } from './actionTypes'
 import {Genre, movieKeywordsType} from "../../types/types";
 import {AxiosResponse} from "axios";
+import {getSpecialCollectionSuccess} from "./specialActions";
 
 
 export const GET_GENRES_SUCCESS = 'MOVIE/GET_GENRES_SUCCESS'
@@ -73,13 +74,10 @@ export function getMoviesSuccess(data: any) {
 
 
 //===== NEW CODE
-
-
-
-
-export function getCollectionRequest() {
+export function clearCollection(payload: string) {
     return {
-        type: collection.REQUEST
+        type: collection.CLEAR,
+        payload
     }
 }
 
@@ -97,12 +95,19 @@ export function getCollectionFailure(payload: any) {
     }
 }
 
-export function clearCollection(payload: string) {
-    return {
-        type: collection.CLEAR,
-        payload
+
+
+export function  getCollection(category: string, page: string) : ThunkAction<any, any, any, any>{
+    return async (dispatch: Dispatch) => {
+        await movieApi.getCollection(category,page)
+            .then((res: any) =>{
+                console.log('We got a popular movies: ', res.results)
+                dispatch(getCollectionSuccess({results: res.results,category}))
+            })
     }
 }
+
+
 
 
 //THUNKS
@@ -119,15 +124,6 @@ export function getGenres(): GetGenresThunk {
     }
 }
 
-export function  getCollection(category: string, page: string) : ThunkAction<any, any, any, any>{
-    return async (dispatch: Dispatch) => {
-        await movieApi.getCollection(category,page)
-            .then((res: any) =>{
-                console.log('We got a popular movies: ', res.results)
-                dispatch(getCollectionSuccess({results: res.results,category}))
-            })
-    }
-}
 
 
 export function getPosters() {

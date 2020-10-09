@@ -6,14 +6,18 @@ interface IOftenFindMoviesProps {
     oftenMovies: null | any
     findOftenMovies: () => Promise<void>
     updateOftenMovies: (page: string) => Promise<void>
+    clear: () => {}
 }
 
- const OftenFindMovies : React.FC<IOftenFindMoviesProps>  = ({oftenMovies, findOftenMovies, updateOftenMovies}) => {
+ const OftenFindMovies : React.FC<IOftenFindMoviesProps>  = ({clear,oftenMovies, findOftenMovies, updateOftenMovies}) => {
 
     const [page,setPage] = React.useState(2)
 
      React.useEffect(() => {
          findOftenMovies()
+         return () => {
+             clear()
+         }
      }, [])
 
 

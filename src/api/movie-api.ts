@@ -58,7 +58,7 @@ export const movieApi = {
 
     getReviews(id: string, page: string) {
         let queryStringParams = {
-            language: 'ru-RU',
+            language: 'en-US',
             page
         };
 

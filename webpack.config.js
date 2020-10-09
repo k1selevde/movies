@@ -1,6 +1,7 @@
 const path = require("path");
 const HTMLWebpackPlugin = require('html-webpack-plugin')
 const {BundleAnalyzerPlugin} = require('webpack-bundle-analyzer')
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const Dotenv = require('dotenv-webpack');
 
 const isDev =  process.env.NODE_ENV === 'development'
@@ -40,7 +41,11 @@ module.exports = {
       }
     }),
     // new BundleAnalyzerPlugin(),
-    new Dotenv()
+    new Dotenv(),
+    new MiniCssExtractPlugin({
+      chunkFilename: '[id].css'
+    }),
+
   ],
   module: {
     rules: [
@@ -56,7 +61,7 @@ module.exports = {
       {
         test: /\.scss$/,
         exclude: /node_modules/,
-        use: ["style-loader", "css-loader", "sass-loader"]
+        use: [MiniCssExtractPlugin.loader, "css-loader", "sass-loader"]
       },
       {
         test: /\.(png|svg|jpg|gif|woff|ttf|eot)$/i,

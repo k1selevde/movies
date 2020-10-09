@@ -6,14 +6,18 @@ interface IOftenFindPeopleProps {
     oftenPeople: null | any
     findOftenPeople: () => Promise<void>
     updateOftenPeople: (page: string) => Promise<void>
+    clear: () => {}
 }
 
-const OftenFindPeople: React.FC<IOftenFindPeopleProps>  = ({oftenPeople, findOftenPeople, updateOftenPeople}) => {
+const OftenFindPeople: React.FC<IOftenFindPeopleProps>  = ({clear,oftenPeople, findOftenPeople, updateOftenPeople}) => {
 
     const [page,setPage] = React.useState(2)
 
     React.useEffect(() => {
         findOftenPeople()
+        return () => {
+            clear()
+        }
     }, [])
 
 

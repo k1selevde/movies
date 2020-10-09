@@ -2,7 +2,7 @@ import {Reducer} from 'redux'
 import {
     GET_MOVIES_SUCCESS,
 } from "../actions/movieActions";
-
+import produce from "immer";
 import {
     search,
     genres,
@@ -19,7 +19,6 @@ import {
     movieReviewsResultType,
     similarMoviesResultsType
 } from "../../types/types";
-
 type Genre = {
     name: string,
     id: string,
@@ -79,7 +78,6 @@ const initialState = {
         latest: null as [] | null,
         upcoming : null as [] | null,
     },
-    // specialPage_collections: []
 }
 
 export type specialCollectionType = typeof initialState.special_collections
@@ -88,146 +86,78 @@ type InitialStateType = typeof initialState;
 
 
 const reducer: Reducer<InitialStateType> = (state = initialState, action: any): InitialStateType => {
-    switch(action.type) {
-        case 'REQUEST':
-            return {
-                ...state,
-            }
-        case posters.GET_SUCCESS:
-            return {
-                ...state,
-                posters: action.payload
-            }
-
-        case genres.GET__SUCCESS:
-            return {
-                ...state,
-                genres: action.payload.map((genre: {name: string, id: string, isSelected: boolean }) => {
-                    genre.isSelected =  false
-                    return genre;
-                })
-            }
-
-        case genres.UPDATE:
-            return {
-                ...state,
-                genres: [
-                    ...state.genres.map(genre =>
-                        {
-                            if (genre.name === action.payload) {
-                            genre.isSelected = !genre.isSelected;
-                        }
-                    return genre;
-                })
-                ]
-            }
-
-        case genres.CLEAR:
-            return {
-                ...state,
-                genres: [
-                    ...state.genres.map(genre =>
-                    {
-                        genre.isSelected = false;
-                        return genre;
+    return produce(state,draftState => {
+        switch (action.type) {
+            case 'REQUEST':
+                return draftState
+            case posters.GET_SUCCESS:
+                draftState.posters = action.payload
+                break;
+            case genres.GET__SUCCESS:
+                draftState.genres = action.payload.map((genre: {name: string, id: string, isSelected: boolean }) => {
+                        genre.isSelected = false
+                        return genre
                     })
-                ]
-            }
+                break;
+            case genres.UPDATE:
+                draftState.genres = draftState.genres.map((genre) => {
+                    if (genre.name === action.payload) {
+                        genre.isSelected = !genre.isSelected
+                    }
+                    return genre
+                })
+                break;
+            case genres.CLEAR:
+                draftState.genres = state.genres.map(genre => {
+                    genre.isSelected = false
+                    return genre
+                })
+                break;
+            case GET_MOVIES_SUCCESS:
+                draftState.currentFilters.totalPages = action.payload.total_results
+                draftState.moviesList = action.payload.results
+                break;
+            case collection.GET_SUCCESS:
+                const cat = action.payload.category
+                //@ts-ignore
+                const oldArr = state.special_collections[cat] ? state.special_collections[cat] : []
+                //@ts-ignore
+                draftState.special_collections[cat] = [...oldArr, ...action.payload.results]
+                break;
+            case collection.CLEAR:
+                //@ts-ignore
+                draftState.special_collections[action.payload] = []
+                break;
+            case movieDetails.GET__SUCCESS:
+                draftState.currentMovie.details = action.payload
+                break;
+            case movieKeywords.GET_SUCCESS:
+                draftState.currentMovie.keywords = action.payload
+                break;
+            case movieCredits.GET_SUCCESS:
+                draftState.currentMovie.credits = action.payload
+                break;
+            case similarMovies.GET_SUCCESS:
+                draftState.currentMovie.similarMovies = action.payload
+                break;
 
-        case GET_MOVIES_SUCCESS:
-            return {
-                ...state,
-                currentFilters: {
-                    ...state.currentFilters,
-                    totalPages: action.payload.total_results
-                },
-                moviesList: action.payload.results
-            }
-        case collection.GET_SUCCESS:
-            const cat = action.payload.category
-            //@ts-ignore
-            const oldArr = state.special_collections[cat] ? state.special_collections[cat] : []
-            return {
-                ...state,
-                special_collections: {
-                    ...state.special_collections,
-                    //@ts-ignore
-                    [cat]: [...oldArr, ...action.payload.results]
-                }
-            }
-        case collection.CLEAR:
-            return {
-                ...state,
-                special_collections: {
-                    ...state.special_collections,
-                    [action.payload]: []
-                }
-            }
-        case movieDetails.GET__SUCCESS:
-            return {
-                ...state,
-                currentMovie: {
-                    ...state.currentMovie,
-                    details: action.payload
-                }
-            }
-        case movieKeywords.GET_SUCCESS:
-            return {
-                ...state,
-                currentMovie: {
-                    ...state.currentMovie,
-                    keywords: action.payload
-                }
-            }
-        case movieCredits.GET_SUCCESS:
-            return {
-                ...state,
-                currentMovie: {
-                    ...state.currentMovie,
-                    credits: action.payload
-                }
-            }
-        case similarMovies.GET_SUCCESS:
-            return {
-                ...state,
-                currentMovie: {
-                    ...state.currentMovie,
-                    similarMovies: action.payload
-                }
-            }
-        case movieReviews.GET__SUCCESS:
-            return {
-                ...state,
-                currentMovie: {
-                    ...state.currentMovie,
-                    reviews: action.payload
-                }
-            }
-        case movies.SET_CURRENT_PAGE:
-            return {
-                ...state,
-                currentFilters: {
-                    ...state.currentFilters,
-                    currentPage: action.payload
-                }
-            }
-        case movies.SET_CURRENT_SORT_OPTION:
-            return {
-                ...state,
-                currentFilters: {
-                    ...state.currentFilters,
-                    sort_option: action.payload
-                }
-            }
-        case 'MOVIE/CLEAR_CURRENT_MOVIE':
-            return {
-                ...state,
-                currentMovie: initialState.currentMovie
-            }
+            case movieReviews.GET__SUCCESS:
+                draftState.currentMovie.reviews = action.payload
+                break;
 
-        default: return state;
-    }
-    //const _enhaustiveCheck: never = action
+            case movies.SET_CURRENT_PAGE:
+                draftState.currentFilters.currentPage = action.payload
+                break;
+            case movies.SET_CURRENT_SORT_OPTION:
+                draftState.currentFilters.sort_option = action.payload
+                break;
+            case 'MOVIE/CLEAR_CURRENT_MOVIE':
+                draftState.currentMovie = initialState.currentMovie
+                break;
+            default:
+                return draftState;
+        }
+    })
 }
 
 

@@ -22,12 +22,11 @@ const SpecialPage : React.FC<ISpecialPageProps> = ({clear,movies,title,getCollec
    const [page,setPage] = React.useState(2)
 
     React.useEffect(() => {
-        //clear collection after unmounting
+        getCollection('1')
         return () => {
             clear()
         }
     }, [])
-
 
    const uploadHandler = async () =>  {
         getCollection(String(page))
@@ -39,7 +38,7 @@ const SpecialPage : React.FC<ISpecialPageProps> = ({clear,movies,title,getCollec
             <h4>{title}</h4>
             <div className="container">
                 <div className="row">
-                    {movies.map((movie: collectionMovie) => (
+                    {movies && movies[0] && movies.map((movie: collectionMovie) => (
                     <div className="col-4">
                         <HorizontalMovieCard movie={movie}/>
                     </div>

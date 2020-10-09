@@ -1,6 +1,7 @@
 import {searchActions} from "../actions/searchActions"
 import {InferActionsTypes} from "../store";
 import {search, searchMovies, searchPeople, oftenPeople, oftenMovies} from "../actions/actionTypes";
+import produce from "immer";
 import {searchResultMovie, searchResultPerson} from "../../types/types";
 
 const initialState = {
@@ -24,130 +25,60 @@ const initialState = {
 
 type InitialStateType = typeof initialState;
 
-/*
- UPDATE: 'SEARCH/UPDATE_SEARCH',
-    TOGGLE__SEARCH_FIELD: 'SEARCH/TOGGLE__SEARCH_FIELD'
-* */
+
 
 const reducer = (state = initialState, action: any): InitialStateType => {
-    switch(action.type) {
-        case 'SEARCH/UPDATE_SEARCH':
-            return {
-                ...state,
-                searchValue: action.payload
-            }
-        case search.CLEAR:
-            return {
-                ...state,
-                searchValue: ''
-            }
-        case 'SEARCH/TOGGLE__SEARCH_FIELD':
-            return {
-                ...state,
-                searchField: {
-                    ...state.searchField,
-                    isHidden: !state.searchField.isHidden
-                }
-            }
-        case searchMovies.GET_SUCCESS:
-            return {
-                ...state,
-                results: {
-                    ...state.results,
-                    movies: action.payload
-                }
-            }
-
-        case searchPeople.GET_SUCCESS:
-            return {
-                ...state,
-                results: {
-                    ...state.results,
-                    people: action.payload,
-                }
-            }
-        case searchPeople.CLEAR:
-            return {
-                ...state,
-                results: {
-                    ...state.results,
-                    people: null
-                }
-            }
-        case searchPeople.UPDATE:
-            return {
-                ...state,
-                results: {
-                    ...state.results,
-                    people: {
-                        ...state.results.people,
-                        results: [...state.results.people.results, ...action.payload]
-                    }
-                }
-            }
-        case searchMovies.CLEAR:
-            return {
-                ...state,
-                results: {
-                    ...state.results,
-                    movies: null
-                }
-            }
-        case searchMovies.UPDATE:
-            return {
-                ...state,
-                results: {
-                    ...state.results,
-                    movies: {
-                        ...state.results.movies,
-                        results: [...state.results.movies.results,...action.payload]
-                    }
-
-                }
-            }
-
-        case oftenPeople.GET__SUCCESS:
-            return {
-                ...state,
-                results: {
-                    ...state.results,
-                    oftenPeople: action.payload
-                }
-            }
-        case oftenPeople.UPDATE:
-            return {
-                ...state,
-                results: {
-                    ...state.results,
-                    oftenPeople: {
-                        ...state.results.oftenPeople,
-                        results: [...state.results.oftenPeople.results,...action.payload]
-                    }
-                }
-            }
-        case oftenMovies.GET__SUCCESS:
-            return {
-                ...state,
-                results: {
-                    ...state.results,
-                    oftenMovies: action.payload
-                }
-            }
-        case oftenMovies.UPDATE:
-            return {
-                ...state,
-                results: {
-                    ...state.results,
-                    oftenMovies: {
-                        ...state.results.oftenMovies,
-                        results: [...state.results.oftenMovies.results,...action.payload]
-                    }
-                }
-            }
-
-        default: return state;
-    }
-    //const _exhaustiveCheck: never = action
+    return produce(state,draftState => {
+        switch (action.type) {
+            case 'SEARCH/UPDATE_SEARCH':
+                draftState.searchValue = action.payload
+                break;
+            case search.CLEAR:
+                draftState.searchValue = ''
+                break;
+            case 'SEARCH/TOGGLE__SEARCH_FIELD':
+                draftState.searchField.isHidden = !state.searchField.isHidden
+                break;
+            case searchMovies.GET_SUCCESS:
+                draftState.results.movies = action.payload
+                break;
+            case searchPeople.GET_SUCCESS:
+                draftState.results.people = action.payload
+                break;
+            case searchPeople.CLEAR:
+                draftState.results.people = null
+                break;
+            case searchPeople.UPDATE:
+                draftState.results.people.results = state.results.people.results.concat(action.payload)
+                break;
+            case searchMovies.CLEAR:
+                draftState.results.movies = null
+                break;
+            case searchMovies.UPDATE:
+                draftState.results.movies.results = state.results.movies.results.concat(action.payload)
+                break;
+            case oftenPeople.GET__SUCCESS:
+                draftState.results.oftenPeople = action.payload
+                break;
+            case oftenPeople.CLEAR:
+                draftState.results.oftenPeople = null
+                break;
+            case oftenPeople.UPDATE:
+                draftState.results.people.results = state.results.people.results.concat(action.payload)
+                break;
+            case oftenMovies.GET__SUCCESS:
+                draftState.results.oftenMovies = action.payload
+                break;
+            case oftenMovies.UPDATE:
+                draftState.results.oftenMovies.results = state.results.oftenMovies.results.concat(action.payload)
+                break;
+            case oftenMovies.CLEAR:
+                draftState.results.oftenMovies = null
+                break;
+            default:
+                return draftState;
+        }
+    })
 }
 
 type SearchActionsType = ReturnType<InferActionsTypes<typeof searchActions>>

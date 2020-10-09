@@ -105,6 +105,20 @@ export function clearSearchPeople() {
     })
 }
 
+export function clearOftenSearchPeople() {
+    return ({
+        type: oftenPeople.CLEAR
+    })
+}
+
+export function clearOftenSearchMovies() {
+    return ({
+        type: oftenMovies.CLEAR
+    })
+}
+
+
+
 
 /*search often looking */
 export function findOftenPeopleSuccess(payload: any) {
