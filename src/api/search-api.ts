@@ -25,8 +25,8 @@ export const searchApi = {
 
         /*
 https://api.themoviedb.org/3/search/movie?api_key=4237669ebd35e8010beee2f55fd45546&language=en-US&query=tom&page=1&include_adult=false*/
-/*        return fetch(`${api_url}/search/movie?api_key=${api_key}&language=en-US&query=${query}&page=${page}&include_adult=false`)
-            .then((res)=> res.json())*/
+        /*        return fetch(`${api_url}/search/movie?api_key=${api_key}&language=en-US&query=${query}&page=${page}&include_adult=false`)
+                    .then((res)=> res.json())*/
     },
     findPerson(query: string, page: string) {
 
@@ -43,7 +43,6 @@ https://api.themoviedb.org/3/search/movie?api_key=4237669ebd35e8010beee2f55fd455
     },
 
     findOftenPeople(page: string) {
-
         let queryStringParams = {
             language: 'en-US',
             page,
