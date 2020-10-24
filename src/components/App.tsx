@@ -17,8 +17,8 @@ import SearchHint from "./common/SearchHint";
 import SpecialPage from '../pages/Special/SpecialPage'
 import PeoplePage from "../pages/Person/PersonPage";
 import Routes from './Routes'
-
-
+import cn from 'classnames'
+import {withRouter, RouteComponentProps} from 'react-router-dom'
 
 interface IAppProps {
     authMe: () => {}
@@ -32,7 +32,7 @@ interface IAppState {
     }
 }
 
-class App extends React.Component<IAppProps,IAppState> {
+class App extends React.Component<IAppProps & RouteComponentProps,IAppState> {
 
     state = {
         userData: {
@@ -45,13 +45,22 @@ class App extends React.Component<IAppProps,IAppState> {
         //this.props.authMe()
     }
 
+    componentDidUpdate(): void {
+        console.log('CONTENT BLUR: ',(this.props.isHiddenSearchField && ( (!location.pathname.includes('search')) && (!location.pathname.includes('movie/')) && (!location.pathname.includes('people'))) ))
+    }
+
     render() {
-        const {isHiddenSearchField} = this.props
+        const {isHiddenSearchField,location} = this.props
         return (
             <div>
                 <Header />
-                <div className="content container">
-                    <Routes />
+                <div className={cn('content',
+                    {'content-blur': (isHiddenSearchField && ( (!location.pathname.includes('search')) && (!location.pathname.includes('movie/')) && (!location.pathname.includes('people'))) )}
+                )}>
+                    <div
+                        className="container">
+                        <Routes/>
+                    </div>
                 </div>
 
             </div>
@@ -66,4 +75,4 @@ const mapStateToProps = (state: AppStateType) => ({
 
 
 //export default WithLoading(connect(mapStateToProps, null)(App))
-export default connect(mapStateToProps,{authMe} )(App);
+export default connect(mapStateToProps,{authMe} )(withRouter(App));

@@ -35,13 +35,11 @@ const MoviePage: React.FC<IMoviePageProps> = ({
 
     React.useEffect(() => {
         return () => {
-            alert('Component will unmount')
             clearCurrentMovie()
         }
     }, [])
 
     React.useEffect(() => {
-        alert('movie change')
         getMovieDetails(String(id))
     }, [id])
 

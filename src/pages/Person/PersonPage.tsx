@@ -17,13 +17,13 @@ const PersonPage : React.FC<IPeoplePageProps & RouteComponentProps> = ({
                                                                            details,
                                                                            getDetails,
                                                                            cleanPeopleDetail
-
 }) => {
 
     type personDetailType = {
         name: string,
         value: any
     }
+
     const personDetails = [
             {
                 name: 'День рождения',
@@ -87,34 +87,34 @@ const PersonPage : React.FC<IPeoplePageProps & RouteComponentProps> = ({
         //@ts-ignore
         const id = match.params.id;
         getDetails(id)
-
+        console.log('match.params change : ', match.params)
         return function cleanPeople() {
             cleanPeopleDetail()
         };
-    }, [])
+    }, [match.params])
 
 
     return (
-        <>
-            <div>People here</div>
-            {/*@ts-ignore*/}
-            <div>match params: {match.params.id}</div>
-            <div>{details && objectIsNotEmpty(details,'name') && details.name}</div>
-            <table>
-                <tbody>
+            <>
+                <div>People here</div>
+                {/*@ts-ignore*/}
+                <div>match params: {match.params.id}</div>
+                <div>{details && objectIsNotEmpty(details, 'name') && details.name}</div>
+                <table>
+                    <tbody>
                     {personDetails && personDetails.map((detail: personDetailType) => (
                         <>
                             {detail.value &&
-                                <tr>
-                                    <th>{detail.name}</th>
-                                    <td>{detail.value}</td>
-                                </tr>
+                            <tr>
+                                <th>{detail.name}</th>
+                                <td>{detail.value}</td>
+                            </tr>
                             }
                         </>
                     ))}
-                </tbody>
-            </table>
-        </>
+                    </tbody>
+                </table>
+            </>
     )
 
 }

@@ -7,8 +7,6 @@ import {searchResultMovie, searchResultPerson} from "../../types/types";
 const initialState = {
     searchValue: '',
     results: {
-        // movies: null as searchResultMovie[] | null,
-        // people: null as searchResultPerson[] | null
         oftenPeople: null as null | any,
         oftenMovies: null as null | any,
         movies: null as null | any,
@@ -18,8 +16,21 @@ const initialState = {
         isHidden: true
     },
     cache: {
-        movies: null as [] | null,
-        people: ['Том Круз', 'Джордж Флойд', 'Иван Драго']
+        movies: [
+            { popularity: 166.3,id: 453405, backdrop_path: "/c3F4P2oauA7IQmy4hM0OmRt2W7d.jpg",title: "Gemini Man",vote_average: 6.4},
+            { popularity: 173.337,id: 429617, backdrop_path: "/5myQbDzw3l8K9yofUXRJ4UTVgam.jpg",title: "Spider-Man: Far from Home", vote_average: 7.6},
+            { popularity: 172.899,id: 680028, backdrop_path: "/kmxnUYcisJDED8oNNIRd9QwWYYP.jpg", title: "Centigrade", vote_average: 6.9},
+            { popularity: 158.413,id: 347201, backdrop_path: "/zUfAxyHUKzVh6err0dMly7ysuM3.jpg", title: "Boruto: Naruto the Movie", vote_average: 7.8},
+            { popularity: 152.213,id: 579583, backdrop_path: "/5rwcd24GGltKiqdPT4G2dmchLr9.jpg", title: "The King of Staten Island", vote_average: 6.8}
+        ],
+        people: [
+            {name: 'Том Круз', id: '500'},
+            {name: 'Scarlett Johansson', id: '1245'},
+            {name: 'Dwayne Johnson', id: '18918'},
+            {name: 'Erin Moriarty', id: '990393'},
+            {name: 'Jason Statham', id: '976'},
+            {name: 'Brad Pitt', id: '287'}
+            ]
     }
 }
 
@@ -49,7 +60,7 @@ const reducer = (state = initialState, action: any): InitialStateType => {
                 draftState.results.people = null
                 break;
             case searchPeople.UPDATE:
-                draftState.results.people.results = state.results.people.results.concat(action.payload)
+                draftState.results.people.results = draftState.results.people.results.concat(action.payload)
                 break;
             case searchMovies.CLEAR:
                 draftState.results.movies = null
@@ -64,7 +75,7 @@ const reducer = (state = initialState, action: any): InitialStateType => {
                 draftState.results.oftenPeople = null
                 break;
             case oftenPeople.UPDATE:
-                draftState.results.people.results = state.results.people.results.concat(action.payload)
+                draftState.results.oftenPeople.results = draftState.results.oftenPeople.results.concat(action.payload)
                 break;
             case oftenMovies.GET__SUCCESS:
                 draftState.results.oftenMovies = action.payload

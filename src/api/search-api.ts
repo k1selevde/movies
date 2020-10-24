@@ -43,7 +43,6 @@ https://api.themoviedb.org/3/search/movie?api_key=4237669ebd35e8010beee2f55fd455
     },
 
     findOftenPeople(page: string) {
-
         let queryStringParams = {
             language: 'en-US',
             page,

@@ -2,3 +2,8 @@
   width: $width;
   height: $height;
 }
+
+@mixin square($param) {
+  width: $param;
+  height: $param;
+}

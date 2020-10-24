@@ -1,14 +1,9 @@
 import * as React from 'react'
 import Slider from "react-slick";
-import VerticalMovieCard from '../MovieCard/VerticalMovieCard'
 import {collectionMovie} from "../../types/types";
+import PosterMovieCard from "../MovieCard/PosterMovieCard";
 
-let basicMovie = {
-    title: 'Second War',
-    id: '324',
-    backdrop_path: ''
-}
-function SampleNextArrow(props: any) {
+/*function SampleNextArrow(props: any) {
     const { className, style, onClick } = props;
     return (
         <div
@@ -17,8 +12,8 @@ function SampleNextArrow(props: any) {
             onClick={onClick}
         />
     );
-}
-function  AppendDots(dots: any) {
+}*/
+/*function  AppendDots(dots: any) {
     return (
         <div
             style={{
@@ -30,8 +25,8 @@ function  AppendDots(dots: any) {
             <ul style={{ margin: "0px" }}> {dots} </ul>
         </div>
     )
-}
-function SamplePrevArrow(props: any) {
+}*/
+/*function SamplePrevArrow(props: any) {
     const { className, style, onClick } = props;
     return (
         <div
@@ -40,9 +35,9 @@ function SamplePrevArrow(props: any) {
             onClick={onClick}
         />
     );
-}
+}*/
 
-class CustomSlide extends React.Component<any,any> {
+/*class CustomSlide extends React.Component<any,any> {
     render() {
         const { index, ...props } = this.props;
         return (
@@ -51,7 +46,7 @@ class CustomSlide extends React.Component<any,any> {
             </div>
         );
     }
-}
+}*/
 
 interface IUniversalSliderProps {
     moviesArr: collectionMovie[]
@@ -63,16 +58,15 @@ class UniversalSlider extends React.PureComponent<IUniversalSliderProps,IUnivers
     render() {
         let {moviesArr = []} = this.props;
         var settings = {
-            dots: false,
+            className: "center",
+            dots: true,
             swipe: true,
             infinite: true,
-            // centerMode: true,
+            centerMode: true,
             speed: 500,
-            slidesToShow: 3,
+            slidesToShow: 1,
             slidesToScroll: 1,
-            nextArrow: <SampleNextArrow />,
-            prevArrow: <SamplePrevArrow />,
-            appendDots: (dots: any) => (
+            /*appendDots: (dots: any) => (
                 <div
                     style={{
                         backgroundColor: "blue",
@@ -94,14 +88,14 @@ class UniversalSlider extends React.PureComponent<IUniversalSliderProps,IUnivers
                         ))}
                     </ul>
                 </div>
-            ),
+            ),*/
         };
         return (
             <>
                 <div style={{margin: '0 auto'}}>
                     <Slider {...settings}>
                         {moviesArr.map((mov)=>(
-                            <VerticalMovieCard movie={mov}/>
+                            <PosterMovieCard movie={mov}/>
                         ))}
                     </Slider>
                 </div>

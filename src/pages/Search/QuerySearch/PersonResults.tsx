@@ -1,6 +1,8 @@
 import * as React from 'react'
 import {searchResultPerson} from "../../../types/types";
 import {NavLink} from 'react-router-dom'
+import PeopleList from "../../../components/common/PeopleLIst";
+import ShowMoreBtn from "../../../components/common/UI/ShowMoreBtn";
 
 interface IPersonResultsProps {
     clear: ()=> {}
@@ -43,26 +45,11 @@ const PersonResults: React.FC<IPersonResultsProps> = ({clear,people,value,findPe
     return (
             <>
                 {people && people.results && people.results[0] &&
-                <div><h4>Here is person results</h4>
+                    <div>
                         <div className="container">
-                            <div className="row">
-                                {people.results.map((person: searchResultPerson) => (
-                                    <div key={person.id}
-                                         className="col-4"
-                                    >
-                                        <NavLink  to={`/people/${person.id}`}>
-                                            <div>{person.name}</div>
-                                        </NavLink>
-                                    </div>
-                                ))}
-                            </div>
+                                <PeopleList people={people.results} />
                         </div>
-                        <button
-                            disabled={people.total_pages+1 <= page}
-                            onClick={showMoreHandler}
-                        >
-                            Показать еще
-                        </button>
+                        {!Boolean(people.total_pages + 1 <= page) && <ShowMoreBtn handler={showMoreHandler} /> }
                     </div>
                 }
             </>

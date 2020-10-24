@@ -29,12 +29,14 @@ interface IEmptySearchPageProps {
 const EmptySearchPage: React.FC<IEmptySearchPageProps> = ({clearOftenSearchMovies,clearOftenSearchPeople,oftenMovies,findOftenMovies,updateOftenMovies,oftenPeople,findOftenPeople,updateOftenPeople}) => {
     return (
         <div>
+            <h4>Часто ищут</h4>
             <OftenFindMovies
                 oftenMovies={oftenMovies}
                 updateOftenMovies={updateOftenMovies}
                 findOftenMovies={findOftenMovies.bind(null,'1')}
                 clear={clearOftenSearchMovies}
             />
+            <h4>Актеры и режиссеры</h4>
            <OftenFindPeople
                 oftenPeople={oftenPeople}
                 findOftenPeople={findOftenPeople.bind(null,'1')}

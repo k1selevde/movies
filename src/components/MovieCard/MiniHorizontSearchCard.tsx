@@ -1,29 +1,31 @@
 import * as React from 'react'
-import {api_url} from "../../constants/default";
 import {collectionMovie} from "../../types/types";
 import {Link} from 'react-router-dom'
 //@ts-ignore
 import defaultCard from '../../assets/img/defaultMovieCard.jpg'
+
+
+
 interface IMovieCardProps {
-    movie: collectionMovie
+    movie: any
 }
 
-const HorizontalMovieCard: React.FC<IMovieCardProps> = ({movie}) => {
+const MiniHorizontalMovieCard: React.FC<IMovieCardProps> = ({movie}) => {
     return (
         <Link to={`/movie/${movie.id}`} key={movie.id}>
-            <div style={{color: 'blue', overflow: 'hidden'}} className="movieCard__wrap">
-                <h4 className="movieCard__title">{movie.title}</h4>
+            <div style={{color: 'blue', overflow: 'hidden'}} className="miniMovieCard__wrap">
                 <div>
                     <div className='movieCard__img-div'></div>
                     <img
                         src={Boolean(movie.backdrop_path) ?  `https://image.tmdb.org/t/p/w500/${movie.backdrop_path}` : defaultCard}
                         alt={movie.title}
-                        className="movieCard__img"
+                        className="miniMovieCard__img"
                     />
                 </div>
+                <h4 className="miniMovieCard__title">{movie.title}</h4>
             </div>
         </Link>
     );
 }
 
-export default HorizontalMovieCard;
+export default MiniHorizontalMovieCard;

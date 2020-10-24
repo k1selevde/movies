@@ -8,6 +8,7 @@ import {collectionMovie} from "../../types/types";
 import {specialCollectionType} from "../../redux/reducers/MovieReducer";
 import {Link, NavLink} from 'react-router-dom';
 import Progress from '../../components/common/Progress'
+import RSlider from "../../components/common/RSlider";
 
 function isEmpty(obj: object,key: string) : Boolean {
     //@ts-ignore
@@ -37,8 +38,7 @@ class MainPage extends React.Component<MainPageProps,MainPageState> {
                 className="main__container"
             >
                 <Posters />
-                <Link to="/movie/34">MOVIE</Link>
-                <Progress />
+{/*                <Progress />*/}
                 <div>
 
                     {Object.keys(special_collections).map((key:string, i: number)=>(

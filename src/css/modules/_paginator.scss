@@ -1,16 +1,62 @@
 .paginator {
   margin: 10px;
+  display: flex;
+  height: 35px;
 }
 
 .pageNumber {
   padding: 2px;
   cursor: pointer;
-  border: 1px solid blue;
+  text-align: center;
+  vertical-align: center;
+  width: 38px;
+  padding: 6px;
+  border: 1px solid #A2A2A2;
 }
 .pageNumber .selecetedPage {
   border-color: black;
   font-weight: bold;
 }
 .selectedPage {
-  color: red
+  font-weight: 600;
+  color: $action-color;
+}
+
+.sideArrow {
+  &__wrap {
+    width: 55px;
+    height: 100%;
+  }
+  border: none;
+  display: block;
+  width: 55px;
+  height: 35px;
+
+  &__left {
+    border-bottom-left-radius: 15px;
+    border-top-left-radius: 15px;
+    cursor: pointer;
+    transition: background .1s ease-in-out .1s;
+    &:hover,
+    &:focus {
+      outline: none;
+    }
+    &:hover {
+      background: $action-color;
+    }
+  }
+
+  &__right {
+    border-bottom-right-radius: 15px;
+    border-top-right-radius: 15px;
+    cursor: pointer;
+    transition: background .1s ease-in-out .1s;
+    &:hover {
+      background: $action-color;
+    }
+    &:hover,
+    &:focus {
+      outline: none;
+    }
+  }
 }

@@ -74,33 +74,34 @@ class MySlider extends React.PureComponent<SpecialCollectionProps,SpecialCollect
             infinite: true,
             // centerMode: true,
             speed: 500,
-            slidesToShow: 3,
+            slidesToShow: 4,
             slidesToScroll: 1,
-            nextArrow: <SampleNextArrow />,
-            prevArrow: <SamplePrevArrow />,
-            appendDots: (dots: any) => (
-                <div
-                    style={{
-                        backgroundColor: "blue",
-                        borderRadius: "20px",
-                        padding: "10px"
-                    }}
-                >
-                    <ul className="d-flex">
-                        {dots.map((dot: any) => (
-                            <div
-                                style={{
-                                    borderRadius: '10px',
-                                    width: '30px',
-                                    height: '30px'
-                                }}
-                            >
-                                {dot}
-                            </div>
-                        ))}
-                    </ul>
-                </div>
-            ),
+            responsive: [
+                {
+                    breakpoint: 1024,
+                    settings: {
+                        slidesToShow: 3,
+                        slidesToScroll: 3,
+                        infinite: true,
+                        dots: true
+                    }
+                },
+                {
+                    breakpoint: 600,
+                    settings: {
+                        slidesToShow: 2,
+                        slidesToScroll: 2,
+                        initialSlide: 2
+                    }
+                },
+                {
+                    breakpoint: 480,
+                    settings: {
+                        slidesToShow: 1,
+                        slidesToScroll: 1
+                    }
+                }
+            ],
         };
         return (
             <>

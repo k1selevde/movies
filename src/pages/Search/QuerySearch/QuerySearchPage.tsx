@@ -80,6 +80,7 @@ class QuerySearchPage extends React.Component<SearchProps,SearchState> {
                         clear={clearSearchMovies}
                         movies={movies}
                     />
+                    <h4 style={{marginTop: '15px'}}>Актёры и режиссеры</h4>
                     <PersonResults
                         findPerson={findPerson.bind(null,value)}
                         findPersonUpdate={findPersonUpdate.bind(null,value)}

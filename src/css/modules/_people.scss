@@ -1,0 +1,31 @@
+.peopleList {
+  &__wrap {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(290px,1fr));
+    grid-gap: 15px;
+  }
+  &__link {
+    color: white;
+    text-decoration: none;
+    transition: color .1s ease-in-out .1s;
+  }
+  &__card {
+    text-align: left;
+    background: transparent;
+    color: white;
+    border-radius: 10px;
+    border: none;
+    padding: 4px 4px;
+    text-decoration: none;
+    transition: background .1s ease .1s;
+    &:hover {
+      background: dimgray;
+      text-decoration: none;
+      color: white;
+      .peopleList__link:hover {
+        text-decoration: none;
+        color: $action-color;
+      }
+    }
+  }
+}

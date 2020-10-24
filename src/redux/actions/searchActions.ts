@@ -151,7 +151,7 @@ export function updateOftenPeople(page:string) {
         alert('update OFTEN person update')
         await searchApi.findOftenPeople(page)
             .then((data)=> {
-                dispatch(updateOftenPeopleSuccess(data))
+                dispatch(updateOftenPeopleSuccess(data.results))
             })
     }
 }

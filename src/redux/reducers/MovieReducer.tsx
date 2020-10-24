@@ -68,14 +68,12 @@ const initialState = {
     collections: [
         ['popular', 'Популярные'],
         ['top_rated', 'С самым большим рейтингом'],
-        ['latest', 'Последние'],
         ['upcoming', 'Набирающие популярность']
     ],
     posters: null as [] |  null,
     special_collections: {
         popular: null as [] | null,
         top_rated: null as [] | null,
-        latest: null as [] | null,
         upcoming : null as [] | null,
     },
 }
@@ -108,7 +106,7 @@ const reducer: Reducer<InitialStateType> = (state = initialState, action: any): 
                 })
                 break;
             case genres.CLEAR:
-                draftState.genres = state.genres.map(genre => {
+                draftState.genres = draftState.genres.map((genre: {name: string, id: string, isSelected: boolean }) => {
                     genre.isSelected = false
                     return genre
                 })
