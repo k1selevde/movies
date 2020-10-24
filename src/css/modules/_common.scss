@@ -30,3 +30,17 @@
     text-transform: uppercase;
   }
 }
+
+
+.arrow {
+  cursor: pointer;
+  position: absolute;
+  top: 49%;
+  @include square(28px);
+  &__next {
+    right: -2%;
+  }
+  &__prev {
+    left: -4%;
+  }
+}

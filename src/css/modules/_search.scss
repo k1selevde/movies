@@ -6,6 +6,9 @@
     background-size: 18px;
     width: 18px;
     height: 18px;
+    svg {
+      fill: white;
+    }
   }
   &__title {
     font-size: 21px;
@@ -15,10 +18,17 @@
     display: flex;
   }
   &__btn {
-    background: #0007A4;
+/*    background: #0007A4;
     color: white;
     font-size: 17px;
+    border: none;*/
     border: none;
+    background: transparent;
+    cursor: pointer;
+    outline: none;
+    &:hover, &:focus {
+      outline: none;
+    }
   }
 }
 

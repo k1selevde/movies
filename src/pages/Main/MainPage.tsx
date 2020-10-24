@@ -43,7 +43,10 @@ class MainPage extends React.Component<MainPageProps,MainPageState> {
 
                     {Object.keys(special_collections).map((key:string, i: number)=>(
                        <div key={key}>
-                            <NavLink to={`/special/${key}`}>
+                            <NavLink
+                                className="specialCol__link"
+                                to={`/special/${key}`}
+                            >
                                 {collections[i][1]}
                             </NavLink>
 

@@ -83,6 +83,7 @@ const PersonPage : React.FC<IPeoplePageProps & RouteComponentProps> = ({
             }
         ]
 
+
     React.useEffect(() => {
         //@ts-ignore
         const id = match.params.id;
@@ -93,7 +94,7 @@ const PersonPage : React.FC<IPeoplePageProps & RouteComponentProps> = ({
         };
     }, [match.params])
 
-
+    React.useEffect(() => console.log('change'))
     return (
             <>
                 <div>People here</div>

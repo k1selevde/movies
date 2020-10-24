@@ -55,7 +55,7 @@ class App extends React.Component<IAppProps & RouteComponentProps,IAppState> {
             <div>
                 <Header />
                 <div className={cn('content',
-                    {'content-blur': (isHiddenSearchField && ( (!location.pathname.includes('search')) && (!location.pathname.includes('movie/')) && (!location.pathname.includes('people'))) )}
+                    {'content-blur': Boolean(isHiddenSearchField && ( (!location.pathname.includes('search')) && (!location.pathname.includes('movie/')) && (!location.pathname.includes('people'))) )}
                 )}>
                     <div
                         className="container">

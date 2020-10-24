@@ -43,6 +43,7 @@ const NavTabs: React.FC<INavTabsProps & RouteComponentProps>  = ({match}) => {
                 {tabs.map((tab: tabType,index: number) => (
                     <li className="movie-tabs__item" key={index}>
                         <NavLink
+                            exact={true}
                             to={`${match.url}/${tab.path}`}
                             className="movieTabLink"
                             activeClassName="movieTabLink__active"

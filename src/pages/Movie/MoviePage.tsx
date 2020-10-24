@@ -46,10 +46,20 @@ const MoviePage: React.FC<IMoviePageProps> = ({
 
     return (
         <>
-            <div>
-                Movie PAGE, {id}
-            </div>
-            <div>{currentMovie && currentMovie.details && currentMovie.details.title}</div>
+            {
+                currentMovie && currentMovie.details &&
+                <div
+                        style={{
+                            background: `url(https://image.tmdb.org/t/p/w500/${currentMovie.details.backdrop_path}) no-repeat`,
+                            width: '100%',
+                            height: '300px'
+                        }}
+                        className="moviePage__header"
+                    >
+                    {currentMovie.details.title}  , {id} , {currentMovie.details.backdrop_path}
+                </div>
+            }
+            
             <div>
                 <h4>Keywords</h4>
                 <MovieKeywords
@@ -59,6 +69,14 @@ const MoviePage: React.FC<IMoviePageProps> = ({
                     getKeywords={getMovieKeywords.bind(null,id)}
                 />
             </div>
+
+            <div>
+                <MoviePageTabs
+                    id={id}
+                    currentMovie={currentMovie}
+                />
+            </div>
+
             <div>
                 <h4>Similar movies:</h4>
                 <SimilarMovies
@@ -66,12 +84,6 @@ const MoviePage: React.FC<IMoviePageProps> = ({
                     //@ts-ignore
                     movies={currentMovie.similarMovies}
                     getMovies={getSimilarMovies.bind(null,id,'1')}
-                />
-            </div>
-            <div>
-                <MoviePageTabs
-                    id={id}
-                    currentMovie={currentMovie}
                 />
             </div>
         </>

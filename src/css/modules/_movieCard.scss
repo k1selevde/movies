@@ -6,11 +6,13 @@
   }
   &__wrap {
     margin-top: 30px;
+    overflow: hidden;
     //padding: 10px 20px;
     //border: 1px solid black;
   }
   &__img {
     width: 80%;
+    margin: 0 auto;
     max-width: 400px;
     border-radius: 15px;
     border: 3px solid blue;
@@ -42,5 +44,31 @@
     max-width: 200px;
     border-radius: 15px;
     border: 3px solid blue;
+  }
+}
+
+
+.posterMovieCard {
+  &__title {
+    text-align: center;
+    color: black;
+    outline: none;
+    text-decoration: none;
+    font-size: 18px;
+    font-weight: 600;
+    &:hover {
+      outline: none;
+      text-decoration: none!important;
+    }
+  }
+  &__wrap {
+    width: fit-content;
+    margin: 20px auto;
+  }
+  &__img {
+    width: 100%;
+    margin: 0 auto;
+    max-width: 400px;
+    border-radius: 15px;
   }
 }

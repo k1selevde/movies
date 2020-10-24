@@ -14,7 +14,7 @@ type SearchHintPropsType = {
 
 
 
-const SearchHint: React.FC<SearchHintPropsType >  = ({cacheMovies, cachePeople,toggleSearchField,isOpen}) => {
+const SearchHint: React.FC<SearchHintPropsType & RouteComponentProps>  = ({location, cacheMovies, cachePeople,toggleSearchField,isOpen}) => {
 // условия появление: если не на searchPage,
 // условия закрытия клик по кнопке, ниже хинта, переход на др.страницу
 
@@ -82,4 +82,4 @@ const SearchHint: React.FC<SearchHintPropsType >  = ({cacheMovies, cachePeople,t
     )
 }
 
-export default SearchHint;
+export default withRouter(SearchHint);

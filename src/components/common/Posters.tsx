@@ -16,8 +16,11 @@ const Posters: React.FC<IPostersProps> = ({posters, getPosters}) => {
 
     return (
         <>
-            <h4>Сейчас в кино</h4>
-            <div>
+            <h4
+                className="posters__title"
+            >
+                Сейчас в кино</h4>
+            <div className="posters__wrap">
                 {posters && <UniversalSlider moviesArr={posters} />}
             </div>
         </>

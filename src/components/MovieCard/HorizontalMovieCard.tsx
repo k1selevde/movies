@@ -11,10 +11,9 @@ interface IMovieCardProps {
 const HorizontalMovieCard: React.FC<IMovieCardProps> = ({movie}) => {
     return (
         <Link to={`/movie/${movie.id}`} key={movie.id}>
-            <div style={{color: 'blue', overflow: 'hidden'}} className="movieCard__wrap">
+            <div className="movieCard__wrap">
                 <h4 className="movieCard__title">{movie.title}</h4>
                 <div>
-                    <div className='movieCard__img-div'></div>
                     <img
                         src={Boolean(movie.backdrop_path) ?  `https://image.tmdb.org/t/p/w500/${movie.backdrop_path}` : defaultCard}
                         alt={movie.title}

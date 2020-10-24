@@ -9,7 +9,15 @@ import {searchActions} from "../../../redux/actions/searchActions";
 import {Dispatch} from "redux";
 import SearchHint from "../SearchHint";
 //@ts-ignore
-// import logo from '../../../assets/icons/logo.svg'
+import LogoIcon from '../../../assets/icons/logo.svg'
+
+// @ts-ignore
+import SearchIcon from '../../../assets/icons/search.svg'
+
+// @ts-ignore
+import CancelIcon from '../../../assets/icons/cancel.svg'
+
+
 
 
 type IHeaderProps = {
@@ -40,7 +48,7 @@ class Header extends React.Component<IHeaderProps,HeaderState> {
                                 <Link to="/" className="logo-link">
                                     <img
                                         className='logo'
-                                        // src={logo}
+                                        src={LogoIcon}
                                         alt="logo"
                                     />
                                 </Link>
@@ -60,9 +68,14 @@ class Header extends React.Component<IHeaderProps,HeaderState> {
                             </div>
                             <div className="header__col header__col-right">
                                     <button
+                                        className="search__btn"
                                         onClick={(event) => this.toggleShowSearch(event)}
                                     >
-                                        TOGGLE
+                                        <img
+                                            className='search__icon'
+                                            src={!isHiddenSearchField ? SearchIcon : CancelIcon}
+                                            alt="logo"
+                                        />
                                     </button>
                             </div>
                         </div>

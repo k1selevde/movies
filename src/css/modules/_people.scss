@@ -5,9 +5,10 @@
     grid-gap: 15px;
   }
   &__link {
+    font-weight: 500;
     color: white;
     text-decoration: none;
-    transition: color .1s ease-in-out .1s;
+    transition: color ease-in-out .1s;
   }
   &__card {
     text-align: left;

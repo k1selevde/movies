@@ -10,15 +10,20 @@ interface IPosterMovieCardProps {
 
 const PosterMovieCard: React.FC<IPosterMovieCardProps> = ({movie}) => {
     return (
-        <Link to={`movie/${movie.id}`}>
+        <Link
+            className="posterMovieCard__wrap"
+              to={`movie/${movie.id}`}
+        >
             <div>
                 <img
                     src={Boolean(movie.backdrop_path) ?  `https://image.tmdb.org/t/p/w500/${movie.backdrop_path}` : defaultCard}
                     alt={movie.title}
-                    className="movieCard__img"
+                    className="posterMovieCard__img"
                 />
             </div>
-            <div>{movie.title}</div>
+            <h4
+                className="posterMovieCard__title"
+            >{movie.title}</h4>
         </Link>
     )
 }

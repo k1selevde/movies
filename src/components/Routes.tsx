@@ -62,10 +62,12 @@ const Routes  = ({movies,collections,getSpecialCollection, clearSpecialCollectio
                                                              getCollection={getSpecialCollection.bind(null, value)}
                                                              title={title} movies={movies}
                                                              clear={clearSpecialCollection.bind(null, value)}/>
-                            return <NotFound/>
-                        }}
+                            return <NotFound />
+
+                            }}
                         />
-                        <Route path="*" component={NotFound}/>
+
+                        <Route path="*" component={NotFound} />
                 </Switch>
             </React.Suspense>
         </div>
@@ -76,5 +78,7 @@ const mapStateToProps = (state: AppStateType) => ({
     collections: state.movie.collections,
     movies: state.special.currentCollection
 })
+
+
 
 export default connect(mapStateToProps,{getSpecialCollection,clearSpecialCollection})(Routes);

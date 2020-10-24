@@ -38,7 +38,6 @@ type SearchState = {}
 
 class QuerySearchPage extends React.Component<SearchProps,SearchState> {
     componentDidMount(): void {
-        //update search field;
         let {value} = this.props;
         this.props.updateSearch(value)
     }

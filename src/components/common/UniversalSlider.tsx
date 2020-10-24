@@ -3,50 +3,47 @@ import Slider from "react-slick";
 import {collectionMovie} from "../../types/types";
 import PosterMovieCard from "../MovieCard/PosterMovieCard";
 
-/*function SampleNextArrow(props: any) {
-    const { className, style, onClick } = props;
-    return (
-        <div
-            className={className}
-            style={{ ...style, display: "block",width:'100px', height: '100px', background: "red" }}
-            onClick={onClick}
-        />
-    );
-}*/
-/*function  AppendDots(dots: any) {
-    return (
-        <div
-            style={{
-                backgroundColor: "#ddd",
-                borderRadius: "10px",
-                padding: "10px"
-            }}
-        >
-            <ul style={{ margin: "0px" }}> {dots} </ul>
-        </div>
-    )
-}*/
-/*function SamplePrevArrow(props: any) {
-    const { className, style, onClick } = props;
-    return (
-        <div
-            className={className}
-            style={{ ...style,width:'100px', height: '100px', display: "block", background: "red" }}
-            onClick={onClick}
-        />
-    );
-}*/
+//@ts-ignore
+import NextArrow from "../../assets/icons/right-arrow.svg";
 
-/*class CustomSlide extends React.Component<any,any> {
-    render() {
-        const { index, ...props } = this.props;
-        return (
-            <div {...props} style={{padding: '40px', border: '1px solid blue', width: '150px', height: '100px'}}>
-                <h3>{index}</h3>
-            </div>
-        );
-    }
-}*/
+//@ts-ignore
+import PrevArrow from "../../assets/icons/left-arrow.svg";
+
+
+
+
+
+function SampleNextArrow(props: any) {
+    const { className, style, onClick } = props;
+    return (
+        //@ts-ignore
+        <div>
+            <img
+                className="arrow arrow__next"
+                src={NextArrow}
+                alt="right-arrow"
+                onClick={onClick}
+            />
+        </div>
+
+    );
+}
+
+function SamplePrevArrow(props: any) {
+    const { className, style, onClick } = props;
+    return (
+        //@ts-ignore
+        <div>
+            <img
+                className="arrow arrow__prev"
+                src={PrevArrow}
+                alt="left-arrow"
+                onClick={onClick}
+            />
+        </div>
+
+    );
+}
 
 interface IUniversalSliderProps {
     moviesArr: collectionMovie[]
@@ -60,35 +57,16 @@ class UniversalSlider extends React.PureComponent<IUniversalSliderProps,IUnivers
         var settings = {
             className: "center",
             dots: true,
+            nextArrow: <SampleNextArrow />,
+            prevArrow: <SamplePrevArrow />,
             swipe: true,
             infinite: true,
+            autoplay: true,
+            autoplaySpeed: 3000,
             centerMode: true,
-            speed: 500,
+            speed: 1500,
             slidesToShow: 1,
             slidesToScroll: 1,
-            /*appendDots: (dots: any) => (
-                <div
-                    style={{
-                        backgroundColor: "blue",
-                        borderRadius: "20px",
-                        padding: "10px"
-                    }}
-                >
-                    <ul className="d-flex">
-                        {dots.map((dot: any) => (
-                            <div
-                                style={{
-                                    borderRadius: '10px',
-                                    width: '30px',
-                                    height: '30px'
-                                }}
-                            >
-                                {dot}
-                            </div>
-                        ))}
-                    </ul>
-                </div>
-            ),*/
         };
         return (
             <>

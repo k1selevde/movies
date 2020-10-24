@@ -12,7 +12,10 @@ const PeopleList: React.FC<IPeopleLIst> = ({people})  => {
             <div className="peopleList__wrap">
                 {people.map((person: searchResultPerson) => (
                     <div key={person.id} className="peopleList__card">
-                        <NavLink  to={`/people/${person.id}`}>
+                        <NavLink
+                            to={`/people/${person.id}`}
+                            className="peopleList__link"
+                        >
                             <div>{person.name}</div>
                         </NavLink>
                     </div>

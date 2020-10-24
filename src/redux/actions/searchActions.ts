@@ -73,7 +73,6 @@ export function findPersonUpdateSuccess(payload:any) {
 
 export function findMoviesUpdate(query: string,page:string) {
     return async(dispatch: Dispatch) => {
-        alert('find person update')
         await searchApi.findMovies(query,page)
             .then((data)=> {
                 dispatch(findMoviesUpdateSuccess(data.results))
@@ -138,7 +137,6 @@ export function updateOftenPeopleSuccess(payload: any) {
 
 export function findOftenPeople(page:string) {
     return async(dispatch: Dispatch) => {
-        alert('find OFTEN person update')
         await searchApi.findOftenPeople(page)
             .then((data)=> {
                 dispatch(findOftenPeopleSuccess(data))
@@ -148,7 +146,6 @@ export function findOftenPeople(page:string) {
 
 export function updateOftenPeople(page:string) {
     return async(dispatch: Dispatch) => {
-        alert('update OFTEN person update')
         await searchApi.findOftenPeople(page)
             .then((data)=> {
                 dispatch(updateOftenPeopleSuccess(data.results))
@@ -184,7 +181,6 @@ export function findOftenMovies(page:string) {
 
 export function updateOftenMovies(page:string) {
     return async(dispatch: Dispatch) => {
-        alert('update OFTEN person update')
         await searchApi.findOftenMovies(page)
             .then((data)=> {
                 dispatch(updateOftenMoviesSuccess(data.results))
