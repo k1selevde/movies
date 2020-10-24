@@ -1,6 +1,9 @@
 import * as React from 'react'
 import {movieCreditsType, movieCreditType} from "../../../types/types";
 import {NavLink} from "react-router-dom";
+//@ts-ignore
+import defaultImage from '../../../assets/img/defaultMovieCard.jpg'
+
 
 interface IMovieCreditsProps {
     credits: movieCreditType[]
@@ -16,13 +19,23 @@ const MovieCredits : React.FC<IMovieCreditsProps> = ({id,credits,getCredits}) =>
     }, [id])
 
     return (
-        <div>
+        <div className="credit__wrap" >
             {credits && credits.map((credit: movieCreditType)=> (
                 <NavLink
+                    style={{textDecoration: 'none'}}
                     to={`/people/${credit.id}`}
                     key={credit.id}
+                    className="credit__item"
                 >
-                    {credit.name}
+                        <img
+                            className="credit__img"
+                            src={credit.profile_path ? `https://image.tmdb.org/t/p/w500/${credit.profile_path}` : defaultImage}
+                            alt={'photo' + credit.name}
+                        />
+
+                    <p className="credit__name" >
+                        {credit.name}
+                    </p>
                 </NavLink>
             ))}
         </div>

@@ -4,15 +4,20 @@ import {collectionMovie} from "../../types/types";
 import {Link} from 'react-router-dom'
 //@ts-ignore
 import defaultCard from '../../assets/img/defaultMovieCard.jpg'
+
+
 interface IMovieCardProps {
     movie: collectionMovie
 }
 
 const HorizontalMovieCard: React.FC<IMovieCardProps> = ({movie}) => {
+
+    let currentTitle = (movie.title.length > 23) ? movie.title.slice(0,20) + '...' : movie.title
+
     return (
-        <Link to={`/movie/${movie.id}`} key={movie.id}>
+        <Link style={{textDecoration: 'none'}} to={`/movie/${movie.id}`} key={movie.id}>
             <div className="movieCard__wrap">
-                <h4 className="movieCard__title">{movie.title}</h4>
+                <h4 className="movieCard__title">{currentTitle}</h4>
                 <div>
                     <img
                         src={Boolean(movie.backdrop_path) ?  `https://image.tmdb.org/t/p/w500/${movie.backdrop_path}` : defaultCard}

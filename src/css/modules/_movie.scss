@@ -2,26 +2,90 @@
 
 .movieTabLink {
   outline: none;
-  border-radius: 15px;
-  border: 2px solid black;
-  background: antiquewhite;
-  color: black;
+  //border-radius: 15px;
+  border-bottom: 1px solid black;
+  //background: antiquewhite;
+  color: white;
   text-decoration: none;
-  &__active {
-    text-decoration: none;
-    color: white;
-    background: cornflowerblue;
-    cursor: default;
-    &:hover {
-      color: black;
-    }
-  }
   &:hover {
-    color: black;
+    text-decoration: none;
+    color:  $action-color;
+  }
+  &__active {
+    pointer-events: none;
+    text-decoration: none;
+    //background: cornflowerblue;
+    cursor: default;
+    color:  $action-color;
+    text-decoration: none;
   }
 }
 
 .moviePage {
   &__header {
+  }
+}
+
+
+.navTabs__container {
+  //margin-top: 30px;
+}
+
+
+.movieTabs {
+  &__container {
+    margin-top: 22px;
+    min-height: 300px;
+    margin-bottom: 12px;
+  }
+
+  &__ul {
+    display: flex;
+    /*    &:not(:first-child){
+          margin-left: 10px;
+      }*/
+  }
+
+  &__item:not(:first-child) {
+    margin-left: 10px;
+  }
+}
+.credit {
+  &__wrap {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(290px,1fr));
+    grid-gap: 15px;
+  }
+
+  &__item {
+    display: flex;
+    align-items: center;
+    transition: all .2s ease-in-out;
+    border-radius: 15px;
+    &:hover {
+      background-color: $second-back-color;
+      .credit__name {
+        color: $action-color;
+      }
+    }
+  }
+  &__img {
+    @include square(100px);
+    border-radius: 15px;
+  }
+  &__name {
+    margin-left: 5px;
+    transition: all .1s ease;
+    color: white;
+  }
+}
+
+.similarMovies {
+  &__wrap {
+    margin-bottom: 20px;
+  }
+  &__title {
+    color: white;
+    font-size: 19px;
   }
 }

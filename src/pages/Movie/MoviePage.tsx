@@ -59,9 +59,8 @@ const MoviePage: React.FC<IMoviePageProps> = ({
                     {currentMovie.details.title}  , {id} , {currentMovie.details.backdrop_path}
                 </div>
             }
-            
+
             <div>
-                <h4>Keywords</h4>
                 <MovieKeywords
                     id={id}
                     //@ts-ignore
@@ -78,7 +77,7 @@ const MoviePage: React.FC<IMoviePageProps> = ({
             </div>
 
             <div>
-                <h4>Similar movies:</h4>
+
                 <SimilarMovies
                     id={id}
                     //@ts-ignore

@@ -17,8 +17,11 @@ const SimilarMovies :  React.FC<ISimilarMoviesProps> = ({id,movies,getMovies}) =
     }, [id])
 
     return (
-        <div>
-            {movies && <Slider moviesArr={movies}/>}
+        <div className="similarMovies__wrap">
+            {movies && movies[0] && <h4 className="similarMovies__title">Похожие фильмы</h4> }
+            <div>
+                {movies && <Slider moviesArr={movies}/>}
+            </div>
         </div>
     )
 }

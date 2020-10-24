@@ -48,7 +48,6 @@ const MovieDetails: React.FC<IMovieDetailsProps>  = ({details}) => {
 
     return (
         <>
-            <div>Details here</div>
             <table>
                 <tbody>
                 {details && dataDetails.map((item,index) => (

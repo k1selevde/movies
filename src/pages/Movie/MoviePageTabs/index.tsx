@@ -32,8 +32,8 @@ const MoviePageTabs: React.FC<IMoviePageTabsProps & RouteComponentProps>  = ({
 
     return (
         <section>
-            <NavTabs />
-            <div>
+            <NavTabs id={id}/>
+            <div className="movieTabs__container" >
                 <Switch>
                     <Route path="/movie/:id/reviews" render={() =>
                     {

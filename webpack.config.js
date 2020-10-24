@@ -19,6 +19,7 @@ module.exports = {
   output: {
     filename: 'bundle.js',  //isProd ?  '[name].[contentHash].bundle.js' : '[name].
     path: path.resolve(__dirname, 'dist'),
+    publicPath: '/',
   },
   optimization: {
     runtimeChunk: isProd
@@ -38,9 +39,9 @@ module.exports = {
     contentBase: path.join(__dirname, "dist"),
     compress: true,
     port: 9000,
-    // watchContentBase: true,
+    watchContentBase: true,
     historyApiFallback: true,
-    // progress: true,
+    progress: true,
   },
   plugins: [
     new HTMLWebpackPlugin({
