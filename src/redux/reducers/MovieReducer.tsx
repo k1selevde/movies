@@ -10,15 +10,17 @@ import {
     movieDetails,
     movieKeywords,
     movieCredits,
+    movieVideos,
     similarMovies, movieReviews, movies, posters
 } from '../actions/actionTypes'
 import {
     movieCreditsType,
     MovieDetailsType,
     movieKeywordsType,
-    movieReviewsResultType,
+    movieReviewsResultType, MoviesVideosType,
     similarMoviesResultsType
 } from "../../types/types";
+import {act} from "react-dom/test-utils";
 type Genre = {
     name: string,
     id: string,
@@ -33,7 +35,8 @@ const initialState = {
         keywords: null as movieKeywordsType | null,
         credits: null as movieCreditsType | null,
         similarMovies: null as similarMoviesResultsType | null,
-        reviews: null as movieReviewsResultType | null
+        reviews: null as movieReviewsResultType | null,
+        videos: null as MoviesVideosType | null
     },
     moviesList: [] as Array<{}>,
     genres: [] as Array<Genre>,
@@ -141,6 +144,9 @@ const reducer: Reducer<InitialStateType> = (state = initialState, action: any): 
 
             case movieReviews.GET__SUCCESS:
                 draftState.currentMovie.reviews = action.payload
+                break;
+            case movieVideos.GET_SUCCESS:
+                draftState.currentMovie.videos = action.payload
                 break;
 
             case movies.SET_CURRENT_PAGE:

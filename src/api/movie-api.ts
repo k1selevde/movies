@@ -6,7 +6,7 @@ import {AxiosResponse} from "axios";
 import {
     CollectionMoviesResponse, CreditsMovieResponse,
     DiscoverMoviesResponse,
-    GenresResponse, KeywordsMovieResponse, MovieDetailsType,
+    GenresResponse, KeywordsMovieResponse, MovieDetailsType, MoviesVideosType,
     ReviewsMovieResponse,
     SimilarMoviesResponse
 } from "../types/types";
@@ -101,5 +101,14 @@ export const movieApi = {
         /*https://api.themoviedb.org/3/movie/now_playing?api_key=4237669ebd35e8010beee2f55fd45546&language=en-US&page=1*/
          return fetch(`https://api.themoviedb.org/3/movie/now_playing?api_key=4237669ebd35e8010beee2f55fd45546&language=ru-RU&page=1`)
              .then(res =>res.json())
+     },
+     getVideos(id: string) {
+
+         let queryStringParams = {
+             language: 'ru-RU',
+         };
+
+        return instance.get<MoviesVideosType>(`/movie/${id}/videos?${queryString.stringify(queryStringParams)}`)
+            .then(res => res.data);
      }
 }

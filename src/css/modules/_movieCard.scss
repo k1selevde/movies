@@ -9,7 +9,6 @@
   &__wrap {
     margin-top: 30px;
     overflow: hidden;
-    width: fit-content;
     &:hover {
       .movieCard__title {
         color: white;
@@ -20,7 +19,7 @@
   }
   &__img {
     width: 80%;
-    margin: 0 auto;
+    //margin: 0 auto;
     max-width: 400px;
     border-radius: 15px;
     border: 3px solid blue;
@@ -39,14 +38,20 @@
     font-size: 15px;
     font-weight: 600;
     text-decoration: none;
-    &:hover {
-      color: $action-color;
-      text-decoration: none;
-    }
+    transition: all .15s ease;
   }
+
+
   &__wrap {
     margin-top: 10px;
+    &:hover {
+      .miniMovieCard__title {
+        color: $action-color;
+      }
+    }
   }
+
+
   &__img {
     width: 80%;
     max-width: 200px;

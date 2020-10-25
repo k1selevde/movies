@@ -10,7 +10,7 @@ import {
     movieKeywords,
     similarMovies,
     movieReviews,
-    movieCredits, movies, posters, specialCollection
+    movieCredits, movies, posters, specialCollection, movieVideos
 } from './actionTypes'
 import {Genre, movieKeywordsType} from "../../types/types";
 import {AxiosResponse} from "axios";
@@ -242,6 +242,23 @@ export function getMovieCredits(id: string) {
             })
     }
 }
+
+export function getMovieVideos(id: string) {
+    return async(dispatch: Dispatch) => {
+        await movieApi.getVideos(id)
+            .then((data) => {
+                dispatch(getMovieVideosSuccess(data.results))
+            })
+    }
+}
+
+export function getMovieVideosSuccess(payload: any ) {
+    return ({
+        type: movieVideos.GET_SUCCESS,
+        payload
+    })
+}
+
 
 export function getMovieCreditsSuccess(payload: any ) {
     return ({

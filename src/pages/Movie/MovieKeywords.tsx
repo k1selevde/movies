@@ -13,10 +13,16 @@ const MovieKeywords : React.FC<IMovieKeywordsProps> = ({id,keywords, getKeywords
     React.useEffect(() => {
         getKeywords()
     }, [id])
+
     let keywordsStr = (keywords && keywords[0]) ? keywords.map(word => word.name).join('#') : ''
+
     return(
         <>
-            <div>{keywordsStr}</div>
+            <div
+                className="movieKeywords"
+            >
+                {keywordsStr}
+            </div>
         </>
     )
 }

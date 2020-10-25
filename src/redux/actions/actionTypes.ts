@@ -55,6 +55,13 @@ export const movieCredits = {
     GET_FAILURE: 'MOVIE/GET_CREDITS_FAILURE',
 }
 
+export const movieVideos = {
+    REQUEST: 'MOVIE/VIDEOS_REQUEST',
+    GET_SUCCESS: 'MOVIE/GET_VIDEOS_SUCCESS',
+    GET_FAILURE: 'MOVIE/GET_VIDEOS_FAILURE',
+}
+
+
 export const movieKeywords = {
     REQUEST: 'MOVIE/KEYWORDS_REQUEST',
     GET_SUCCESS: 'MOVIE/GET_KEYWORDS_SUCCESS',

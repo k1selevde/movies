@@ -9,6 +9,7 @@ import {CurrentMovieType} from '../../redux/reducers/MovieReducer'
 import MovieReviews from "./MoviePageTabs/MovieReviews";
 import MovieCredits from "./MoviePageTabs/MovieCredits";
 import MoviePageTabs from "./MoviePageTabs";
+import Progressbar from "../../components/common/UI/Progressbar";
 
 
 interface IMoviePageProps {
@@ -23,6 +24,8 @@ interface IMoviePageProps {
 }
 
 interface MoviePageState {}
+
+
 
 const MoviePage: React.FC<IMoviePageProps> = ({
                                                   currentMovie,
@@ -49,14 +52,24 @@ const MoviePage: React.FC<IMoviePageProps> = ({
             {
                 currentMovie && currentMovie.details &&
                 <div
-                        style={{
-                            background: `url(https://image.tmdb.org/t/p/w500/${currentMovie.details.backdrop_path}) no-repeat`,
-                            width: '100%',
-                            height: '300px'
-                        }}
                         className="moviePage__header"
                     >
-                    {currentMovie.details.title}  , {id} , {currentMovie.details.backdrop_path}
+                    <img
+                        src={`https://image.tmdb.org/t/p/w500/${currentMovie.details.poster_path}`}
+                        alt={currentMovie.details.title}
+                        className="moviePage__poster"
+                    />
+                    <div
+                        className="moviePage__data"
+                    >
+                        <h4 className="moviePage__title">
+                            {currentMovie.details.title}
+                        </h4>
+                        <p className="moviePage__overview">
+                            {currentMovie.details.overview}
+                        </p>
+                        <Progressbar vote={12} max={14}/>
+                    </div>
                 </div>
             }
 

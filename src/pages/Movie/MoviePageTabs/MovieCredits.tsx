@@ -4,6 +4,9 @@ import {NavLink} from "react-router-dom";
 //@ts-ignore
 import defaultImage from '../../../assets/img/defaultMovieCard.jpg'
 
+//@ts-ignore
+import NoImagePeople from '../../../assets/img/noImagePeople.png'
+
 
 interface IMovieCreditsProps {
     credits: movieCreditType[]
@@ -29,7 +32,7 @@ const MovieCredits : React.FC<IMovieCreditsProps> = ({id,credits,getCredits}) =>
                 >
                         <img
                             className="credit__img"
-                            src={credit.profile_path ? `https://image.tmdb.org/t/p/w500/${credit.profile_path}` : defaultImage}
+                            src={credit.profile_path ? `https://image.tmdb.org/t/p/w500/${credit.profile_path}` : NoImagePeople}
                             alt={'photo' + credit.name}
                         />
 
