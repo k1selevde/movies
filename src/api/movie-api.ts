@@ -27,6 +27,7 @@ export const movieApi = {
     getMovies(page: string, filters: {}) {
         let queryStringParams = {
             language: 'ru-RU',
+            include_adult: 'true',
             ...filters
         };
 
@@ -71,18 +72,12 @@ export const movieApi = {
         return instance.get<CreditsMovieResponse>(`/movie/${id}/credits?`)
             .then(res => res.data);
 
-        /*https://api.themoviedb.org/3/movie/12/credits?api_key=4237669ebd35e8010beee2f55fd45546*/
-/*        return fetch(`${api_url}/movie/${id}/credits?api_key=${api_key}`)
-            .then(res =>res.json())*/
     },
     getKeywords(id: string) {
 
         return instance.get<KeywordsMovieResponse>(`/movie/${id}/keywords?`)
             .then(res => res.data);
 
-        /*https://api.themoviedb.org/3/movie/12/keywords?api_key=4237669ebd35e8010beee2f55fd45546*/
-/*        return fetch(`${api_url}/movie/${id}/keywords?api_key=${api_key}`)
-            .then(res =>res.json())*/
     },
 
 
@@ -98,7 +93,6 @@ export const movieApi = {
 
      getPosters() {
 
-        /*https://api.themoviedb.org/3/movie/now_playing?api_key=4237669ebd35e8010beee2f55fd45546&language=en-US&page=1*/
          return fetch(`https://api.themoviedb.org/3/movie/now_playing?api_key=4237669ebd35e8010beee2f55fd45546&language=ru-RU&page=1`)
              .then(res =>res.json())
      },

@@ -95,13 +95,16 @@ export function getCollectionFailure(payload: any) {
     }
 }
 
-
+/*
+export function clearReviews() {
+    type: movieReviews.CLEAR
+}
+*/
 
 export function  getCollection(category: string, page: string) : ThunkAction<any, any, any, any>{
     return async (dispatch: Dispatch) => {
         await movieApi.getCollection(category,page)
             .then((res: any) =>{
-                console.log('We got a popular movies: ', res.results)
                 dispatch(getCollectionSuccess({results: res.results,category}))
             })
     }
@@ -117,7 +120,6 @@ export function getGenres(): GetGenresThunk {
         dispatch({type: 'REQUEST'})
         await movieApi.getGenres()
             .then((data) => {
-                    console.log('its res : ', data)
                     dispatch(getGenresSuccess(data.genres))
                 }
             )

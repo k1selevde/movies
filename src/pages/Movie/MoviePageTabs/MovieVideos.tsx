@@ -16,10 +16,12 @@ const MovieVideos: React.FC<IMovieVideosProps>  = ({videos,getVideos,id}) => {
 
 
     return (
-        <div>
+        <div className="videosList">
             {
                 videos && videos.map((video) => (
-                    <div key={video.id}>
+                    <div
+                        key={video.id}
+                    >
                         <iframe
                             title={`${video.type}: ${video.name}`}
                             width="100%"

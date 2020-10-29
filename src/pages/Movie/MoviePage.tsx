@@ -68,7 +68,7 @@ const MoviePage: React.FC<IMoviePageProps> = ({
                         <p className="moviePage__overview">
                             {currentMovie.details.overview}
                         </p>
-                        <Progressbar vote={12} max={14}/>
+                        <Progressbar vote={currentMovie.details.vote_average}/>
                     </div>
                 </div>
             }

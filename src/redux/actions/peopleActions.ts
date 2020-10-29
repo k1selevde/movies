@@ -37,3 +37,18 @@ export function cleanPeopleDetail() {
     })
 }
 
+export function getExternalIDs(id: string) {
+    return async (dispatch: Dispatch) => {
+        await peopleApi.getExternalIDs(id)
+            .then((data) => {
+                dispatch(getExternalIDsSuccess(data))
+            })
+    }
+}
+
+export function getExternalIDsSuccess(payload: any) {
+    return ({
+        type: people.GET_IDS_SUCCESS,
+        payload
+    })
+}

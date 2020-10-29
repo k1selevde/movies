@@ -61,6 +61,7 @@
     "nprogress": "^0.2.0",
     "query-string": "^6.13.1",
     "react": "^16.8.6",
+    "react-circular-progressbar": "^2.0.3",
     "react-dom": "^16.8.6",
     "react-redux": "^7.0.3",
     "react-router-dom": "^5.2.0",

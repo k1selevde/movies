@@ -17,8 +17,10 @@ const HorizontalMovieCard: React.FC<IMovieCardProps> = ({movie}) => {
     return (
         <Link style={{textDecoration: 'none'}} to={`/movie/${movie.id}`} key={movie.id}>
             <div className="movieCard__wrap">
+
                 <h4 className="movieCard__title">{currentTitle}</h4>
-                <div>
+                <div className="movieCard__img--wrap">
+                    <div className="movieCard__vote">{movie.vote_average}</div>
                     <img
                         src={Boolean(movie.backdrop_path) ?  `https://image.tmdb.org/t/p/w500/${movie.backdrop_path}` : defaultCard}
                         alt={movie.title}

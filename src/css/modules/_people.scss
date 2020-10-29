@@ -3,6 +3,7 @@
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(290px,1fr));
     grid-gap: 15px;
+    margin-top: 25px;
   }
   &__link {
     font-weight: 500;

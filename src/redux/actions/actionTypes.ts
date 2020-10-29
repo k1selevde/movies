@@ -15,7 +15,8 @@ export const genres = {
 export const movieReviews = {
     REQUEST: 'MOVIE/REVIEWS_REQUEST',
     GET__SUCCESS: 'MOVIE/GET_REVIEWS_SUCCESS',
-    GET__FAILURE: 'MOVIE/GET_REVIEWS_FAILURE'
+    GET__FAILURE: 'MOVIE/GET_REVIEWS_FAILURE',
+    CLEAR: 'MOVIE/CLEAR_REVIEWS'
 }
 
 export const movieDetails = {
@@ -87,7 +88,8 @@ export const searchPeople = {
 export const people = {
     GET_DETAILS_SUCCESS: 'PEOPLE/GET_DETAILS_SUCCESS',
     GET_DETAILS_FAILURE: 'PEOPLE/GET_DETAILS_FAILURE',
-    CLEAR: 'PEOPLE/CLEAR_PEOPLE_DETAIL'
+    CLEAR: 'PEOPLE/CLEAR_PEOPLE_DETAIL',
+    GET_IDS_SUCCESS: 'PEOPLE/GET_IDS_SUCCESS'
 }
 
 export const movies = {

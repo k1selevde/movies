@@ -11,8 +11,9 @@ interface IPosterMovieCardProps {
 const PosterMovieCard: React.FC<IPosterMovieCardProps> = ({movie}) => {
     return (
         <Link
+            style={{textDecoration: 'none'}}
             className="posterMovieCard__wrap"
-              to={`movie/${movie.id}`}
+            to={`movie/${movie.id}`}
         >
             <div>
                 <img

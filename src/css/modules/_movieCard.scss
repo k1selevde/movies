@@ -6,8 +6,18 @@
     font-weight: 600;
     transition: all .2s ease-in-out;
   }
+
+  &__vote {
+    position: absolute;
+    @include size(60px,40px);
+    background: #9290DF;
+    right: 35px;
+    top: 50px;
+  }
+
+
   &__wrap {
-    margin-top: 30px;
+    margin: 30px 20px 0 20px;
     overflow: hidden;
     &:hover {
       .movieCard__title {
@@ -18,11 +28,15 @@
     //border: 1px solid black;
   }
   &__img {
-    width: 80%;
+    width: 100%;
     //margin: 0 auto;
-    max-width: 400px;
+    max-width: 370px;
     border-radius: 15px;
     border: 3px solid blue;
+    &--wrap {
+      width: fit-content;
+      height: fit-content;
+    }
   }
 }
 
@@ -69,12 +83,18 @@
     text-decoration: none;
     font-size: 18px;
     font-weight: 600;
+    transition: all .15s ease-out;
     &:hover {
       outline: none;
       text-decoration: none!important;
     }
   }
   &__wrap {
+    &:hover {
+      .posterMovieCard__title {
+          color: $action-color;
+      }
+    }
     width: fit-content;
     margin: 20px auto;
   }

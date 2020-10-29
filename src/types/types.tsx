@@ -300,12 +300,24 @@ export type MoviesVideosType = {
 }
 
 export type MovieVideoType = {
-    "id": string,
-    "iso_639_1": string,
-    "iso_3166_1": string,
-    "key": string,
-    "name": string,
-    "site": string,
-    "size": number,
-    "type": string
+    id: string,
+    iso_639_1: string,
+    iso_3166_1: string,
+    key: string,
+    name: string,
+    site: string,
+    size: number,
+    type: string
+}
+
+
+export type PeopleExternalIDs = {
+    id: number,
+    twitter_id: string,
+    facebook_id: string,
+    tvrage_id: number,
+    instagram_id: string,
+    freebase_mid: string,
+    imdb_id: string,
+    freebase_id: string
 }

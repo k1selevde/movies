@@ -6,7 +6,7 @@ interface ISortingProps {
     setCurrentSortOption: (option: string) => {}
 }
 
-const Sorting: React.FC<ISortingProps>  = ({options=[], setCurrentSortOption}) => {
+const Sorting: React.FC<ISortingProps>  = ({options= [], setCurrentSortOption}) => {
     let selectRef = React.useRef(null)
     return (
         <div>

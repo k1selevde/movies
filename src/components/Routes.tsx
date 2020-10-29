@@ -31,6 +31,8 @@ type RoutesPropsType = {
     clearSpecialCollection: (value: string) => {}
 }
 
+// const id = React.useMemo(() => '2', [])
+
 const Routes  = ({movies,collections,getSpecialCollection, clearSpecialCollection} : RoutesPropsType) => {
     return (
         <div>
@@ -49,7 +51,7 @@ const Routes  = ({movies,collections,getSpecialCollection, clearSpecialCollectio
 
                         <Route path="/movie/:id" render={({match}) => {
                             let {id} = match.params
-                            //let id = React.useMemo(() => match.params.id, [match.params])
+                            // let myId = React.useMemo(() => match.params.id, [match.params])
                             //@ts-ignore
                             return <MoviePage id={id}/>
                         }}
@@ -61,7 +63,8 @@ const Routes  = ({movies,collections,getSpecialCollection, clearSpecialCollectio
                             if (!!title) return <SpecialPage value={value}
                                                              getCollection={getSpecialCollection.bind(null, value)}
                                                              title={title} movies={movies}
-                                                             clear={clearSpecialCollection.bind(null, value)}/>
+                                                             clear={clearSpecialCollection.bind(null, value)}
+                                        />
                             return <NotFound />
 
                             }}

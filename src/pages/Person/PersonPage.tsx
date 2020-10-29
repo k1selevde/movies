@@ -2,21 +2,35 @@ import * as React from 'react'
 import {withRouter, RouteComponentProps} from 'react-router-dom'
 import {connect} from "react-redux";
 import {AppStateType} from "../../redux/reducers";
-import {cleanPeopleDetail,getDetails} from "../../redux/actions/peopleActions";
-import {PersonDetailsType} from "../../types/types";
-import {objectIsNotEmpty} from "../../helpers/helpers";
+import {cleanPeopleDetail,getDetails,getExternalIDs} from "../../redux/actions/peopleActions";
+import {PeopleExternalIDs, PersonDetailsType} from "../../types/types";
+import {objectIsNotEmpty} from "../../helpers";
+
+
+//@ts-ignore
+import homepage from "../../assets/icons/homepage.svg"
+//@ts-ignore
+import defaultImage from '../../assets/img/noImagePeople.png'
+import ExternalIDS from "./ExternalIDS";
+
+
+
 
 interface IPeoplePageProps {
+    ids: null | PeopleExternalIDs,
     details: null | PersonDetailsType,
     getDetails: (id: string) => Promise<void>,
-    cleanPeopleDetail: () => {}
+    cleanPeopleDetail: () => {},
+    getExternalIDs: (id: string) => Promise<void>
 }
 
 const PersonPage : React.FC<IPeoplePageProps & RouteComponentProps> = ({
                                                                            match,
                                                                            details,
+                                                                           ids,
                                                                            getDetails,
-                                                                           cleanPeopleDetail
+                                                                           cleanPeopleDetail,
+                                                                           getExternalIDs
 }) => {
 
     type personDetailType = {
@@ -88,45 +102,93 @@ const PersonPage : React.FC<IPeoplePageProps & RouteComponentProps> = ({
         //@ts-ignore
         const id = match.params.id;
         getDetails(id)
+        getExternalIDs(id)
         console.log('match.params change : ', match.params)
         return function cleanPeople() {
             cleanPeopleDetail()
         };
     }, [match.params])
 
-    React.useEffect(() => console.log('change'))
+
+
     return (
             <>
-                <div>People here</div>
-                {/*@ts-ignore*/}
-                <div>match params: {match.params.id}</div>
-                <div>{details && objectIsNotEmpty(details, 'name') && details.name}</div>
-                <table>
-                    <tbody>
-                    {personDetails && personDetails.map((detail: personDetailType) => (
-                        <>
-                            {detail.value &&
-                            <tr>
-                                <th>{detail.name}</th>
-                                <td>{detail.value}</td>
-                            </tr>
-                            }
-                        </>
-                    ))}
-                    </tbody>
-                </table>
+                { details &&
+                    <>
+                        <div
+                            className="personPage__header"
+                        >
+                            <div className="personPage__img-block">
+                                <img
+                                    className="personPage__img"
+                                    src={details.profile_path ? `https://image.tmdb.org/t/p/w500/${details.profile_path}` : defaultImage}
+                                    alt="photo"
+                                />
+                            </div>
+                            <div className="personPage__data">
+                                <div style={{display: 'flex', justifyContent: 'space-between'}}>
+                                    <div><h4
+                                        className="personPage__name"
+                                    >{details.name}</h4></div>
+                                    { details.homepage &&
+                                        <div><a
+                                            style={{textDecoration: "none"}}
+                                            target="_blank"
+                                            href={details.homepage}
+                                            className="personPage__homepage"
+                                        >
+                                            <img
+                                                className="personPage__homepage--img"
+                                                src={homepage}
+                                                alt="homepage-link"
+                                            />
+                                            <span
+                                                className="personPage__homepage--link"
+
+                                            >
+                                        личный сайт
+                                    </span>
+                                        </a></div>
+                                    }
+                                </div>
+                                     <div className="personPage__socialContainer">
+                                         <ExternalIDS ids={ids}/>
+                                     </div>
+                            </div>
+                        </div>
+
+
+{/*                        <div>{details && objectIsNotEmpty(details, 'name') && details.name}</div>*/}
+                        <table>
+                            <tbody>
+                            {personDetails && personDetails.map((detail: personDetailType) => (
+                                <>
+                                    {detail.value &&
+                                    <tr>
+                                        <th>{detail.name}</th>
+                                        <td>{detail.value}</td>
+                                    </tr>
+                                    }
+                                </>
+                            ))}
+                            </tbody>
+                        </table>
+                    </>
+                }
             </>
     )
 
 }
 
 const mapStateToProps = (state: AppStateType) => ({
-    details: state.people.details
+    details: state.people.details,
+    ids: state.people.ids
 })
 
 export default connect(mapStateToProps, {
     cleanPeopleDetail,
-    getDetails
+    getDetails,
+    getExternalIDs
 })(withRouter(PersonPage));
 
 

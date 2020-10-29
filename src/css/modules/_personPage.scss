@@ -1,0 +1,48 @@
+.personPage {
+  &__header {
+    display: flex;
+  }
+  &__img-block {
+
+  }
+  &__img {
+    @media screen and (max-width: 800px) {
+      display: none;
+    }
+    height: auto;
+    max-width: 300px;
+  }
+  &__data {
+    width: 90%;
+    margin-left: 30px;
+  }
+  &__homepage {
+    display: flex;
+    align-items: center;
+    &:hover {
+      .personPage__homepage--link {
+        text-decoration: none;
+        color: $action-color;
+      }
+    }
+    &--link {
+      text-transform: uppercase;
+      color: white;
+      font-size: 13px;
+      font-weight: 400;
+      text-decoration: none;
+      transition: all .1s ease;
+      margin-left: 6px;
+
+    }
+    &--img {
+      @include square(19px)
+    }
+  }
+  &__name {
+    color: white;
+    font-size: 28px;
+    font-weight: 600;
+  }
+
+}

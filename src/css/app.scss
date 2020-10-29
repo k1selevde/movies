@@ -71,6 +71,15 @@ button { outline: none; }
 
 // common, slick
 
+.svg {
+    &__facebook {
+        width: 20px;
+        height: 20px;
+        &:hover {
+            fill: blue;
+        }
+    }
+}
 
 //Модули
 @import "modules/modules";

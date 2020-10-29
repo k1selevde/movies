@@ -15,15 +15,21 @@ interface IMovieCreditsProps {
 }
 
 const MovieCredits : React.FC<IMovieCreditsProps> = ({id,credits,getCredits}) => {
+    let currentCredits;
+
 
     React.useEffect(() => {
-        console.log(`new ID: ${id}`)
         getCredits()
     }, [id])
 
+
+    if (credits) {
+        currentCredits = credits.length > 20 ? credits.slice(0,20) : credits;
+    }
+
     return (
         <div className="credit__wrap" >
-            {credits && credits.map((credit: movieCreditType)=> (
+            {credits && currentCredits.map((credit: movieCreditType)=> (
                 <NavLink
                     style={{textDecoration: 'none'}}
                     to={`/people/${credit.id}`}
