@@ -54,11 +54,11 @@ const MoviePage: React.FC<IMoviePageProps> = ({
                 <div
                         className="moviePage__header"
                     >
-                    <img
+                    { currentMovie.details.poster_path && <img
                         src={`https://image.tmdb.org/t/p/w500/${currentMovie.details.poster_path}`}
                         alt={currentMovie.details.title}
                         className="moviePage__poster"
-                    />
+                    />}
                     <div
                         className="moviePage__data"
                     >

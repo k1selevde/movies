@@ -1,8 +1,5 @@
 import * as React from 'react'
-import {AppStateType} from "../../redux/reducers";
-import {connect} from 'react-redux'
 import {collectionMovie} from "../../types/types";
-import {withRouter, RouteComponentProps} from 'react-router-dom'
 import HorizontalMovieCard from '../../components/MovieCard/HorizontalMovieCard'
 import ShowMoreBtn from "../../components/common/UI/ShowMoreBtn";
 
@@ -57,8 +54,5 @@ const SpecialPage : React.FC<ISpecialPageProps> = ({value,clear,movies,title,get
         </>
     )
 }
-
-
-//export default withRouter(SpecialPage);
 
 export default SpecialPage;

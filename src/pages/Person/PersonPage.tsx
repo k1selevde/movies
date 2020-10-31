@@ -105,7 +105,6 @@ const PersonPage : React.FC<IPeoplePageProps & RouteComponentProps> = ({
         const id = match.params.id;
         getDetails(id)
         getExternalIDs(id)
-        console.log('match.params change : ', match.params)
         return function cleanPeople() {
             cleanPeopleDetail()
         };
@@ -121,18 +120,18 @@ const PersonPage : React.FC<IPeoplePageProps & RouteComponentProps> = ({
                             className="personPage__header"
                         >
                             <div className="personPage__img-block">
-                                <img
+                                {details.profile_path && <img
                                     className="personPage__img"
                                     src={details.profile_path ? `https://image.tmdb.org/t/p/w500/${details.profile_path}` : defaultImage}
                                     alt="photo"
-                                />
+                                />}
                             </div>
                             <div className="personPage__data">
                                 <div style={{display: 'flex', justifyContent: 'space-between'}}>
                                     <div><h4
                                         className="personPage__name"
-                                    >{details.name}<span className="personPage__role" >({details.known_for_department})</span></h4></div>
-                                    { details.homepage &&
+                                    >{details.name}<span className="personPage__role" >({Boolean(details.known_for_department) && details.known_for_department})</span></h4></div>
+                                    {details.homepage &&
                                         <div><a
                                             style={{textDecoration: "none"}}
                                             target="_blank"

@@ -19,8 +19,6 @@ const SearchField  = ({search,updateSearch}: SearchFieldProps) => {
     }
     const submitForm = (e: any) => {
         e.preventDefault()
-
-        console.log('search form submit')
         history.push(`/search/${sVal.current.value}`)
     }
     return (

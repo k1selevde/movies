@@ -1,7 +1,4 @@
 import * as React from 'react'
-import {findOftenPeople} from "../../../redux/actions/searchActions";
-import {NavLink} from "react-router-dom";
-import {searchResultPerson} from "../../../types/types";
 import PeopleList from "../../../components/common/PeopleLIst";
 import ShowMoreBtn from "../../../components/common/UI/ShowMoreBtn";
 
