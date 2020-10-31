@@ -64,6 +64,14 @@ const initialState = {
                 {
                     label: "Рейтинг по возростанию",
                     value: "vote_average.asc"
+                },
+                {
+                    label: "Дата выхода по убыванию",
+                    value: "release_date.desc"
+                },
+                {
+                    label: "Дата выхода по возрастанию",
+                    value: "release_date.asc"
                 }
             ]
         },

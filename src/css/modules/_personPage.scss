@@ -1,6 +1,25 @@
 .personPage {
+  &__socialContainer {
+    margin: 20px 0 15px 0;
+  }
+
+  &__biography {
+    margin: 30px 0 10px 0;
+    color: white;
+  }
+
+  &__role {
+    font-style: italic;
+    font-size: 16px;
+    font-weight: 400;
+  }
+
   &__header {
     display: flex;
+  }
+  personPage__birth {
+    margin-top: 5px;
+    margin-bottom: 5px;
   }
   &__img-block {
 
@@ -17,6 +36,10 @@
     margin-left: 30px;
   }
   &__homepage {
+    @media screen and (max-width: 600px) {
+      display: none;
+    }
+
     display: flex;
     align-items: center;
     &:hover {
@@ -45,4 +68,10 @@
     font-weight: 600;
   }
 
+}
+
+.externalID {
+  &__wrap div {
+    margin-right: 10px;
+  }
 }

@@ -13,7 +13,9 @@ import homepage from "../../assets/icons/homepage.svg"
 import defaultImage from '../../assets/img/noImagePeople.png'
 import ExternalIDS from "./ExternalIDS";
 
-
+function getBirthday(b: string) {
+    return b.split('-').join(' ')
+}
 
 
 interface IPeoplePageProps {
@@ -129,7 +131,7 @@ const PersonPage : React.FC<IPeoplePageProps & RouteComponentProps> = ({
                                 <div style={{display: 'flex', justifyContent: 'space-between'}}>
                                     <div><h4
                                         className="personPage__name"
-                                    >{details.name}</h4></div>
+                                    >{details.name}<span className="personPage__role" >({details.known_for_department})</span></h4></div>
                                     { details.homepage &&
                                         <div><a
                                             style={{textDecoration: "none"}}
@@ -151,28 +153,19 @@ const PersonPage : React.FC<IPeoplePageProps & RouteComponentProps> = ({
                                         </a></div>
                                     }
                                 </div>
+                                    <div className="personPage__birth">
+                                        {Boolean(details.birthday) && getBirthday(details.birthday)}, {details.place_of_birth}
+                                    </div>
                                      <div className="personPage__socialContainer">
-                                         <ExternalIDS ids={ids}/>
+                                         {Boolean(ids) && <ExternalIDS ids={ids}/>}
                                      </div>
+
                             </div>
                         </div>
 
-
-{/*                        <div>{details && objectIsNotEmpty(details, 'name') && details.name}</div>*/}
-                        <table>
-                            <tbody>
-                            {personDetails && personDetails.map((detail: personDetailType) => (
-                                <>
-                                    {detail.value &&
-                                    <tr>
-                                        <th>{detail.name}</th>
-                                        <td>{detail.value}</td>
-                                    </tr>
-                                    }
-                                </>
-                            ))}
-                            </tbody>
-                        </table>
+                        <div className="personPage__biography">
+                            {details.biography}
+                        </div>
                     </>
                 }
             </>

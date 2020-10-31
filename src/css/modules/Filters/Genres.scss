@@ -9,19 +9,24 @@
   &__name {
     cursor: pointer;
     padding: 4px 19px;
-    border-radius: 25%;
+    border-radius: 15px;
+    margin: 2px 0;
+
     &--active {
       color: white;
-      cursor: no-drop;
-      background: mediumvioletred;
+      cursor: default;
+      background: $action-color;
     }
   }
 }
 
 
 .genres {
+  &__wrapper {
+    margin-top: 20px;
+  }
   &__title {
-    color: blue;
+    color: white;
     font-weight: 600;
   }
 

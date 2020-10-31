@@ -12,7 +12,6 @@ interface ISimilarMoviesProps {
 const SimilarMovies :  React.FC<ISimilarMoviesProps> = ({id,movies,getMovies}) => {
 
     React.useEffect(() => {
-        alert('rerender')
         getMovies()
     }, [id])
 

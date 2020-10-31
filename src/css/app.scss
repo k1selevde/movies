@@ -75,8 +75,26 @@ button { outline: none; }
     &__facebook {
         width: 20px;
         height: 20px;
+        transition: .1s ease;
+        cursor: pointer;
+        fill: #3b5998;
         &:hover {
-            fill: blue;
+            opacity: .9;
+        }
+    }
+
+    &__instagram {
+        cursor: pointer;
+    }
+
+    &__twitter {
+        width: 20px;
+        height: 20px;
+        transition: all .1s ease;
+        cursor: pointer;
+        fill: #00acee;
+        &:hover {
+            opacity: .9;
         }
     }
 }

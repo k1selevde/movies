@@ -8,6 +8,7 @@ interface IMovieKeywordsProps {
     id: string
 }
 
+
 const MovieKeywords : React.FC<IMovieKeywordsProps> = ({id,keywords, getKeywords}) => {
 
     React.useEffect(() => {

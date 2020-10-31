@@ -11,10 +11,16 @@ type IExternalIDSProps = {
 const ExternalIDS: React.FC<IExternalIDSProps>  = ({ids}) => {
     let height = '20px'
     return (
-        <div style={{display: 'flex'}} >
-            {ids.facebook_id && <a href={`www.facebook.com/${ids.facebook_id}`} ><FacebookID height={height} id={ids.facebook_id}/> </a>}
-            {ids.instagram_id && <InstagramID height={height} id={ids.instagram_id} />}
-            {ids.twitter_id && <TwitterID height={height} id={ids.twitter_id} />}
+        <div className="externalID__wrap" style={{display: 'flex', maxWidth: '100px', justifyContent: 'center', alignItems: 'center'}} >
+            <div>{ids.facebook_id &&
+                 <a href={'https://facebook.com/' + ids.facebook_id} target="_blank" style={{padding: '0px', margin: '0px'}}><FacebookID height={height} id={ids.facebook_id}/> </a>}
+            </div>
+            <div>
+                {ids.instagram_id && <a href={'https://instagram.com/' + ids.instagram_id} target="_blank" style={{padding: '0px', margin: '0px'}}><InstagramID height={height} id={ids.instagram_id}/></a>  }
+            </div>
+            <div>
+                {ids.twitter_id && <a href={'https://twitter.com/' + ids.twitter_id} target="_blank" style={{padding: '0px', margin: '0px'}} ><TwitterID height={height} id={ids.twitter_id}/></a>}
+            </div>
         </div>
     );
 }

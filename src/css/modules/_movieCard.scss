@@ -1,5 +1,6 @@
 .movieCard {
   &__title {
+    margin-bottom: 4px;
     text-align: left;
     color: black;
     font-size: 18px;
@@ -9,19 +10,30 @@
 
   &__vote {
     position: absolute;
-    @include size(60px,40px);
-    background: #9290DF;
-    right: 35px;
-    top: 50px;
+    @include size(50px,35px);
+    //background: #9290DF;
+    right: 25px;
+    top: 0;
+    border-bottom-left-radius: 6px;
+    border-bottom-right-radius: 6px;
+    text-align: center;
+    padding-top: 4px;
+    color: white;
   }
 
 
   &__wrap {
     margin: 30px 20px 0 20px;
     overflow: hidden;
+    transition: all .1s ease;
+    white-space: nowrap;
     &:hover {
+      transform: scale(1.02);
       .movieCard__title {
         color: white;
+      }
+      .movieCard__img {
+
       }
     }
     //padding: 10px 20px;
@@ -32,9 +44,10 @@
     //margin: 0 auto;
     max-width: 370px;
     border-radius: 15px;
-    border: 3px solid blue;
+    //border: 3px solid blue;
+    box-shadow: 0 0 10px rgba(0,0,0,.4);
     &--wrap {
-      width: fit-content;
+      position: relative;
       height: fit-content;
     }
   }
@@ -57,20 +70,24 @@
 
 
   &__wrap {
+    cursor: pointer;
     margin-top: 10px;
     &:hover {
+      transform: scale(1.02);
       .miniMovieCard__title {
         color: $action-color;
+
       }
     }
   }
 
 
   &__img {
+    box-shadow: 0 0 10px rgba(0,0,0, 0.4);
     width: 80%;
     max-width: 200px;
     border-radius: 15px;
-    border: 3px solid blue;
+    //border: 3px solid blue;
   }
 }
 

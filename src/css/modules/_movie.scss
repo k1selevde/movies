@@ -58,6 +58,10 @@
     margin-top: 22px;
     min-height: 300px;
     margin-bottom: 12px;
+    table tbody tr td {
+      margin-left: 10px;
+      padding-left: 25px;
+    }
   }
 
   &__ul {

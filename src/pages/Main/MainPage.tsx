@@ -1,4 +1,4 @@
-import * as React from 'react'
+  import * as React from 'react'
 import SpecialCollection from '../../components/SpecialCollection/SpecialCollection'
 import Posters from "../../components/common/Posters";
 import {AppStateType} from "../../redux/reducers";

@@ -7,7 +7,7 @@ type IDProps = {
 
 const InstagramID: React.FC<IDProps>  = ({height}) => {
     return (
-        <svg height={height} viewBox="0 0 24 24" width={512} >
+        <svg className="svg__instagram" height={height} viewBox="0 0 24 24" >
             <linearGradient
                 id="prefix__a"
                 gradientTransform="matrix(0 -1.982 -1.844 0 -132.522 -51.077)"

@@ -35,7 +35,7 @@ class Filters extends React.Component<IFilterProps> {
                 className="filters__container"
             >
                 <h4
-                    className="filters_title"
+                    className="filters__title"
                 >
                     Фильтры
                 </h4>
