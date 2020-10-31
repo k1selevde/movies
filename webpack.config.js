@@ -51,7 +51,9 @@ module.exports = {
       }
     }),
     // new BundleAnalyzerPlugin(),
-    new Dotenv(),
+    new Dotenv({
+      path: path.resolve(__dirname, './.env')
+    }),
     new MiniCssExtractPlugin({
       filename: isProd ? '[name].[contenthash].css' : '[name].css'
     }),
