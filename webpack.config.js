@@ -19,7 +19,7 @@ module.exports = {
   output: {
     filename: 'bundle.js',  //isProd ?  '[name].[contentHash].bundle.js' : '[name].
     path: path.resolve(__dirname, 'dist'),
-    // publicPath: '/'
+    // publicPath: '/dist/'
   },
   optimization: {
     runtimeChunk: isProd
