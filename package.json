@@ -5,8 +5,7 @@
   "scripts": {
     "lint": "./node_modules/.bin/eslint",
     "dev": "cross-env NODE_ENV=development webpack --mode development",
-    "build": "cross-env NODE_ENV=production webpack --mode production",
-    "start": "cross-env NODE_ENV=development webpack-dev-server --mode development --open",
+    "start": "cross-env NODE_ENV=production webpack --mode production",
     "stats": "webpack --json > stats.json && webpack-bundle-analyzer stats.json"
   },
   "author": "",
