@@ -51,19 +51,13 @@ module.exports = {
       }
     }),
     // new BundleAnalyzerPlugin(),
-    new Dotenv({
+/*    new Dotenv({
       path: path.resolve(__dirname, './.env')
-    }),
+    }),*/
     new MiniCssExtractPlugin({
       filename: isProd ? '[name].[contenthash].css' : '[name].css'
     }),
     new CleanWebpackPlugin(),
-    /*new CopyWebpackPlugin([
-      {
-        from: path.resolve(__dirname, 'src/assets/!*'),
-        to: path.resolve(__dirname, 'dist/')
-      },
-    ]),*/
     new CopyWebpackPlugin(
         { patterns: [{
               from: path.resolve(__dirname, './src/assets'),
