@@ -17,9 +17,8 @@ module.exports = {
   entry: "./src/index.tsx",
   mode: "development",
   output: {
-    filename: 'bundle.js',  //isProd ?  '[name].[contentHash].bundle.js' : '[name].
-    path: path.resolve(__dirname, 'dist'),
-    // publicPath: '/dist/'
+    filename: 'bundle.js',
+    path: './dist'
   },
   optimization: {
     runtimeChunk: isProd

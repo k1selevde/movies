@@ -1,10 +1,16 @@
 {
   "name": "project",
   "version": "1.0.0",
-  "main": "index.js",
+  "engines": {
+    "node": "7.0.0",
+    "npm": "3.10.8"
+  },
+  "description": "project",
+  "main": "src/index.tsx",
   "scripts": {
     "start": "./node_modules/webpack/bin/webpack.js -p --progress && node server.js",
     "lint": "./node_modules/.bin/eslint",
+    "heroku-postbuild": "webpack -p",
     "dev": "cross-env NODE_ENV=development webpack --mode development",
     "build": "cross-env NODE_ENV=production webpack --mode production",
     "stats": "webpack --json > stats.json && webpack-bundle-analyzer stats.json"
