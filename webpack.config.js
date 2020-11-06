@@ -18,7 +18,7 @@ module.exports = {
   mode: "development",
   output: {
     filename: 'bundle.js',
-    path: './dist'
+    path: path.resolve(__dirname, 'dist'),
   },
   optimization: {
     runtimeChunk: isProd
