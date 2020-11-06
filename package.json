@@ -8,8 +8,8 @@
   "description": "project",
   "main": "src/index.tsx",
   "scripts": {
-    "start": "node server.js",
-    "dev": "cross-env NODE_ENV=development webpack --mode development",
+    "build": "node server.js",
+    "dev": "cross-env NODE_ENV=development webpack --mode development"
   },
   "author": "",
   "license": "ISC",
