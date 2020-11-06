@@ -14,7 +14,7 @@ const isProd = !isDev;
 
 
 module.exports = {
-  entry: "./src/index.tsx",
+  entry: __dirname + "/src/index.tsx",
   mode: "development",
   output: {
     filename: 'bundle.js',
