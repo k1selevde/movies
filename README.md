@@ -35,5 +35,5 @@
   ![search-page-empty](https://github.com/k1selevde/movies/blob/master/src/assets/img/movies-image/search-page-empty.png)
   ![search-page-value](https://github.com/k1selevde/movies/blob/master/src/assets/img/movies-image/search-page-value.png)
 
-- *Страница Collections: Популярные, с самым большим рейтингом, набирающие популярность. *
+- *Страница Collections: Популярные, с самым большим рейтингом, набирающие популярность.*
   ![collection-page](https://github.com/k1selevde/movies/blob/master/src/assets/img/movies-image/colleaction-page.png)
