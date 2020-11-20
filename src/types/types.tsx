@@ -217,6 +217,10 @@ export type MovieDetailsType = {
     vote_count: number
 }
 
+
+
+
+
 export type movieCreditType = {
     cast_id: number,
     character: string,
@@ -288,4 +292,32 @@ export type PersonDetailsType = {
     adult: false,
     imdb_id: string,
     homepage: null | string
+}
+
+
+export type MoviesVideosType = {
+    results: Array<MovieVideoType>
+}
+
+export type MovieVideoType = {
+    id: string,
+    iso_639_1: string,
+    iso_3166_1: string,
+    key: string,
+    name: string,
+    site: string,
+    size: number,
+    type: string
+}
+
+
+export type PeopleExternalIDs = {
+    id: number,
+    twitter_id: string,
+    facebook_id: string,
+    tvrage_id: number,
+    instagram_id: string,
+    freebase_mid: string,
+    imdb_id: string,
+    freebase_id: string
 }

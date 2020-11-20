@@ -16,8 +16,8 @@ const MoviesList : React.FC<IMoviesListProps> = ({movies}) => {
     return (
         <div>
             <div className="moviesList__wrap">
-                {movies.map(movie => (
-                    <div className="col-6">
+                {movies.map((movie:collectionMovie) => (
+                    <div key={movie.id}>
                          <HorizontalMovieCard movie={movie}/>
                     </div>
                 ))}

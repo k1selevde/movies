@@ -1,0 +1,18 @@
+.specialCol {
+  &__link {
+    width: fit-content;
+    &:first-child {
+      margin-top: 65px!important;
+    }
+    display: block;
+    margin: 35px 0 1px 0;
+    color: white;
+    font-weight: 600;
+    font-size: 24px;
+    transition: all .15s ease-in-out;
+    &:hover {
+      color: $action-color;
+      text-decoration: none;
+    }
+  }
+}

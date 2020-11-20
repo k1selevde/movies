@@ -1,18 +1,124 @@
 .movieCard {
   &__title {
+    margin-bottom: 4px;
+    text-align: left;
     color: black;
     font-size: 18px;
     font-weight: 600;
+    transition: all .2s ease-in-out;
   }
+
+  &__vote {
+    position: absolute;
+    @include size(50px,35px);
+    //background: #9290DF;
+    right: 25px;
+    top: 0;
+    border-bottom-left-radius: 6px;
+    border-bottom-right-radius: 6px;
+    text-align: center;
+    padding-top: 4px;
+    color: white;
+  }
+
+
   &__wrap {
-    margin-top: 30px;
+    margin: 30px 20px 0 20px;
+    overflow: hidden;
+    transition: all .1s ease;
+    white-space: nowrap;
+    &:hover {
+      transform: scale(1.02);
+      .movieCard__title {
+        color: white;
+      }
+      .movieCard__img {
+
+      }
+    }
     //padding: 10px 20px;
     //border: 1px solid black;
   }
   &__img {
+    width: 100%;
+    //margin: 0 auto;
+    max-width: 370px;
+    border-radius: 15px;
+    //border: 3px solid blue;
+    box-shadow: 0 0 10px rgba(0,0,0,.4);
+    &--wrap {
+      position: relative;
+      height: fit-content;
+    }
+  }
+}
+
+
+
+.miniMovieCard {
+  &__title {
+    margin-top: 5px;
+    overflow: hidden;
+    max-width: 165px;
+    white-space: nowrap;
+    color: white;
+    font-size: 15px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all .15s ease;
+  }
+
+
+  &__wrap {
+    cursor: pointer;
+    margin-top: 10px;
+    &:hover {
+      transform: scale(1.02);
+      .miniMovieCard__title {
+        color: $action-color;
+
+      }
+    }
+  }
+
+
+  &__img {
+    box-shadow: 0 0 10px rgba(0,0,0, 0.4);
     width: 80%;
+    max-width: 200px;
+    border-radius: 15px;
+    //border: 3px solid blue;
+  }
+}
+
+
+.posterMovieCard {
+  &__title {
+    text-align: center;
+    color: black;
+    outline: none;
+    text-decoration: none;
+    font-size: 18px;
+    font-weight: 600;
+    transition: all .15s ease-out;
+    &:hover {
+      outline: none;
+      text-decoration: none!important;
+    }
+  }
+  &__wrap {
+    &:hover {
+      .posterMovieCard__title {
+          color: $action-color;
+      }
+    }
+    width: fit-content;
+    margin: 20px auto;
+  }
+  &__img {
+    width: 100%;
+    margin: 0 auto;
     max-width: 400px;
     border-radius: 15px;
-    border: 3px solid blue;
   }
 }

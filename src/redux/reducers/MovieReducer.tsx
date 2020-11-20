@@ -10,15 +10,17 @@ import {
     movieDetails,
     movieKeywords,
     movieCredits,
+    movieVideos,
     similarMovies, movieReviews, movies, posters
 } from '../actions/actionTypes'
 import {
     movieCreditsType,
     MovieDetailsType,
     movieKeywordsType,
-    movieReviewsResultType,
+    movieReviewsResultType, MoviesVideosType,
     similarMoviesResultsType
 } from "../../types/types";
+import {act} from "react-dom/test-utils";
 type Genre = {
     name: string,
     id: string,
@@ -33,7 +35,8 @@ const initialState = {
         keywords: null as movieKeywordsType | null,
         credits: null as movieCreditsType | null,
         similarMovies: null as similarMoviesResultsType | null,
-        reviews: null as movieReviewsResultType | null
+        reviews: null as movieReviewsResultType | null,
+        videos: null as MoviesVideosType | null
     },
     moviesList: [] as Array<{}>,
     genres: [] as Array<Genre>,
@@ -61,6 +64,14 @@ const initialState = {
                 {
                     label: "Рейтинг по возростанию",
                     value: "vote_average.asc"
+                },
+                {
+                    label: "Дата выхода по убыванию",
+                    value: "release_date.desc"
+                },
+                {
+                    label: "Дата выхода по возрастанию",
+                    value: "release_date.asc"
                 }
             ]
         },
@@ -68,14 +79,12 @@ const initialState = {
     collections: [
         ['popular', 'Популярные'],
         ['top_rated', 'С самым большим рейтингом'],
-        ['latest', 'Последние'],
         ['upcoming', 'Набирающие популярность']
     ],
     posters: null as [] |  null,
     special_collections: {
         popular: null as [] | null,
         top_rated: null as [] | null,
-        latest: null as [] | null,
         upcoming : null as [] | null,
     },
 }
@@ -108,7 +117,7 @@ const reducer: Reducer<InitialStateType> = (state = initialState, action: any): 
                 })
                 break;
             case genres.CLEAR:
-                draftState.genres = state.genres.map(genre => {
+                draftState.genres = draftState.genres.map((genre: {name: string, id: string, isSelected: boolean }) => {
                     genre.isSelected = false
                     return genre
                 })
@@ -143,6 +152,9 @@ const reducer: Reducer<InitialStateType> = (state = initialState, action: any): 
 
             case movieReviews.GET__SUCCESS:
                 draftState.currentMovie.reviews = action.payload
+                break;
+            case movieVideos.GET_SUCCESS:
+                draftState.currentMovie.videos = action.payload
                 break;
 
             case movies.SET_CURRENT_PAGE:

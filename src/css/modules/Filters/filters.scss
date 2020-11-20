@@ -1,13 +1,46 @@
 @import 'Genres';
 
+.filters {
+  &__container {
+    @media screen and (max-width: 400px) {
+      display: none;
+    }
+  }
+  &__title {
+    color: black;
+  }
+}
+
 .reset-btn {
+  outline: none;
   color: white;
-  background-color: #0007A4;
+  font-weight: 600;
+  background-color: #1d8bff;
   outline: none;
   border-radius: 5px;
   border: none;
+  cursor: pointer;
+  padding: 5px 8px;
+  font-size: 13px;
+  &:hover {
+    outline: none;
+    opacity: .8;
+  }
+  &:active {
+    outline: none;
+  }
 }
 
-.reset-btn:hover {
-  opacity: .8;
+.sorting {
+  &__wrap {
+
+    max-width: 100px;
+    margin-top: 18px;
+    select {
+      @media screen and (max-width: 790px) {
+        width: 120px;
+      }
+      max-width: 200px;
+    }
+  }
 }

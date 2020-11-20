@@ -1,5 +1,7 @@
 import * as React from 'react'
 import HorizontalMovieCard from "../../../components/MovieCard/HorizontalMovieCard";
+import MoviesList from "../../Movies/MoviesList";
+import ShowMoreBtn from "../../../components/common/UI/ShowMoreBtn";
 
 
 interface IMoviesResultsProps {
@@ -47,26 +49,12 @@ const MoviesResults: React.FC<IMoviesResultsProps> = ({
 
     return (
         <>
-            {movies && movies.results && movies.results[0] && <div><h4>Here is movies results</h4>
-                <div className="container">
-                    <div className="row">
-                        {movies.results.map((movie: any) => (
-                            <div
-                                key={movie.id}
-                                className="col-3"
-                            >
-                                <HorizontalMovieCard movie={movie}/>
-                            </div>
-                        ))}
-                    </div>
+            {movies && movies.results[0] &&
+                <div>
+                    <MoviesList movies={movies.results}/>
+                    {!Boolean(movies.total_pages + 1 <= page) && <ShowMoreBtn handler={showMoreHandler} /> }
                 </div>
-                <button
-                    disabled={movies.total_pages+1 <= page}
-                    onClick={showMoreHandler}
-                >
-                    Показать еще
-                </button>
-            </div>}
+            }
         </>
 
     )

@@ -1,0 +1,77 @@
+.personPage {
+  &__socialContainer {
+    margin: 20px 0 15px 0;
+  }
+
+  &__biography {
+    margin: 30px 0 10px 0;
+    color: white;
+  }
+
+  &__role {
+    font-style: italic;
+    font-size: 16px;
+    font-weight: 400;
+  }
+
+  &__header {
+    display: flex;
+  }
+  personPage__birth {
+    margin-top: 5px;
+    margin-bottom: 5px;
+  }
+  &__img-block {
+
+  }
+  &__img {
+    @media screen and (max-width: 800px) {
+      display: none;
+    }
+    height: auto;
+    max-width: 300px;
+  }
+  &__data {
+    width: 90%;
+    margin-left: 30px;
+  }
+  &__homepage {
+    @media screen and (max-width: 600px) {
+      display: none;
+    }
+
+    display: flex;
+    align-items: center;
+    &:hover {
+      .personPage__homepage--link {
+        text-decoration: none;
+        color: $action-color;
+      }
+    }
+    &--link {
+      text-transform: uppercase;
+      color: white;
+      font-size: 13px;
+      font-weight: 400;
+      text-decoration: none;
+      transition: all .1s ease;
+      margin-left: 6px;
+
+    }
+    &--img {
+      @include square(19px)
+    }
+  }
+  &__name {
+    color: white;
+    font-size: 28px;
+    font-weight: 600;
+  }
+
+}
+
+.externalID {
+  &__wrap div {
+    margin-right: 10px;
+  }
+}

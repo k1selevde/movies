@@ -1,0 +1,46 @@
+
+
+.showMoreBtn {
+  &__wrap {
+    width: 160px;
+    background: transparent;
+    outline: none;
+    cursor: pointer;
+    margin: 15px 0 10px 15px;
+    border: 1px solid white;
+    padding: 8px 5px;
+    font-size: 13px;
+    transition: all .1s ease-in .1s;
+    &:focus,
+    &:active {
+      outline: none;
+    }
+    &:hover {
+      background: white;
+      border: 1px solid $action-color;
+      & .showMoreBtn__text {
+        color: $action-color;
+        font-weight: bold;
+      }
+    }
+  }
+  &__text {
+    transition: all .1s ease-in .1s;
+    color: white;
+    text-transform: uppercase;
+  }
+}
+
+
+.arrow {
+  cursor: pointer;
+  position: absolute;
+  top: 49%;
+  @include square(28px);
+  &__next {
+    right: -2%;
+  }
+  &__prev {
+    left: -4%;
+  }
+}

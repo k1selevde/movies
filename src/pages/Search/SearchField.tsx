@@ -19,13 +19,11 @@ const SearchField  = ({search,updateSearch}: SearchFieldProps) => {
     }
     const submitForm = (e: any) => {
         e.preventDefault()
-
-        console.log('search form submit')
         history.push(`/search/${sVal.current.value}`)
     }
     return (
         <>
-            <div className="d-flex justify-content-center">
+            <div className="d-flex">
                 <form
                     className="searchField__form"
                     onSubmit={submitForm}
@@ -37,6 +35,7 @@ const SearchField  = ({search,updateSearch}: SearchFieldProps) => {
                         type="text"
                         onChange={changeSearchHandler}
                         placeholder={"Найти фильмы, сериалы, актеров и тд!"}
+                        autoFocus
                     />
 {/*                    <div
                         // className="search__icon"

@@ -9,6 +9,7 @@ import {CurrentMovieType} from '../../redux/reducers/MovieReducer'
 import MovieReviews from "./MoviePageTabs/MovieReviews";
 import MovieCredits from "./MoviePageTabs/MovieCredits";
 import MoviePageTabs from "./MoviePageTabs";
+import Progressbar from "../../components/common/UI/Progressbar";
 
 
 interface IMoviePageProps {
@@ -24,6 +25,8 @@ interface IMoviePageProps {
 
 interface MoviePageState {}
 
+
+
 const MoviePage: React.FC<IMoviePageProps> = ({
                                                   currentMovie,
                                                   id,
@@ -35,25 +38,42 @@ const MoviePage: React.FC<IMoviePageProps> = ({
 
     React.useEffect(() => {
         return () => {
-            alert('Component will unmount')
             clearCurrentMovie()
         }
     }, [])
 
     React.useEffect(() => {
-        alert('movie change')
         getMovieDetails(String(id))
     }, [id])
 
 
     return (
         <>
+            {
+                currentMovie && currentMovie.details &&
+                <div
+                        className="moviePage__header"
+                    >
+                    { currentMovie.details.poster_path && <img
+                        src={`https://image.tmdb.org/t/p/w500/${currentMovie.details.poster_path}`}
+                        alt={currentMovie.details.title}
+                        className="moviePage__poster"
+                    />}
+                    <div
+                        className="moviePage__data"
+                    >
+                        <h4 className="moviePage__title">
+                            {currentMovie.details.title}
+                        </h4>
+                        <p className="moviePage__overview">
+                            {currentMovie.details.overview}
+                        </p>
+                        <Progressbar vote={currentMovie.details.vote_average}/>
+                    </div>
+                </div>
+            }
+
             <div>
-                Movie PAGE, {id}
-            </div>
-            <div>{currentMovie && currentMovie.details && currentMovie.details.title}</div>
-            <div>
-                <h4>Keywords</h4>
                 <MovieKeywords
                     id={id}
                     //@ts-ignore
@@ -61,19 +81,21 @@ const MoviePage: React.FC<IMoviePageProps> = ({
                     getKeywords={getMovieKeywords.bind(null,id)}
                 />
             </div>
+
             <div>
-                <h4>Similar movies:</h4>
+                <MoviePageTabs
+                    id={id}
+                    currentMovie={currentMovie}
+                />
+            </div>
+
+            <div>
+
                 <SimilarMovies
                     id={id}
                     //@ts-ignore
                     movies={currentMovie.similarMovies}
                     getMovies={getSimilarMovies.bind(null,id,'1')}
-                />
-            </div>
-            <div>
-                <MoviePageTabs
-                    id={id}
-                    currentMovie={currentMovie}
                 />
             </div>
         </>

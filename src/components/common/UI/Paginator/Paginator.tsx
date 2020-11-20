@@ -46,16 +46,19 @@ const Paginator: React.FC<IPaginatorProps> = ({
             <div
                 className="paginator"
             >
-                {portionNumber > 1 &&
-                <button
-                    onClick={() => {
-                        setPortionNumber(portionNumber - 1)
-                    }}
-                >
-                    PREV
-                </button>
-                }
-                {pages
+                <div className="sideArrow__wrap">
+                    {portionNumber > 1 &&
+                    <button
+                        className="sideArrow sideArrow__left"
+                        onClick={() => {
+                            setPortionNumber(portionNumber - 1)
+                        }}
+                    >
+                        PREV
+                    </button>
+                    }
+                </div>
+                {(pages.length > 1) && pages
                     .filter(p => p >= leftPortionPageNumber && p <= rightPortionPageNumber)
                     .map(p => {
                         return (
@@ -75,16 +78,20 @@ const Paginator: React.FC<IPaginatorProps> = ({
                             {p}
                         </span>
                         )
-                    })}
-                {portionNumber < portionCount &&
-                <button
-                    onClick={() => {
-                        setPortionNumber(portionNumber + 1)
-                    }}
-                >
-                    NEXT
-                </button>
+                    })
                 }
+                <div className="sideArrow__wrap">
+                    {portionNumber < portionCount &&
+                        <button
+                            className="sideArrow sideArrow__right"
+                            onClick={() => {
+                                setPortionNumber(portionNumber + 1)
+                            }}
+                        >
+                            NEXT
+                        </button>
+                    }
+                </div>
             </div>
         </div>
     )

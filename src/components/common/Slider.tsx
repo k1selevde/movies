@@ -5,27 +5,47 @@ import {collectionMovie} from "../../types/types";
 import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
 import KeyboardArrowRightIcon from '@material-ui/icons/KeyboardArrowRight';
 
+/**/
+//@ts-ignore
+import NextArrow from '../../assets/icons/right-arrow.svg'
 
-let basicMovie = {
-    title: 'Second War',
-    id: '324',
-    backdrop_path: ''
-}
+//@ts-ignore
+import PrevArrow from '../../assets/icons/left-arrow.svg'
+
+
 function SampleNextArrow(props: any) {
     const { className, style, onClick } = props;
     return (
-
-        <div style={{cursor: 'pointer', width: '60px', height: '40px'}}>
-            <KeyboardArrowRightIcon  fontSize="large" onClick={onClick} />
+        //@ts-ignore
+        <div>
+            <img
+                className="arrow arrow__next"
+                src={NextArrow}
+                alt="right-arrow"
+                onClick={onClick}
+            />
         </div>
 
-        /*<div
-            className={className}
-            style={{ ...style, display: "block",width:'100px', height: '100px', background: "red" }}
-            onClick={onClick}
-        />*/
     );
 }
+
+function SamplePrevArrow(props: any) {
+    const { className, style, onClick } = props;
+    return (
+        //@ts-ignore
+        <div>
+            <img
+                className="arrow arrow__prev"
+                src={PrevArrow}
+                alt="left-arrow"
+                onClick={onClick}
+            />
+        </div>
+
+    );
+}
+
+
 function  AppendDots(dots: any) {
     return (
         <div
@@ -39,26 +59,10 @@ function  AppendDots(dots: any) {
         </div>
     )
 }
-function SamplePrevArrow(props: any) {
-    const { className, style, onClick } = props;
-    return (
-        <div style={{cursor: 'pointer', width: '60px', height: '40px'}}>
-            <ArrowBackIosIcon  onClick={onClick} />
-        </div>
 
-    );
-}
 
-class CustomSlide extends React.Component<any,any> {
-    render() {
-        const { index, ...props } = this.props;
-        return (
-            <div {...props} style={{padding: '40px', border: '1px solid blue', width: '150px', height: '100px'}}>
-                <h3>{index}</h3>
-            </div>
-        );
-    }
-}
+
+
 
 interface SpecialCollectionProps {
     moviesArr: collectionMovie[]
@@ -73,34 +77,37 @@ class MySlider extends React.PureComponent<SpecialCollectionProps,SpecialCollect
             swipe: true,
             infinite: true,
             // centerMode: true,
-            speed: 500,
-            slidesToShow: 3,
-            slidesToScroll: 1,
             nextArrow: <SampleNextArrow />,
             prevArrow: <SamplePrevArrow />,
-            appendDots: (dots: any) => (
-                <div
-                    style={{
-                        backgroundColor: "blue",
-                        borderRadius: "20px",
-                        padding: "10px"
-                    }}
-                >
-                    <ul className="d-flex">
-                        {dots.map((dot: any) => (
-                            <div
-                                style={{
-                                    borderRadius: '10px',
-                                    width: '30px',
-                                    height: '30px'
-                                }}
-                            >
-                                {dot}
-                            </div>
-                        ))}
-                    </ul>
-                </div>
-            ),
+            speed: 500,
+            slidesToShow: 4,
+            slidesToScroll: 1,
+            responsive: [
+                {
+                    breakpoint: 1024,
+                    settings: {
+                        slidesToShow: 3,
+                        slidesToScroll: 3,
+                        infinite: true,
+                        dots: true
+                    }
+                },
+                {
+                    breakpoint: 600,
+                    settings: {
+                        slidesToShow: 2,
+                        slidesToScroll: 2,
+                        initialSlide: 2
+                    }
+                },
+                {
+                    breakpoint: 480,
+                    settings: {
+                        slidesToShow: 1,
+                        slidesToScroll: 1
+                    }
+                }
+            ],
         };
         return (
             <>

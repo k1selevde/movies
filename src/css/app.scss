@@ -12,7 +12,10 @@ html {
 
 
 
-body { height: 100%; }
+body {
+    height: 100%;
+    background-color: $background-color;
+}
 
 h1, h2, h3, h4, h5, h6 { margin: 0; }
 
@@ -51,13 +54,49 @@ button { outline: none; }
 }
 
 .content {
+    padding: 20px 0;
+    //background: $background-color;
     flex: 1 0 auto;
+}
+
+.content-blur {
+    filter: blur(2px)
 }
 
 .container {
     margin: 0 auto;
     max-width: $content-size;
     width: 100%;
+}
+
+// common, slick
+
+.svg {
+    &__facebook {
+        width: 20px;
+        height: 20px;
+        transition: .1s ease;
+        cursor: pointer;
+        fill: #3b5998;
+        &:hover {
+            opacity: .9;
+        }
+    }
+
+    &__instagram {
+        cursor: pointer;
+    }
+
+    &__twitter {
+        width: 20px;
+        height: 20px;
+        transition: all .1s ease;
+        cursor: pointer;
+        fill: #00acee;
+        &:hover {
+            opacity: .9;
+        }
+    }
 }
 
 //Модули

@@ -1,9 +1,7 @@
 import * as React from 'react'
-import {withRouter} from "react-router-dom";
-import {AppStateType} from "../../redux/reducers";
-import {connect} from 'react-redux'
 import {collectionMovie} from "../../types/types";
 import HorizontalMovieCard from '../../components/MovieCard/HorizontalMovieCard'
+import ShowMoreBtn from "../../components/common/UI/ShowMoreBtn";
 
 
 interface ISpecialPageProps {
@@ -11,15 +9,21 @@ interface ISpecialPageProps {
     movies: collectionMovie[],
     getCollection: (page: string) => Promise<void>
     clear: () => {}
+    value: string
 }
 
 type State = {
     page: number
 }
 
-const SpecialPage : React.FC<ISpecialPageProps> = ({clear,movies,title,getCollection}) =>  {
+const SpecialPage : React.FC<ISpecialPageProps> = ({value,clear,movies,title,getCollection}) =>  {
 
    const [page,setPage] = React.useState(2)
+
+
+    React.useEffect(() => {
+        clear()
+    }, [value])
 
     React.useEffect(() => {
         getCollection('1')
@@ -45,16 +49,10 @@ const SpecialPage : React.FC<ISpecialPageProps> = ({clear,movies,title,getCollec
                     ))}
                 </div>
             </div>
-            <button
-                onClick={uploadHandler}
-                style={{marginTop: '15px', marginBottom: '20px'}}
-            >
-                Показать больше
-            </button>
+
+            {movies && <ShowMoreBtn handler={uploadHandler} /> }
         </>
     )
-
 }
-
 
 export default SpecialPage;

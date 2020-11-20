@@ -13,6 +13,10 @@ const MovieDetails: React.FC<IMovieDetailsProps>  = ({details}) => {
             value: details.status
         },
         {
+            name: "Жанры",
+            value: details.genres ? details.genres.map((item: any) => item.name) : null
+        },
+        {
             name: "Дата выхода",
             value: details.release_date
         },
@@ -41,14 +45,13 @@ const MovieDetails: React.FC<IMovieDetailsProps>  = ({details}) => {
             value: details.production_companies ? details.production_companies.map((item: any) => item.name) : null
         },
         {
-            name: "Жанры",
-            value: details.genres ? details.genres.map((item: any) => item.name) : null
-        }
+            name: "Adult",
+            value: details.adult
+        },
     ] : null;
 
     return (
         <>
-            <div>Details here</div>
             <table>
                 <tbody>
                 {details && dataDetails.map((item,index) => (

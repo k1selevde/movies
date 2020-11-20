@@ -1,6 +1,8 @@
 import * as React from 'react'
 import {findOftenPeople} from "../../../redux/actions/searchActions";
 import HorizontalMovieCard from "../../../components/MovieCard/HorizontalMovieCard";
+import MoviesList from "../../Movies/MoviesList";
+import ShowMoreBtn from "../../../components/common/UI/ShowMoreBtn";
 
 interface IOftenFindMoviesProps {
     oftenMovies: null | any
@@ -9,46 +11,35 @@ interface IOftenFindMoviesProps {
     clear: () => {}
 }
 
- const OftenFindMovies : React.FC<IOftenFindMoviesProps>  = ({clear,oftenMovies, findOftenMovies, updateOftenMovies}) => {
+const OftenFindMovies: React.FC<IOftenFindMoviesProps> = ({clear, oftenMovies, findOftenMovies, updateOftenMovies}) => {
 
-    const [page,setPage] = React.useState(2)
+    const [page, setPage] = React.useState(2)
 
-     React.useEffect(() => {
-         findOftenMovies()
-         return () => {
-             clear()
-         }
-     }, [])
-
+    React.useEffect(() => {
+        findOftenMovies()
+        return () => {
+            clear()
+        }
+    }, [])
 
 
     const showMoreHandler = async () => {
         updateOftenMovies(String(page))
-        await setPage(page+1)
+        await setPage(page + 1)
     }
 
     return (
         <>
-            <h4>Часто ищут</h4>
-            <div>
-                <div className="container">
-                    <div className="row">
-                            {oftenMovies && oftenMovies.results && oftenMovies.results[0] && oftenMovies.results.map((movie: any) => (
-                                <div
-                                    key={movie.id}
-                                    className="col-3"
-                                >
-                                    <HorizontalMovieCard movie={movie}/>
-                                </div>
-                            ))}
+            {oftenMovies && oftenMovies.results &&
+                <>
+                    <div>
+                        <div className="container">
+                            <MoviesList movies={oftenMovies.results}/>
+                        </div>
                     </div>
-                </div>
-            </div>
-            <button
-                onClick={showMoreHandler}
-            >
-                Показать еще
-            </button>
+                    {!Boolean(oftenMovies.total_pages + 1 <= page) && <ShowMoreBtn handler={showMoreHandler} />}
+                </>
+            }
         </>
     )
 }

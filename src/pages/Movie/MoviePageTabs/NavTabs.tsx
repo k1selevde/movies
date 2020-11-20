@@ -7,9 +7,11 @@ type tabType = {
     path: string
 }
 
-interface INavTabsProps {}
+interface INavTabsProps {
+    id: string
+}
 
-const NavTabs: React.FC<INavTabsProps & RouteComponentProps>  = ({match}) => {
+const NavTabs: React.FC<INavTabsProps & RouteComponentProps>  = ({id,match}) => {
     const _onClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
         e.preventDefault()
     }
@@ -38,12 +40,14 @@ const NavTabs: React.FC<INavTabsProps & RouteComponentProps>  = ({match}) => {
 
     ])
     return (
-        <div>
-            <ul>
+        <div className="navTabs__container">
+            <ul className="movieTabs__ul" >
                 {tabs.map((tab: tabType,index: number) => (
-                    <li className="movie-tabs__item" key={index}>
+                    <li className="movieTabs__item" key={index}>
                         <NavLink
-                            to={`${match.url}/${tab.path}`}
+                            exact={true}
+                            //to={`${match.url}${[tab.path] ? '/' : ''}${tab.path}`}
+                            to={`/movie/${id}/${tab.path}`}
                             className="movieTabLink"
                             activeClassName="movieTabLink__active"
                             onClick={(`${match.url}/${tab.path}` === `${location.pathname}`) ? (e) => _onClick(e) : null}
