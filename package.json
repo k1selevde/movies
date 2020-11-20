@@ -9,7 +9,8 @@
   "main": "src/index.tsx",
   "scripts": {
     "build": "./node_modules/webpack/bin/webpack.js -p --progress && node server.js",
-    "dev": "cross-env NODE_ENV=development webpack --mode development"
+    "dev": "cross-env NODE_ENV=development webpack --mode development",
+    "start": "cross-env NODE_ENV=development webpack-dev-server --mode development"
   },
   "author": "",
   "license": "ISC",
