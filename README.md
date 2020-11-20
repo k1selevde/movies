@@ -5,10 +5,10 @@
 ### Особенности разработки
 - Приложение, использующее публичное  [TMDb api](https://developers.themoviedb.org/3/getting-started/introduction).
 - использование Typescript(типизация redux, react components, api)
-- настройка Webpack для разработки :triumph: .
+- настройка Webpack для разработки :triumph: . 
+При деплое на [HEROKU](https://www.heroku.com/) был вынужден воспользоваться утилитой [CRA](https://github.com/facebook/create-react-app)
 - Для сокращения кода redux reducers - использовал [Immer]() :yum:
-- Для сетевых запросов - библиотека [axios](https://github.com/axios/axios) :alien: .
-При деплое был  на [HEROKU](https://www.heroku.com/) был вынужден воспользоваться утилитой [CRA](https://github.com/facebook/create-react-app) 
+- Для сетевых запросов - библиотека [axios](https://github.com/axios/axios) :alien: . 
 - React Hooks + React Lifecycle Methods  :green_heart: 
 - Роутинг(React-router-dom)
 - Верстка по БЭМ, стили SCSS(модульно), bootstrap :innocent: . 
